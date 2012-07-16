@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link type="text/css" href="css/ui-lightness/jquery-ui-1.8rc1.custom.css" rel="stylesheet"/>
+	<style type="text/css">
+	        .first
+        {
+            font-weight:bold;
+            cursor:pointer;
+            text-decoration:underline;
+
+        }
+
+        .hyperlink
+        {
+            cursor:pointer;
+            text-decoration:underline;
+        }
+
+        .pager li
+        {
+	        list-style-type:none;
+            display:inline;
+	        margin-left:4px;
+        }
+
+	</style>
+    <script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8rc1.custom.min.js"></script>
+
+    <script type="text/javascript" src="development-bundle/ui/jquery.ui.core.js"></script>
+	<script type="text/javascript" src="development-bundle/ui/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="development-bundle/ui/jquery.ui.button.js"></script>
+	<script type="text/javascript" src="development-bundle/ui/jquery.ui.position.js"></script>
+	<script type="text/javascript" src="development-bundle/ui/jquery.ui.autocomplete.js"></script>
+
+    <script type="text/javascript" src="js/jquery-extensions.js"></script>
+	<script type="text/javascript" src="js/datadumper.js"></script>
+	<script type="text/javascript" src="js/build.js"></script>
+	<script type="text/javascript" src="js/widget.js"></script>
+	<script type="text/javascript">
+
+$(document).ready(function()
+				  {
+	$.ajax({
+		url:url,
+		dataType:"json",
+		success: function(srwdata){
+			$($(srwdata.explainResponse.record.recordData.explain.configInfo).attr('default')).each(function(ix,tt){if ($(tt).attr('@type') == 'contextSet') {contextSet = $(tt).attr('$');}});
+//		   console.debug('1');
+			initiateSettings(srwdata.explainResponse);
+//		   console.debug('2');
+			var fields = srwdata.explainResponse.record.recordData.explain.indexInfo.index;
+			$(fields).each(function(ix){
+				appendFieldRow(fields[ix],ix);
+			});
+			$("#widgetFields :text, #widgetFields select").bind("change keyup", function(){
+				updateSettings($(this).attr('name'),$(this).val());
+			});
+			$("#widgetFields :checkbox").click(function(){
+				updateSettings($(this).attr('name'),$(this).is(':checked'));
+			});
+			$("#widgetSettings :text").bind("change keyup", function(){
+				updateSettings($(this).attr('name'),$(this).val());
+			});
+			$("#widgetFields :radio").bind("change keyup", function(){
+				updateSettings($(this).attr('name'),$(this).val());
+			});
+
+		}
+	});
+});
+
+</script>
+</head>
+<body>
+	<div id="widgetBuilder">
+		<div style="float:left">
+			<table id="widgetSettings">
+				<thead>
+					<th>Setting</th>
+					<th>Value</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>baseUrl</td>
+						<td><input type="text" name="configInfo.baseUrl" value="http://api.iisg.nl/solr/migranten/srw" /></td>
+					</tr>
+					<tr>
+						<td>maximumRecords</td>
+						<td><input type="text" name="query.maximumRecords" value="10" /></td>
+					</tr>
+					<tr>
+						<td>searchEmptyOption</td>
+						<td><input type="text" name="configInfo.searchEmptyOption" value="-- No preference --" /></td>
+					</tr>
+					<tr>
+						<td>waitingMessage</td>
+						<td><input type="text" name="configInfo.waitingMessage" value="Query sent. One moment please..." /></td>
+					</tr>
+					<tr>
+						<td>0</td>
+						<td><input type="text" name="configInfo.httpStatus.0" value="You seem to have no connection to the internet." /></td>
+					</tr>
+					<tr>
+						<td>404</td>
+						<td><input type="text" name="configInfo.httpStatus.404" value="URL of SRU server not found (HTTP 404). Please check your configuration or contact administrator." /></td>
+					</tr>
+					<tr>
+						<td>500</td>
+						<td><input type="text" name="configInfo.httpStatus.500" value="Internal Server Error (HTTP 500). Please contact administrator" /></td>
+					</tr>
+					<tr>
+						<td>parsererror</td>
+						<td><input type="text" name="configInfo.httpStatus.parsererror" value="Parsing the server's response failed." /></td>
+					</tr>
+					<tr>
+						<td>timeout</td>
+						<td><input type="text" name="configInfo.httpStatus.timeout" value="Request Time out." /></td>
+					</tr>
+				</tbody>
+			</table>
+			<table id="widgetFields">
+				<thead>
+					<th>Title</th>
+					<th>Label</th>
+					<th>Display</th>
+					<th>Shortlist</th>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+		<div id="widgetDemo" style="float:left">
+			<div class="iish" id="widget_4734y4399584"></div>
+		</div>
+		<div style="clear:both">
+			<textarea id="javascriptSource" cols=150 rows=20></textarea>
+		</div>
+	</div>
+</body>
+</html>

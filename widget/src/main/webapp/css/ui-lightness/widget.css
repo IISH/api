@@ -1,0 +1,234 @@
+.iish_widget
+{
+    clear:both;
+}
+
+.iish_widget h4
+{
+    display:inline;
+}
+.iish_widget .sru
+{
+    display:none;
+}
+
+.iish_widget .pager
+{
+    padding-left:5px;
+    margin-left:0px;
+}
+.iish_widget .pager li
+{
+    list-style-type:none;
+    display:inline;
+    margin-left:4px;
+}
+
+.iish_widget .search
+{
+    padding:15px;
+}
+#search_container
+{
+    float:left;
+    margin-top:5px;
+    margin-right:5px;
+}
+.iish_widget .search ol
+{
+    padding-left:0px;
+}
+.iish_widget .search li
+{
+    list-style-type:none;
+}
+
+.search label
+{
+    float:left;
+    text-align: right;    
+}
+.search select
+{
+    float:right;
+}
+.search input
+{
+    float:right;
+}
+
+.iish_widget .navigate
+{
+    padding:5px;
+    cursor:pointer;
+}
+.iish_widget .navigate h4
+{
+    padding-right:1.1em;
+}
+.iish_widget .navigate span
+{
+    display:inline-block;
+}
+.iish_widget .navigate p
+{
+    padding-right:1.1em;
+    display:inline;
+}
+.iish_widget #result
+{
+    float:right;
+    padding:0px;
+    margin-top:5px;
+}
+
+.fulllist dd li
+{
+    display:inline;
+    list-style-type:none;
+}
+
+.iish_widget .resultset
+{
+    float:right;
+    margin:0px;
+    padding-left:10px;
+    padding-right:10px;
+    height:600px;
+    overflow-y:auto;
+    overflow-x: hidden;
+}
+.iish_widget .embededresultset
+{
+    float:right;
+    margin:0px;
+    padding-left:10px;
+    padding-right:10px;
+}
+.iish_widget .embededresultset li
+{
+    list-style:none;
+}
+
+.resultset .hyperlink
+{
+    cursor:pointer;
+    text-decoration:underline;
+}
+.iish_widget .resultset li
+{
+    display:table;
+    margin-bottom:25px;
+    list-style-type:none;
+    border-bottom: 3px solid #999;
+}
+.highlight
+{
+    background-color: #cccccc;
+}
+.highlight p
+{
+    text-decoration:underline;
+}
+.highlight a
+{
+    text-decoration:underline;
+}
+
+.iish_widget .resultset li:before
+{
+    content: counter(item) ".";
+    counter-increment: item ;
+}
+.iish_widget .jcarousel-skin-tango li:before
+{
+    content:"";
+    counter-increment:none;
+}
+.iish_widget .sl
+{
+    cursor:pointer;
+}
+.iish_widget .search p
+{
+    height:1em;
+}
+/*.iish_widget .search span
+{
+    display: inline-block;
+    width:80px;
+}*/
+
+.iish_widget dl
+{
+    margin:0px;
+}
+.iish_widget dt
+{
+	float: left;
+	margin: 0;
+	padding: 5px;
+	font-weight: bold;
+}
+
+.iish_widget dd
+{
+	float: right;
+	margin: 0;
+	padding: 5px;
+}
+.iish_widget dd.page
+{
+	float: left;
+}
+
+.iish_widget .metspages ul
+{
+    display:table;
+}
+.iish_widget .metspages li:before
+{
+    content:"";
+    counter-increment:none;
+}
+.iish_widget .metspages li
+{
+    text-align: center;
+    float: left;
+}
+.metspages img
+{
+    width:100px;
+    height:150px;
+    padding-right:5px;
+}
+
+.metspages img
+{
+    cursor: url(images/magnify.cur), pointer;
+}
+
+#images img
+{
+    cursor: url(images/magnify.cur), pointer;
+}
+
+.brand
+{
+    float:right;
+}
+.brand a
+{
+    font-size:smaller;
+    text-decoration: none;
+    padding-left:20px;
+    padding-right:5px;
+    background-repeat:no-repeat;
+    background-image:url(images/iish.png);
+}
+
+.brand a:hover
+{
+    font-size:smaller;
+    text-decoration:underline;
+}
