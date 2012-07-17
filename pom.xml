@@ -26,7 +26,6 @@ limitations under the License.
     <modules>
         <module>bootstrap</module>
         <module>sru</module>
-        <module>oai</module>
         <module>import</module>
         <module>analyzers</module>
         <module>widget</module>

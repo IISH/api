@@ -30,10 +30,10 @@ public class StartUp
 
         // Solr home environment
         if ( System.getProperty("solr.solr.home") == null )
-            System.setProperty("solr.solr.home", "./solr-mappings/solr");
+            System.setProperty("solr.solr.home", "H:\\projects\\sru-widget\\solr-mappings\\solr");
 
         System.setProperty("enable.master", "true");
-        System.setProperty("enable.slave", "false");
+        System.setProperty("enable.slave", "true");
         System.setProperty("debug", "true");
 
         server.addHandler(new WebAppContext("./solr-mappings/solr-3.4.0.war", "/solr"));

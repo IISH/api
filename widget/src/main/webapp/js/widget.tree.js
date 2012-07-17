@@ -50,8 +50,8 @@ function populate_tree(group_id, target) {
 
                 tree.append('<li id=' + identifierNoColon + '></li>');
 
-                var title = $(recordData).find('dt').first();
-                var description = $(recordData).find('dd').last();
+                var title = $(recordData).find("dt:contains('Title')").next() ;
+                var description = $(recordData).find("dt:contains('Description')").next();
 
                 $('#' + identifierNoColon).addClass('contentContainer').html(title);
                 $('#' + identifierNoColon).append(description);
