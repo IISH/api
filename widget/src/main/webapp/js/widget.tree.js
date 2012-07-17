@@ -31,7 +31,7 @@ function populate_tree(group_id, target) {
 //    target.children().hide();
     var query = 'query=iisg.collectionName exact "hisco" and hisco.group_id exact "' + group_id + '"&version=1.1&operation=searchRetrieve&maximumRecords=10&recordSchema=info:srw/schema/1/hisco&recordPacking=string&startRecord=1&shortlist=';
     $.ajax({
-        url:"http://localhost:8080/solr/hisco/srw",
+        url: baseUrl,
         data:query,
         success:function (data) {
 
