@@ -6,7 +6,7 @@ if (typeof settings === 'undefined') {
 }
 document.write('<script type="text/javascript" src="'.concat(baseUrl, 'widget/js/widget.tree.js"></script>'));
 
-document.write('<link type="text/css" rel="Stylesheet" href="'.concat(baseUrl, 'widget/css/responseCss.css" />'));
+//document.write('<link type="text/css" rel="Stylesheet" href="'.concat(baseUrl, 'widget/css/responseCss.css" />'));
 document.write('<link type="text/css" rel="Stylesheet" href="'.concat(baseUrl, 'widget/css/menuCss.css" />'));
 
 document.write('<div class="iish_widget"></div>');
