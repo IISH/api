@@ -41,28 +41,42 @@ function populate_tree(group_id, target) {
 
             $(data.searchRetrieveResponse.records.record).each(function (ix, record) {
                 var recordData = record.recordData;
-
-
                 var extraRecordData = record.extraRecordData.extraData;
-
                 var identifier = extraRecordData.Identifier;
                 var identifierNoColon = identifier.replace(/[:]/g, "");
+                var listItem = $('<li id=' + identifierNoColon + '></li>');
 
-                tree.append('<li id=' + identifierNoColon + '></li>');
-
-                var title = $(recordData).find("dt:contains('Title')").next() ;
+                var group_id = $(recordData).find("dt:contains('Group identifier')").next().html();
+                var title = $(recordData).find("dt:contains('Title')").next().html();
                 var description = $(recordData).find("dt:contains('Description')").next();
 
-                $('#' + identifierNoColon).addClass('contentContainer').html(title);
-                $('#' + identifierNoColon).append(description);
 
-                $('#' + identifierNoColon).css({'background-image':'url(' + baseUrl + 'widget/css/right.png)',
+                tree.append(listItem);
+                listItem.addClass('contentContainer');
+
+                listItem.append('<div class="group_id">' + group_id + ' -&nbsp;</div>');
+                listItem.append('<div class="title">' + title + '</div>');
+                listItem.append(description);
+                description.addClass('description');
+
+                listItem.css({'background-image':'url(' + baseUrl + 'widget/css/right.png)',
                     'background-repeat':'no-repeat',
                     'background-position':'-3px 6px'
                 });
 
-                addMenuEvent($('#' + identifierNoColon), identifier);
+                var searchButton = $('<dd><input type="submit" id="' + group_id + '" value="View records"></dd>');
 
+                listItem.append(searchButton);
+
+                searchButton.click(function (event) {
+
+
+                    window.open();
+                    event.stopImmediatePropagation();
+
+                });
+
+                addMenuEvent(listItem, identifier);
 
             });
 
@@ -83,12 +97,12 @@ function addMenuEvent(li, identifier) {
                 //jquery call to populate submenu:
                 populate_tree(identifier, li);
 
-                $(this).children('ul').slideDown()
+                $(this).children('ul').slideDown();
                 $(this).removeClass('contentContainer').addClass('contentViewing');
                 $(this).css({'background-image':'url(' + baseUrl + 'widget/css/down.png)',
                     'background-repeat':'no-repeat',
                     'background-position':'-4px 6px',
-                    'background-color': 'transparent'
+                    'background-color':'transparent'
 
                 });
             }

@@ -1,33 +1,49 @@
 /* START TREE MENU */
 body {
-    font-family: Arial;
-    font-size: 16px;
+    /*font-family: Arial;*/
+    /*font-size: 16px;*/
     line-height: 23px;
-    background-color: #0f136a;
+    /*background-color: #0f136a;*/
 }
 
 li {
     border-left: 1px solid #FF7300;
     padding: 0 0 10px 10px;
-    color: #FFFC00;
+    /*color: #FFFC00;*/
 }
 
 li.contentContainer {
-    color: #FFFFFF;
+    /*color: #FFFFFF;*/
     cursor: pointer;
 }
 
 li.contentViewing {
     /*background:url('down.png ') no-repeat -4px 6px;*/
-    color: #FFFFFF;
+    /*color: #FFFFFF;*/
     cursor: pointer;
 }
 
 .contentContainer ul, .contentViewing ul {
-    color: #FFFC00;
+    /*color: #FFFC00;*/
     margin: 15px 0 0 10px;
 }
 
 ol, ul {
     list-style: none outside none;
+}
+
+
+.group_id{
+    float: left;
+    font-weight: bold;
+
+}
+
+.title{
+}
+
+
+
+.description{
+
 }
