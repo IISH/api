@@ -58,7 +58,7 @@ function populate_tree(group_id, target) {
                 });
 
                 addMenuEvent(listItem, identifier);
-                var searchButton = $('<dd><a target="_blank" href="' + baseWidgetUrl + '?value='+hisco_id+'&relation=exact&index=hisco.group_id">view records</a></dd>');
+                var searchButton = $('<dd><a target="_blank" href="' + baseWidgetUrl + '?value='+hisco_id+'&relation=%3D&index=hisco.group_ids">view records</a></dd>');
                 searchButton.click(function(event){
                     event.stopImmediatePropagation();
                 });

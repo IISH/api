@@ -614,10 +614,8 @@ function getRecordData(Identifier, recordData, numberOfRecords) {
         });
 
         var dl = $(dl_fulllist).find("dt:first");
-        dt = $("<dt class='label'>Actions</dt>");
-        $(dt).insertBefore(dl);
         var dd = $("<dd/>");
-        $(dd).insertAfter(dt);
+        $(dd).insertAfter(dl);
         $(source).appendTo(dd);
         $(emb).appendTo(dd);
     }
