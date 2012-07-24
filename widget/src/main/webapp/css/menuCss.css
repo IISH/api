@@ -1,23 +1,26 @@
 /* START TREE MENU */
-body {
+
+.iish_widget body {
     /*font-family: Arial;*/
     /*font-size: 16px;*/
     line-height: 23px;
     /*background-color: #0f136a;*/
 }
 
-li {
+.iish_widget li {
     border-left: 1px solid #FF7300;
     padding: 0 0 10px 10px;
+list-style:none;
+	
     /*color: #FFFC00;*/
 }
 
-li.contentContainer {
+.iish_widget li.contentContainer {
     /*color: #FFFFFF;*/
     cursor: pointer;
 }
 
-li.contentViewing {
+.iish_widget li.contentViewing {
     /*background:url('down.png ') no-repeat -4px 6px;*/
     /*color: #FFFFFF;*/
     cursor: pointer;
@@ -28,8 +31,8 @@ li.contentViewing {
     margin: 15px 0 0 10px;
 }
 
-ol, ul {
-    list-style: none outside none;
+.iish_widget ol, ul {
+   list-style: none outside none;
 }
 
 
@@ -39,7 +42,7 @@ ol, ul {
 
 }
 
-.title{
+.iish_widget .title{
     font-weight: bold;
 }
 

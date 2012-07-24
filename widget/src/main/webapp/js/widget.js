@@ -1,5 +1,5 @@
-//var baseUrl = "http://api.socialhistoryservices.org/";
-var baseUrl = "http://localhost:8080/";
+var baseUrl = "http://api.socialhistoryservices.org/";
+//var baseUrl = "http://localhost:8080/";
 document.write('<script type="text/javascript" src="'.concat(baseUrl, 'widget/js/jquery-1.4.1.min.js"></script>'));
 if (typeof settings === 'undefined') {
     document.write('<script type="text/javascript" src="'.concat(baseUrl, 'widget/js/settings.', recordSchema, '.js"></script>'));

@@ -1,6 +1,6 @@
 // This ought to be set with the widget builder.
 
-var baseWidgetUrl="http://localhost:8080/widget/hisco.htm";
+var baseWidgetUrl="http://api.socialhistoryservices.org/widget/hisco.htm";
 
 var settings = {
     "query":{
