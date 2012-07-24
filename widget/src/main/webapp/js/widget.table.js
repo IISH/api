@@ -65,9 +65,8 @@ function loadWidget() {
     var value = $.getUrlVar('value');
     if (value) {
         var index = $.getUrlVar('index');
-        query = setQuery(null, index, "=", value, null);
+        query = setQuery('Hisco code', index, "=", value, null);
         $('input[name=' + index + ']').val(value);
-        removeSearchItem(index);
         showAllRecordsInFirstView = true ;
     }
     else {
