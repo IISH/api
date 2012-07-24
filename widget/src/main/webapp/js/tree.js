@@ -1,5 +1,5 @@
-//var baseUrl = "http://localhost:8080/";
-var baseUrl = "http://api.socialhistoryservices.org/";
+var baseUrl = "http://localhost:8080/";
+//var baseUrl = "http://api.socialhistoryservices.org/";
 document.write('<script type="text/javascript" src="'.concat(baseUrl, 'widget/js/jquery-1.4.1.min.js"></script>'));
 if (typeof settings === 'undefined') {
     document.write('<script type="text/javascript" src="'.concat(baseUrl, 'widget/js/settings.', recordSchema, '.js"></script>'));
@@ -8,7 +8,6 @@ document.write('<script type="text/javascript" src="'.concat(baseUrl, 'widget/js
 
 //document.write('<link type="text/css" rel="Stylesheet" href="'.concat(baseUrl, 'widget/css/responseCss.css" />'));
 document.write('<link type="text/css" rel="Stylesheet" href="'.concat(baseUrl, 'widget/css/menuCss.css" />'));
-
 document.write('<div class="iish_widget"></div>');
 
 function startup() {

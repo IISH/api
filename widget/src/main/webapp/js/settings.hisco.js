@@ -1,4 +1,7 @@
-// This ought to be set with the widget builder. 
+// This ought to be set with the widget builder.
+
+var baseWidgetUrl="http://localhost:8080/widget/hisco.htm";
+
 var settings = {
     "query":{
         "version":"1.1",
@@ -87,5 +90,9 @@ var settings = {
             {"type":"select","title":[
         {"@lang":"nl-NL","$":"Met afbeeldingen"},
         {"@lang":"en-US","$":"With images"}
-    ],"map":{"name":{"@set":"hisco","$":"images"}}}
+    ],"map":{"name":{"@set":"hisco","$":"images"}}},
+        {"type":"text","title":[
+                {"@lang":"nl-NL","$":"Hisco code"},
+                {"@lang":"en-US","$":"Hisco code"}
+            ],"map":{"name":{"@set":"hisco","$":"group_id"}}}
 ]}

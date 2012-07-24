@@ -27,7 +27,7 @@ function populate_tree(group_id, target) {
     if (group_id == undefined || !group_id) group_id = 'hisco';
     var query = 'query=iisg.collectionName exact "hisco" and hisco.group_id exact "' + group_id + '"&version=1.1&operation=searchRetrieve&maximumRecords=10&recordSchema=info:srw/schema/1/hisco&recordPacking=string&startRecord=1&shortlist=';
     $.ajax({
-        url: baseUrl + 'solr/hisco/srw',
+        url:baseUrl + 'solr/hisco/srw',
         data:query,
         success:function (data) {
 
@@ -38,18 +38,16 @@ function populate_tree(group_id, target) {
                 var recordData = record.recordData;
                 var extraRecordData = record.extraRecordData.extraData;
                 var identifier = extraRecordData.Identifier;
+                var hisco_id = identifier.substring(6).replace(/[:]/g, "");
                 var identifierNoColon = identifier.replace(/[:]/g, "");
                 var listItem = $('<li id=' + identifierNoColon + '></li>');
-
-                var group_id = $(recordData).find("dt:contains('Group identifier')").next().html();
+                var group_id = $(recordData).find("dt:contains('Group identifier')").next().html().substring(6);
                 var title = $(recordData).find("dt:contains('Title')").next().html();
                 var description = $(recordData).find("dt:contains('Description')").next();
 
-
                 tree.append(listItem);
                 listItem.addClass('contentContainer');
-
-                listItem.append('<div class="group_id">' + group_id + ' -&nbsp;</div>');
+                listItem.append('<div class="group_id">' + hisco_id + ' -&nbsp;</div>');
                 listItem.append('<div class="title">' + title + '</div>');
                 listItem.append(description);
                 description.addClass('description');
@@ -59,24 +57,15 @@ function populate_tree(group_id, target) {
                     'background-position':'-3px 6px'
                 });
 
-                var searchButton = $('<dd><input type="submit" id="' + group_id + '" value="View records"></dd>');
-
-                listItem.append(searchButton);
-
-                searchButton.click(function (event) {
-
-
-                    window.open();
-                    event.stopImmediatePropagation();
-
-                });
-
                 addMenuEvent(listItem, identifier);
-
+                var searchButton = $('<dd><a target="_blank" href="' + baseWidgetUrl + '?value='+hisco_id+'&relation=exact&index=hisco.group_id">view records</a></dd>');
+                searchButton.click(function(event){
+                    event.stopImmediatePropagation();
+                });
+                listItem.append(searchButton);
             });
 
             target.append('</ul>');
-
 
         }, dataType:"jsonp"
     });
@@ -112,8 +101,8 @@ function addMenuEvent(li, identifier) {
 
                 $(this).removeClass('contentViewing').addClass('contentContainer');
                 //$(this).css({'background-image':'url(' + baseUrl + 'widget/css/right.png)',
-                  //  'background-repeat':'no-repeat',
-                    //'background-position':'-3px 6px'
+                //  'background-repeat':'no-repeat',
+                //'background-position':'-3px 6px'
                 //});
 
 
