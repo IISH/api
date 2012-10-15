@@ -1,4 +1,4 @@
-var baseUrl = (_baseUrl === undefined ) ? "//localhost:8080/" : baseUrl ;
+var baseUrl = (baseUrl === undefined ) ? "//localhost:8080/" : baseUrl ;
 document.write('<script type="text/javascript" src="'.concat(baseUrl, 'widget/js/jquery-1.4.1.min.js"></script>'));
 if (typeof settings === 'undefined') {
     document.write('<script type="text/javascript" src="'.concat(baseUrl, 'widget/js/settings.', recordSchema, '.js"></script>'));
