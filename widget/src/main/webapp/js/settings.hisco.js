@@ -41,7 +41,7 @@ var settings = {
         "searchbutton":"Search",
         //"searchEmptyOption":"-- No preference --",
         "shortlist":"shortlist",
-        "languages":[{"$":"English","@lang":"en-US"},{"$":"Dutch","@lang":"nl-NL"}],
+        /*"languages":[{"$":"English","@lang":"en-US"},{"$":"Dutch","@lang":"nl-NL"}],*/
         "lang_default":"en-US",
         "fadeIn":2000,
         "timeoutInputText":1000,

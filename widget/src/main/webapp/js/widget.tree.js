@@ -58,8 +58,8 @@ function populate_tree(group_id, target) {
                 });
 
                 addMenuEvent(listItem, identifier);
-                var searchButton = $('<dd><a target="_blank" href="' + baseWidgetUrl + '?value='+hisco_id+'&relation=%3D&index=hisco.group_ids">view records</a></dd>');
-                searchButton.click(function(event){
+                var searchButton = $('<dd><a target="_blank" href="' + baseWidgetUrl + '?value=' + hisco_id + '&relation=%3D&index=hisco.group_ids">view records</a></dd>');
+                searchButton.click(function (event) {
                     event.stopImmediatePropagation();
                 });
                 listItem.append(searchButton);
@@ -137,18 +137,18 @@ function getUrl(path) {
  * unit: 6-22
  * micro: 6-22.90
  */
-function formatHiscoId(id){
+function formatHiscoId(id) {
     var tag = String(id);
-    alert(tag + ':' + tag.length);
-    switch(tag.length){
-       case 1:
-           return tag;
-        break;
+    switch (tag.length) {
+        case 1:
+            return tag;
         case 2:
             return tag.substring(0, 1) + "-" + tag.substring(1, 2);
         case 3:
             return tag.substring(0, 1) + "-" + tag.substring(1, 3);
-        default:
+        case 5:
             return tag.substring(0, 1) + "-" + tag.substring(1, 3) + "." + tag.substring(3, 5);
-   }
+        default:
+            return tag;
+    }
 }
