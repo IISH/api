@@ -718,7 +718,7 @@ function makeFullList(dt) {
 function setNavigation(data) {
     $(formNavigate).empty();
     var header = $("<h4/>");
-    $(header).text(getLangLabel(settings.configInfo.user_selections) + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+    $(header).text(getLangLabel(settings.configInfo.user_selections) + '     ');
     $(header).appendTo(formNavigate);
 
     var index_record = 0;
