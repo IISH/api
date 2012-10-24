@@ -47,7 +47,7 @@ function populate_tree(group_id, target) {
 
                 tree.append(listItem);
                 listItem.addClass('contentContainer');
-                listItem.append('<div class="group_id">' + hisco_id + ' -&nbsp;</div>');
+                listItem.append('<div class="group_id">' + formatHiscoId(hisco_id) + '&nbsp;</div>');
                 listItem.append('<div class="title">' + title + '</div>');
                 listItem.append(description);
                 description.addClass('description');
@@ -125,4 +125,30 @@ function RenderLabels_tree() {
 function getUrl(path) {
     var url = baseUrl.concat(path);
     return url;
+}
+
+/**
+ * formatHiscoId
+ *
+ * Formats the number into parts:x-x-x.xx
+ * Example 62290
+ * major: 6
+ * minor: 6-2
+ * unit: 6-22
+ * micro: 6-22.90
+ */
+function formatHiscoId(id){
+    var tag = String(id);
+    alert(tag + ':' + tag.length);
+    switch(tag.length){
+       case 1:
+           return tag;
+        break;
+        case 2:
+            return tag.substring(0, 1) + "-" + tag.substring(1, 2);
+        case 3:
+            return tag.substring(0, 1) + "-" + tag.substring(1, 3);
+        default:
+            return tag.substring(0, 1) + "-" + tag.substring(1, 3) + "." + tag.substring(3, 5);
+   }
 }
