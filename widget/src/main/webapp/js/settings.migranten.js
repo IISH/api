@@ -1,4 +1,3 @@
-// This ought to be set with the widget builder. 
 var settings = {
     "query":{
         "version":"1.1",
@@ -14,7 +13,7 @@ var settings = {
         "relation":"all",
         "embedQuery":{"index":"iisg.identifier", "relation":"exact"},
         "allQuery":{"index":"iisg.collectionName", "relation":"exact","actualTerm":"migranten"},
-        "baseUrl":[{"$":"solr/migranten/srw_en","@lang":"en-US"},{"$":"solr/migranten/srw_nl","@lang":"nl-NL"}],
+        "baseUrl":"solr/migranten/srw_nl",
         "widgetId":"iish_widget_migranten_v1_1",
         "formSearch":"search",
         "formResult":"result",
