@@ -29,6 +29,7 @@ var showAllRecordsInFirstView = settings.configInfo.showAllRecordsInFirstView;
 var comboWidth = -1;
 
 function loadWidget() {
+
     if (!divWidgetContainer) {
         if (settings.configInfo.cssStylesheets) {
             var head = $("head");
@@ -67,7 +68,8 @@ function loadWidget() {
         var index = $.getUrlVar('index');
         query = setQuery('Hisco code', index, "=", value, null);
         $('input[name=' + index + ']').val(value);
-        showAllRecordsInFirstView = true ;
+        showAllRecordsInFirstView = true;
+
     }
     else {
         query = setDefaultQuery();
@@ -118,7 +120,7 @@ function init() {
             if (!index.map || !index.map.name)
                 return;
 
-            var p = $("<p><label>&nbsp;</label></p>");
+            var p = emptyLabel();
             var context = index.map.name['@set'] + "." + index.map.name['$'];
             $(p).attr("id", context);
             var displayLabel = getLangLabel(index.title);
@@ -139,8 +141,9 @@ function init() {
                 case 'select':
                     var select = $("<select title='" + displayLabel + "' name='" + context + "' />");
                     select.change(function () {
-                        var query = setQuery(displayLabel, this.name, "exact", $(this).val(), null);
-                        runQuery(query, processResponse, beforeSend);
+                        setQuery(displayLabel, this.name, "exact", $(this).val(), null);
+                        //var query = setQuery(displayLabel, this.name, "exact", $(this).val(), null);
+                        //runQuery(query, processResponse, beforeSend);
                     });
                     $(select).appendTo(p);
                     break;
@@ -158,6 +161,24 @@ function init() {
             }
         }
     );
+
+    var p = emptyLabel();
+    var searchButton = $("<button type='button' title='Press to search'>" + getLangLabel(settings.configInfo.formSearch) + "</button>").click(function () {
+        var query = getRequestQuery();
+        runQuery(query, processResponse, beforeSend);
+        return false;
+    });
+
+    p2 = emptyLabel();
+    var resetButton = $("<button type='reset' title='Press to reset'>Reset</button>").click(function () {
+        queryArray = null; // really neccesary ?
+        queryArray = new Array();
+        runQuery(setDefaultQuery(), processResponse, beforeSend);
+    });
+
+    $(searchButton).appendTo(p);
+    $(resetButton).appendTo(p);
+    $(p).appendTo(form);
 
     // Div width distribution:
     var width = $(divWidgetContainer).width();
@@ -188,6 +209,10 @@ function init() {
     }
     formResult.appendTo(divWidgetContainer);
     $(imageContainer).appendTo(divWidgetContainer);
+}
+
+function emptyLabel() {
+    return $("<p style='white-space: nowrap'><label>&nbsp;</label></p>");
 }
 
 function setBrand(element) {
@@ -227,20 +252,21 @@ function getId(text) {
 function getText(displayLabel, index, relation) {
     var input = $("<input name='" + index + "' type='text'/>");
 
-    $(input).keyup(function () {
-        clearTimeout(timeoutId);
-        var funct = "setTimer(this, '".concat(displayLabel, "', '", index, "', '", relation, "','", $(this).val(), "');");
-        timeoutId = setTimeout(funct, settings.configInfo.timeoutInputText);
+    $(input).change(function () {
+        //clearTimeout(timeoutId);
+        //var funct = "setTimer(this, '".concat(displayLabel, "', '", index, "', '", relation, "','", $(this).val(), "');");
+        //timeoutId = setTimeout(funct, settings.configInfo.timeoutInputText);
+        setQuery(displayLabel, index, relation, $(this).val(), null);
     });
 
     return input;
 }
 
-function setTimer(obj, displayLabel, index, relation, value) {
-    var query = setQuery(displayLabel, index, relation, value, null);
-    runQuery(query, processResponse, beforeSend);
-}
-;
+/*function setTimer(obj, displayLabel, index, relation, value) {
+ var query = setQuery(displayLabel, index, relation, value, null);
+ runQuery(query, processResponse, beforeSend);
+ }
+ ;*/
 
 function beforeSend() {
     $(formResult).html("<p class=\"waiting\">".concat(getLangLabel(settings.configInfo.waitingMessage), "</p>"));
@@ -251,7 +277,7 @@ function runQuery(query, callback, friendlyMessage) {
 
     $.ajax({
         type:"GET",
-        url:getUrl(getLangLabel(settings.configInfo.baseUrl)),
+        url:settings.configInfo.baseUrl , //'//api.socialhistoryservices.org/solr/hisco/srw',
         data:query,
         beforeSend:friendlyMessage,
         success:function (data) {
@@ -745,12 +771,12 @@ function setNavigation(data) {
 
     if (index_record != 0) {
         var p = $("<p style='font-weight:normal'/>");
-        $(p).text(getLangLabel(settings.configInfo.clear_all));
-        p.click(function () {
-            queryArray = null; // really neccesary ?
-            queryArray = new Array();
-            runQuery(setDefaultQuery(), processResponse, beforeSend);
-        });
+        /*$(p).text(getLangLabel(settings.configInfo.clear_all));
+         p.click(function () {
+         queryArray = null; // really neccesary ?
+         queryArray = new Array();
+         runQuery(setDefaultQuery(), processResponse, beforeSend);
+         });*/
         p.appendTo(header);
     }
 
@@ -781,7 +807,6 @@ function setDropdownFacetLists(data) {
             if (obj.terms) // there are facet categories... we cannot offer a delete parameter or present searchable items.
                 $(p).show();
             else {
-                //$(li).hide();
                 return true;
             }
             ;

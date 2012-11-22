@@ -1,4 +1,4 @@
-var baseUrl = (baseUrl === undefined ) ? "//localhost:8080/" : baseUrl ;
+var baseUrl = (baseUrl === undefined ) ? "//localhost:8080/" : baseUrl;
 document.write('<script type="text/javascript" src="'.concat(baseUrl, 'widget/js/jquery-1.4.1.min.js"></script>'));
 if (typeof settings === 'undefined') {
     document.write('<script type="text/javascript" src="'.concat(baseUrl, 'widget/js/settings.', recordSchema, '.js"></script>'));
@@ -6,8 +6,12 @@ if (typeof settings === 'undefined') {
 document.write('<script type="text/javascript" src="'.concat(baseUrl, 'widget/js/widget.table.js"></script>'));
 document.write('<div class="iish_widget"></div>');
 
+var patience = 0;
 function startup() {
     if (typeof $ === 'undefined') {
+        if (patience++ > 20) {
+            document.location.reload(true);
+        }
     } else {
 
         // Taken from http://jquery-howto.blogspot.nl/2009/09/get-url-parameters-values-with-jquery.html

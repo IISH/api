@@ -17,7 +17,7 @@ var settings = {
         "relation":"all",
         "embedQuery":{"index":"iisg.identifier", "relation":"exact"},
         "allQuery":{"index":"iisg.collectionName", "relation":"exact","actualTerm":"hisco"},
-        "baseUrl":"solr/hisco/srw",
+        "baseUrl":"/solr/hisco/srw",
         "widgetId":"iish_widget_hisco_v1_1",
         "formSearch":"search",
         "formResult":"result",
@@ -33,7 +33,7 @@ var settings = {
             "timeout":"Request Time out."
         },
 "embedparameters":{"url":"widget/js/widget.js"},
-        "noSearchAndRetrieveResponse":"There was no result...",
+        "noSearchAndRetrieveResponse":"There was no result... remove some or all of your selections and try again.",
         "title":[{"$":"Find an occupation","@lang":"en-US"},{"$":"Vind een beroep","@lang":"nl-NL"}],
         "user_selections":[{"$":"Your selections","@lang":"en-US"},{"$":"Resultaat","@lang":"nl-NL"}],
         "clear_all":[{"$":"Clear all","@lang":"en-US"},{"$":"Verwijderen","@lang":"nl-NL"}],
@@ -45,7 +45,7 @@ var settings = {
         "lang_default":"en-US",
         "fadeIn":2000,
         "timeoutInputText":1000,
-        "showAllRecordsInFirstView":false,
+        "showAllRecordsInFirstView":true,
 	"cssStylesheets":["widget/css/ui-lightness/jquery-ui-1.8rc1.custom.css","widget/css/ui-lightness/widget.css", "widget/css/skins/tango/skin.css"],
         "cssClasses":{
             "search":"search ui-widget ui-widget-content ui-corner-all",
@@ -94,5 +94,5 @@ var settings = {
         {"type":"text","title":[
                 {"@lang":"nl-NL","$":"Hisco code"},
                 {"@lang":"en-US","$":"Hisco code"}
-            ],"map":{"name":{"@set":"hisco","$":"group_id"}}}
+            ],"map":{"name":{"@set":"hisco","$":"group_ids"}}}
 ]}
