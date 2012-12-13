@@ -17,7 +17,7 @@ var settings = {
         "relation":"all",
         "embedQuery":{"index":"iisg.identifier", "relation":"exact"},
         "allQuery":{"index":"iisg.collectionName", "relation":"exact","actualTerm":"hisco"},
-        "baseUrl":"/solr/hisco/srw",
+        "baseUrl":"//api.socialhistoryservices.org/solr/hisco/srw",
         "widgetId":"iish_widget_hisco_v1_1",
         "formSearch":"search",
         "formResult":"result",

@@ -9,8 +9,12 @@ document.write('<script type="text/javascript" src="'.concat(baseUrl, 'widget/js
 document.write('<link type="text/css" rel="Stylesheet" href="'.concat(baseUrl, 'widget/css/menuCss.css" />'));
 document.write('<div class="iish_widget"></div>');
 
+var patience = 0;
 function startup() {
     if (typeof $ === 'undefined') {
+        if (patience++ > 20) {
+            document.location.reload(true);
+        }
     } else {
         window.clearInterval(_startup);
         $(document).ready(function() {

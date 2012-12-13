@@ -27,7 +27,7 @@ function populate_tree(group_id, target) {
     if (group_id == undefined || !group_id) group_id = 'hisco';
     var query = 'query=iisg.collectionName exact "hisco" and hisco.group_id exact "' + group_id + '"&version=1.1&operation=searchRetrieve&maximumRecords=10&recordSchema=info:srw/schema/1/hisco&recordPacking=string&startRecord=1&shortlist=';
     $.ajax({
-        url:baseUrl + 'solr/hisco/srw',
+        url:settings.configInfo.baseUrl,
         data:query,
         success:function (data) {
 

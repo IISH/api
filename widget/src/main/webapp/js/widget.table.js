@@ -277,7 +277,7 @@ function runQuery(query, callback, friendlyMessage) {
 
     $.ajax({
         type:"GET",
-        url:settings.configInfo.baseUrl , //'//api.socialhistoryservices.org/solr/hisco/srw',
+        url:settings.configInfo.baseUrl,
         data:query,
         beforeSend:friendlyMessage,
         success:function (data) {
