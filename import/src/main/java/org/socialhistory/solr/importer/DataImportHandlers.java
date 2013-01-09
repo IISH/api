@@ -93,7 +93,7 @@ public class DataImportHandlers implements SolrCoreAware, SolrRequestHandler {
             if (core.getRequestHandler(path + name) == null) {
 
                 final NamedList list = new NamedList();
-                final String config = getListValue(defaults, "importer", "importer/") + name + ".xml";
+                final String config = getListValue(defaults, "importer", "import/") + name + ".xml";
                 File file = new File(core.getSolrConfig().getResourceLoader().getConfigDir(), config);
                 if (!file.exists()) {
                     log.warn("Dataimport handler not found: " + file.getAbsolutePath());
@@ -103,7 +103,7 @@ public class DataImportHandlers implements SolrCoreAware, SolrRequestHandler {
 
                 list.add("config", config);
                 list.add("normalize", getListValue(defaults, "normalize", "normalize/") + name + ".xsl");
-                list.add("importer", getListValue(defaults, "importer", "importer/") + "add.xsl");
+                list.add("importer", getListValue(defaults, "importer", "import/") + "add.xsl");
                 list.add("resource", getListValue(defaults, "resource", "resource/" + name + ".xsl"));
                 final String debugTraceFolder = (String) defaults.get("debugTraceFolder");
                 if (debugTraceFolder != null || !debugTraceFolder.isEmpty()) {

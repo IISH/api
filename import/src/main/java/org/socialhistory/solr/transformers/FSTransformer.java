@@ -9,6 +9,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -34,6 +35,8 @@ public class FSTransformer extends Transformer {
         final String debugTraceFolder = (String) params.get("debugTraceFolder");
         final String unformatted_resource_normalize = (String) params.get("resource");
         final String fileAbsolutePath = (String) row.get("fileAbsolutePath");
+
+        if (Boolean.parseBoolean(System.getProperty("debug"))) System.out.println(fileAbsolutePath);
 
         byte[] ba_schema;
         try {
