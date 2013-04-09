@@ -714,7 +714,7 @@ public class SolrSRWDatabase extends ORG.oclc.os.SRW.SRWDatabase {
 
 
     @Override
-    public void init(String dbname, String srwHome, String dbHome, String dbPropertiesFileName, Properties dbProperties, HttpServletRequest request) throws Exception {
+    public void init(String dbname, String srwHome, String dbHome, String dbPropertiesFileName, Properties dbProperties) throws Exception {
 
         if (dbProperties == null)
             dbProperties = new Properties(srwProperties);
