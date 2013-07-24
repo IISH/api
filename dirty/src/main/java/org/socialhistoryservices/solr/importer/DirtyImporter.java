@@ -1,5 +1,9 @@
 package org.socialhistoryservices.solr.importer;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.ByteArrayRequestEntity;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.log4j.Logger;
 
 import javax.xml.stream.XMLInputFactory;
@@ -21,12 +25,15 @@ import java.util.List;
  * args:
  * 0=folder containing files;
  * 1=SOLR update url with core, like http://localhost:8080/solr/all/update
- * 2=comma seperated xslt stylesheets; 3=xslt parameters
+ * 2=comma separated xslt stylesheets; 3=xslt parameters
  */
 public class DirtyImporter {
 
     private String url;
     private List<Transformer> tChain;
+    private int counter = 0;
+    private long numMillisecondsToSleep = 15000; // 15 seconds
+    final HttpClient httpclient = new HttpClient();
 
     public DirtyImporter(String url, String _xslts, String _parameters) throws TransformerConfigurationException, FileNotFoundException, MalformedURLException {
 
@@ -40,8 +47,6 @@ public class DirtyImporter {
         for (String xslt : xslts) {
             File file = new File(xslt);
             Source source = new StreamSource(file);
-            // final String systemId = file.toURI().toURL().toString();
-            //source.setSystemId(systemId);
             final Transformer t = tf.newTransformer(source);
             for (String parameter : parameters) {
                 String[] split = parameter.split(":");
@@ -53,18 +58,12 @@ public class DirtyImporter {
 
     public void process(File file) throws FileNotFoundException, XMLStreamException {
 
-        // Main marc structure:
-        // catalog
-        //  record
-        //  ...
-        //  record
-        // catalog
-
         final XMLInputFactory xif = XMLInputFactory.newInstance();
-        final XMLStreamReader xsr = xif.createXMLStreamReader(new FileReader(file));
+        FileInputStream inputStream = new FileInputStream(file);
+        final XMLStreamReader xsr = xif.createXMLStreamReader(inputStream, "utf-8");
 
         while (xsr.hasNext()) {
-            xsr.next();
+
             if (xsr.getEventType() == XMLStreamReader.START_ELEMENT) {
                 String elementName = xsr.getLocalName();
                 if ("record".equals(elementName)) {
@@ -73,23 +72,65 @@ public class DirtyImporter {
                     } catch (Exception e) {
                         log.warn(e);
                     }
+                } else {
+                    xsr.next();
                 }
+            } else {
+                xsr.next();
             }
         }
     }
 
     private void process(XMLStreamReader xsr) throws TransformerException, IOException {
         byte[] record = getRecordAsBytes(xsr);
+        String resource = null;
         for (int i = 1; i < tChain.size(); i++) {
+            if (i == tChain.size() - 2) {
+                resource = new String(record, "utf-8");
+            } else if (i == tChain.size() - 1) {
+                tChain.get(i).setParameter("resource", resource);
+            }
             record = convertRecord(tChain.get(i), record);
         }
-        addSolrDocument(record);
+        sendSolrDocument(record);
     }
 
-    private void addSolrDocument(byte[] record) throws IOException {
+    private void sendSolrDocument(byte[] record) throws IOException {
 
-        HttpClient.Post(url, "<add>".concat(new String(record, "utf-8")).concat("</add>"));
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream(record.length+11)  ;
+        baos.write("<add>".getBytes());
+        baos.write(record)  ;
+        baos.write("</add>".getBytes()) ;
+
+        final PostMethod post = new PostMethod(url);
+        final RequestEntity entity = new ByteArrayRequestEntity(baos.toByteArray(), "text/xml; charset=utf-8");
+        post.setRequestEntity(entity);
+        log.info("Sending " + ++counter);
+        try {
+            httpclient.executeMethod(post);
+        } catch (Exception e) {
+            log.warn(e);
+        } finally {
+            post.releaseConnection();
+        }
+
+        /*if (counter % 1000 == 1) {
+            log.info("Pause");
+            sleep();
+        }*/
+
     }
+
+    /**
+     * We give ourselves a breather for the socket connections to expire
+     */
+    /*private void sleep() {
+        try {
+            Thread.sleep(numMillisecondsToSleep);
+        } catch (InterruptedException e) {
+            log.warn(e);
+        }
+    }*/
 
     private byte[] convertRecord(Transformer transformer, byte[] record) throws TransformerException {
 
@@ -107,7 +148,6 @@ public class DirtyImporter {
 
     public static void main(String[] args) throws Exception {
 
-        // C:\data\datasets\iish.archieven.biblio.xml "http://localhost:8080/solr/all/update" "C:\Users\lwo\projects\org.socialhistory.api\solr-mappings\solr\all\conf\normalize\iish.evergreen.biblio.xsl,C:\Users\lwo\projects\org.socialhistory.api\solr-mappings\solr\all\conf\import\add.xsl" "collectionName:iish.evergreen.biblio"
         File file = new File(args[0]);
         if (!file.exists() || file.isDirectory()) {
             System.err.println("File not found.");
@@ -123,5 +163,4 @@ public class DirtyImporter {
     }
 
     private Logger log = Logger.getLogger(getClass().getName());
-
 }
