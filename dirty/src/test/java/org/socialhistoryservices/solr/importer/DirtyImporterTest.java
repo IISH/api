@@ -26,7 +26,7 @@ import java.io.File;
 public class DirtyImporterTest {
 
     @Test
-    public void ImportSomeDate() throws Exception {
+    public void ImportSomeRecords() throws Exception {
 
         String url = "http://localhost:8080/solr/all/update";
         String xslt = "C:\\Users\\lwo\\org.socialhistory.api\\solr-mappings\\solr\\all\\conf\\normalize\\iish.evergreen.biblio.xsl,C:\\Users\\lwo\\org.socialhistory.api\\solr-mappings\\solr\\all\\conf\\import\\add.xsl";

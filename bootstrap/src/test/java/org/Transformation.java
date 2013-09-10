@@ -46,7 +46,7 @@ public class Transformation {
         final File[] files = new File(args[1]).listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File file, String s) {
-                return s.startsWith("ARCH");
+                return s.startsWith("ARCH") | s.startsWith("COLL") ;
             }
         });
 
