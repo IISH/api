@@ -21,6 +21,7 @@ public class DirtyExporter {
 
     final IndexReader reader;
     final Transformer transformer;
+    int count = 0 ;
 
 
     public DirtyExporter(String index) throws IOException, TransformerConfigurationException {
@@ -46,6 +47,7 @@ public class DirtyExporter {
                 transformer.setOutputProperty("omit-xml-declaration", "yes");
                 final byte[] bytes = document.get("resource").getBytes("UTF8");
                 if (bytes != null || bytes.length != 0) {
+                    count++;
                     transformer.transform(new StreamSource(new ByteArrayInputStream(bytes)), new StreamResult(fileOutputStream));
                 }
             }
@@ -54,6 +56,8 @@ public class DirtyExporter {
         fileOutputStream.write("</marc:catalog>".getBytes());
         fileOutputStream.close();
         reader.close();
+
+        System.out.println("Count: " + count);
     }
 
 
