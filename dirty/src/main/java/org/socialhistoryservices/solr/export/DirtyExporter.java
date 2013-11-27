@@ -21,7 +21,7 @@ public class DirtyExporter {
 
     final IndexReader reader;
     final Transformer transformer;
-    int count = 0 ;
+    int count = 0;
 
 
     public DirtyExporter(String index) throws IOException, TransformerConfigurationException {
@@ -34,8 +34,9 @@ public class DirtyExporter {
         transformer = transformerFactory.newTransformer(new StreamSource(resourceAsStream));
     }
 
-    public void export(String collectionName, String file) throws IOException, TransformerException {
+    public void export(String collectionName) throws IOException, TransformerException {
 
+        String file = collectionName + ".xml";
         final FileOutputStream fileOutputStream = new FileOutputStream(file);
         fileOutputStream.write("<marc:catalog xmlns:marc=\"http://www.loc.gov/MARC21/slim\">".getBytes());
 
@@ -72,7 +73,7 @@ public class DirtyExporter {
      */
     public static void main(String[] args) throws IOException, TransformerException {
         DirtyExporter dirtyExporter = new DirtyExporter(args[0]);
-        dirtyExporter.export(args[1], args[2]);
+        dirtyExporter.export(args[1]);
     }
 
 }

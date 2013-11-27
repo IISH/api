@@ -25,7 +25,7 @@ class DoTransform {
 
         ByteArrayInputStream bais = new ByteArrayInputStream(ba);
         StreamSource source = new StreamSource(bais);
-        return PerFormTransForm(context, xslt, source, row);
+        return PerFormTransForm(context, xslt, source, row, null);
 
     }
 
@@ -33,23 +33,23 @@ class DoTransform {
 
         StringReader sr = new StringReader("<dataroot/>");
         StreamSource source = new StreamSource(sr);
-        return PerFormTransForm(context, xslt, source, row);
+        return PerFormTransForm(context, xslt, source, row, null);
     }
 
     public static byte[] PerformTransform(StreamSource source, Context context, String xslt, Map<String, Object> row) throws MalformedURLException, TransformerConfigurationException {
-        return PerFormTransForm(context, xslt, source, row);
+        return PerFormTransForm(context, xslt, source, row, null);
     }
 
     public static byte[] PerformTransform(Context context, String xslt, Map<String, Object> row) throws MalformedURLException, TransformerConfigurationException {
 
         String fileAbsolutePath = (String) row.get("fileAbsolutePath");
         StreamSource source = new StreamSource(fileAbsolutePath);
-        return PerFormTransForm(context, xslt, source, row);
+        return PerFormTransForm(context, xslt, source, row, new Date(new File(fileAbsolutePath).lastModified()));
     }
 
-    private static byte[] PerFormTransForm(Context context, String xslt, StreamSource source, Map<String, Object> row) throws MalformedURLException, TransformerConfigurationException {
+    private static byte[] PerFormTransForm(Context context, String xslt, StreamSource source, Map<String, Object> row, Date date) throws MalformedURLException, TransformerConfigurationException {
 
-        javax.xml.transform.Transformer transformer = GetTransform(context, xslt);
+        javax.xml.transform.Transformer transformer = GetTransform(context, xslt, date);
         insertParameters(row, transformer);
         ByteArrayOutputStream writer = new ByteArrayOutputStream();
         StreamResult result = new StreamResult(writer);
@@ -65,7 +65,7 @@ class DoTransform {
     public static byte[] PerformTransform(String fileAbsolutePath, Context context, String xslt) throws MalformedURLException, TransformerConfigurationException {
 
         StreamSource source = new StreamSource(fileAbsolutePath);
-        return PerFormTransForm(context, xslt, source, null);
+        return PerFormTransForm(context, xslt, source, null, new Date(new File(fileAbsolutePath).lastModified()));
     }
 
     /**
@@ -77,7 +77,7 @@ class DoTransform {
      * @throws TransformerConfigurationException
      * @throws MalformedURLException
      */
-    private static javax.xml.transform.Transformer GetTransform(Context context, String xslt) throws TransformerConfigurationException, MalformedURLException {
+    private static javax.xml.transform.Transformer GetTransform(Context context, String xslt, Date date) throws TransformerConfigurationException, MalformedURLException {
         // no need to synchronize access to context, right?
         // Nothing else happens with it at the same time
 
@@ -92,7 +92,7 @@ class DoTransform {
             provider = tFactory.newTransformer(xslSource);
 
             // Set some system xslt params:
-            Date now = new Date();
+            Date now = ( date == null ) ? new Date() : date;
 
             String date_modified = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(now);
             String marc_controlfield_005 = new SimpleDateFormat("yyyyMMddHHmmss").format(now);
