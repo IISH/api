@@ -17,22 +17,24 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.socialhistoryservices.solr.importer;
+package org.socialhistory.solr.importer;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
 
-public class DirtyImporterTest {
+public class BatchImportTest {
 
+    @Ignore
     @Test
     public void ImportSomeRecords() throws Exception {
 
         String url = "http://localhost:8080/solr/all/update";
-        String xslt = "C:\\Users\\lwo\\org.socialhistory.api\\solr-mappings\\solr\\all\\conf\\normalize\\iish.evergreen.biblio.xsl,C:\\Users\\lwo\\org.socialhistory.api\\solr-mappings\\solr\\all\\conf\\import\\add.xsl";
+        String xslt = "~/org.socialhistory.api/solr-mappings/solr/all/conf/normalize/iish.evergreen.biblio.xsl,C:/Users/lwo/org.socialhistory.api/solr-mappings/solr/all/conf/import/add.xsl";
         String parameters = "collectionName:iish.evergreen.biblio";
-        DirtyImporter importer = new DirtyImporter(url, xslt, parameters);
-        File file = new File("C:\\data\\datasets\\iish.evergreen.biblio.xml") ;
+        BatchImport importer = new BatchImport(url, xslt, parameters);
+        File file = new File("/data/datasets/iish.evergreen.biblio.xml");
         importer.process(file);
     }
 }

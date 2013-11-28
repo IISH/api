@@ -144,7 +144,7 @@ function updateJavascriptSource() {
 		"<script type='text/javascript'>\nvar settings = " + Dumper(settings) + "\n</script>\n" +
 		"<div id='" + settings.configInfo.widgetId + "'></div>"
 	);
-	// a slightly dirty hack to re-render the widget demo each time \/
+	// a slightly export hack to re-render the widget demo each time \/
 	$("#widgetDemo").html("<div class='iish' id='widget_" + widgetId + "'></div>");
 	init();
 	RenderLabels();

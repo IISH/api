@@ -18,10 +18,10 @@ public class StartUp {
 
     public static void main(String... args) throws Exception {
         server = new StartUp();
-        server.Start();
+        server.start();
     }
 
-    private Server Start() throws Exception {
+    private Server start() throws Exception {
         int port = 8080;
         Server server = new Server(port);
 

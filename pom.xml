@@ -29,7 +29,6 @@ limitations under the License.
         <module>import</module>
         <module>analyzers</module>
         <module>widget</module>
-        <module>dirty</module>
     </modules>
 
     <organization>

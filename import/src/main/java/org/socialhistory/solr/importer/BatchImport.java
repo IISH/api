@@ -1,4 +1,4 @@
-package org.socialhistoryservices.solr.importer;
+package org.socialhistory.solr.importer;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.ByteArrayRequestEntity;
@@ -27,15 +27,14 @@ import java.util.List;
  * 1=SOLR update url with core, like http://localhost:8080/solr/all/update
  * 2=comma separated xslt stylesheets; 3=xslt parameters
  */
-public class DirtyImporter {
+public class BatchImport {
 
     private String url;
     private List<Transformer> tChain;
     private int counter = 0;
-    private long numMillisecondsToSleep = 15000; // 15 seconds
     final HttpClient httpclient = new HttpClient();
 
-    public DirtyImporter(String url, String _xslts, String _parameters) throws TransformerConfigurationException, FileNotFoundException, MalformedURLException {
+    public BatchImport(String url, String _xslts, String _parameters) throws TransformerConfigurationException, FileNotFoundException, MalformedURLException {
 
         this.url = url;
         String[] parameters = _parameters.split(",|;");
@@ -114,23 +113,7 @@ public class DirtyImporter {
             post.releaseConnection();
         }
 
-        /*if (counter % 1000 == 1) {
-            log.info("Pause");
-            sleep();
-        }*/
-
     }
-
-    /**
-     * We give ourselves a breather for the socket connections to expire
-     */
-    /*private void sleep() {
-        try {
-            Thread.sleep(numMillisecondsToSleep);
-        } catch (InterruptedException e) {
-            log.warn(e);
-        }
-    }*/
 
     private byte[] convertRecord(Transformer transformer, byte[] record) throws TransformerException {
 
@@ -158,7 +141,7 @@ public class DirtyImporter {
         final String xslt = args[2];
         final String parameters = args[3];
 
-        DirtyImporter importer = new DirtyImporter(url, xslt, parameters);
+        BatchImport importer = new BatchImport(url, xslt, parameters);
         importer.process(file);
     }
 

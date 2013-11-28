@@ -1,4 +1,4 @@
-package org.socialhistoryservices.solr.export;
+package org.socialhistory.solr.importer;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
@@ -17,14 +17,14 @@ import java.util.List;
 /**
  * Exports the Lucene document.resource fields as XML.
  */
-public class DirtyExporter {
+public class ExportIndex {
 
     final IndexReader reader;
     final Transformer transformer;
     int count = 0;
 
 
-    public DirtyExporter(String index) throws IOException, TransformerConfigurationException {
+    public ExportIndex(String index) throws IOException, TransformerConfigurationException {
         final FSDirectory directory = FSDirectory.open(new File(index));
         reader = IndexReader.open(directory);
 
@@ -72,7 +72,7 @@ public class DirtyExporter {
      * @param args
      */
     public static void main(String[] args) throws IOException, TransformerException {
-        DirtyExporter dirtyExporter = new DirtyExporter(args[0]);
+        ExportIndex dirtyExporter = new ExportIndex(args[0]);
         dirtyExporter.export(args[1]);
     }
 
