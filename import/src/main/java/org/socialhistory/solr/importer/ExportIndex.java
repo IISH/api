@@ -67,7 +67,6 @@ public class ExportIndex {
      * <p/>
      * args[0] = index path
      * args[1] = collectionName
-     * args[2] = file to export to.
      *
      * @param args
      */
