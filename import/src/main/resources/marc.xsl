@@ -9,6 +9,14 @@ This stylesheet corrects some irregularities from the Evergreen OAI export.
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
         xmlns:marc="http://www.loc.gov/MARC21/slim">
 
+    <xsl:template match="record">
+        <xsl:apply-templates select="recordData"/>
+    </xsl:template>
+
+    <xsl:template match="recordData">
+        <xsl:apply-templates />
+    </xsl:template>
+
     <xsl:template match="marc:record">
         <xsl:choose>
             <xsl:when test="marc:controlfield[@tag='008']">
