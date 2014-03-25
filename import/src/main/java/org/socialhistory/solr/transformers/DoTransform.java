@@ -90,23 +90,24 @@ class DoTransform {
 
             TransformerFactory tFactory = TransformerFactory.newInstance();
             provider = tFactory.newTransformer(xslSource);
-
-            // Set some system xslt params:
-            Date now = ( date == null ) ? new Date() : date;
-
-            String date_modified = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(now);
-            String marc_controlfield_005 = new SimpleDateFormat("yyyyMMddHHmmss").format(now);
-            String marc_controlfield_008 = new SimpleDateFormat("yyMMdd's'").format(now);
-
-            provider.setParameter("date_modified", date_modified);
-            provider.setParameter("marc_controlfield_005", marc_controlfield_005);
-            provider.setParameter("marc_controlfield_008", marc_controlfield_008);
             provider.setParameter("collectionName", file_stylesheet.getName().replace(".xsl", ""));
-
-            insertParameters(context.getRequestParameters(), provider);
 
             context.setSessionAttribute(xslt, provider, Context.SCOPE_ENTITY);
         }
+
+        // Set some system xslt params:
+        Date now = ( date == null ) ? new Date() : date;
+
+        String date_modified = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(now);
+        String marc_controlfield_005 = new SimpleDateFormat("yyyyMMddHHmmss").format(now);
+        String marc_controlfield_008 = new SimpleDateFormat("yyMMdd's'").format(now);
+
+        provider.setParameter("date_modified", date_modified);
+        provider.setParameter("marc_controlfield_005", marc_controlfield_005);
+        provider.setParameter("marc_controlfield_008", marc_controlfield_008);
+
+        insertParameters(context.getRequestParameters(), provider);
+
 
         return provider;
     }
