@@ -47,7 +47,7 @@ public class ExportIndex {
                 transformer.reset();
                 transformer.setOutputProperty("omit-xml-declaration", "yes");
                 final byte[] bytes = document.get("resource").getBytes("UTF8");
-                if (bytes != null || bytes.length != 0) {
+                if (bytes.length != 0) {
                     count++;
                     transformer.transform(new StreamSource(new ByteArrayInputStream(bytes)), new StreamResult(fileOutputStream));
                 }
