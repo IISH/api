@@ -35,7 +35,7 @@ This stylesheet corrects some irregularities from the Evergreen OAI export.
     </xsl:template>
 
     <!-- stretch leaders -->
-    <xsl:template match="marc:leader">
+    <!--<xsl:template match="marc:leader">
         <marc:leader>
             <xsl:choose>
                 <xsl:when test="string-length(normalize-space(text()))=24">
@@ -47,7 +47,7 @@ This stylesheet corrects some irregularities from the Evergreen OAI export.
                 </xsl:otherwise>
             </xsl:choose>
         </marc:leader>
-    </xsl:template>
+    </xsl:template>-->
 
     <!-- remove empty datafields -->
     <xsl:template match="marc:datafield[not(marc:subfield)]"/>
