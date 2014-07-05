@@ -2,6 +2,7 @@
 
 <!--
 This stylesheet corrects some irregularities from the Evergreen OAI export.
+The VuFind import added a datestamp, which is to be added to a custom 903 datafield.
 -->
 
 <xsl:stylesheet
@@ -14,7 +15,7 @@ This stylesheet corrects some irregularities from the Evergreen OAI export.
     </xsl:template>
 
     <xsl:template match="recordData">
-        <xsl:apply-templates />
+        <xsl:apply-templates/>
     </xsl:template>
 
     <xsl:template match="marc:record">
@@ -22,10 +23,18 @@ This stylesheet corrects some irregularities from the Evergreen OAI export.
             <xsl:when test="marc:controlfield[@tag='008']">
                 <xsl:copy>
                     <xsl:apply-templates select="@*|node()"/>
+                    <xsl:if test="datestamp">
+                        <marc:datafield tag="903" ind1=" " ind2=" ">
+                            <marc:subfield code="a">
+                                <xsl:value-of select="datestamp"/>
+                            </marc:subfield>
+                        </marc:datafield>
+                    </xsl:if>
                 </xsl:copy>
             </xsl:when>
             <xsl:otherwise/>
         </xsl:choose>
+
     </xsl:template>
 
     <xsl:template match="@*|node()">
@@ -35,7 +44,7 @@ This stylesheet corrects some irregularities from the Evergreen OAI export.
     </xsl:template>
 
     <!-- stretch leaders -->
-    <!--<xsl:template match="marc:leader">
+    <xsl:template match="marc:leader">
         <marc:leader>
             <xsl:choose>
                 <xsl:when test="string-length(normalize-space(text()))=24">
@@ -47,7 +56,7 @@ This stylesheet corrects some irregularities from the Evergreen OAI export.
                 </xsl:otherwise>
             </xsl:choose>
         </marc:leader>
-    </xsl:template>-->
+    </xsl:template>
 
     <!-- remove empty datafields -->
     <xsl:template match="marc:datafield[not(marc:subfield)]"/>
@@ -56,7 +65,7 @@ This stylesheet corrects some irregularities from the Evergreen OAI export.
     <xsl:template match="marc:datafield[marc:subfield[not(text())]]"/>
 
     <!-- Remove authorities -->
-    <xsl:template match="marc:subfield[@code='0']"/>
+    <!--<xsl:template match="marc:subfield[@code='0']"/>-->
 
     <xsl:template match="marc:subfield/text()">
         <xsl:value-of select="normalize-space(.)"/>
