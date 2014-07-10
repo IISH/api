@@ -10,6 +10,8 @@ The VuFind import added a datestamp, which is to be added to a custom 903 datafi
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
         xmlns:marc="http://www.loc.gov/MARC21/slim">
 
+    <xsl:preserve-space elements="marc:leader" />
+
     <xsl:template match="record">
         <xsl:apply-templates select="recordData"/>
     </xsl:template>
@@ -47,7 +49,7 @@ The VuFind import added a datestamp, which is to be added to a custom 903 datafi
     <xsl:template match="marc:leader">
         <marc:leader>
             <xsl:choose>
-                <xsl:when test="string-length(normalize-space(text()))=24">
+                <xsl:when test="string-length(text())=24">
                     <xsl:value-of select="text()"/>
                 </xsl:when>
                 <xsl:otherwise>
