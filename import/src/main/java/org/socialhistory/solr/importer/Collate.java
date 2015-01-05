@@ -47,7 +47,7 @@ public class Collate {
         transformer.setOutputProperty("omit-xml-declaration", "yes");
     }
 
-    private void process(String source, String target) throws IOException, XMLStreamException, TransformerException {
+    private void process(String source, String target, String extension) throws IOException, XMLStreamException, TransformerException {
 
         final FileOutputStream fos = new FileOutputStream(target);
         final OutputStreamWriter writer = new OutputStreamWriter(fos, "utf8");
@@ -59,7 +59,8 @@ public class Collate {
         if (sourceFile.isDirectory()) {
             getFiles(sourceFile, writer);
         } else {
-            getCatalog(sourceFile, writer);
+            if (extension == null || sourceFile.getName().endsWith(extension))
+                getCatalog(sourceFile, writer);
         }
         writer.write("</marc:catalog>");
         writer.flush();
@@ -127,12 +128,20 @@ public class Collate {
     /**
      * @param args args[0]=source folder;
      *             args[1] target document;
-     *             optional filter args[2]=listfiles filter
+     *             optional case sensitive extension for files. E.g. args[2]=.xml
      */
     public static void main(String[] args) throws Exception {
 
-        Collate collate = new Collate();
-        collate.process(args[0], args[1]);
+        final String source = args[0];
+        final String target = args[1];
+        final String filter = (args.length == 2) ? null : args[2];
+        System.out.println("Source folder: " + source);
+        System.out.println("Target folder: " + target);
+        System.out.println("Extension filter: " + filter);
+
+        final Collate collate = new Collate();
+        collate.process(source, target, filter);
+
         System.out.println();
         System.out.println("Records collated: " + collate.counter);
         System.out.println("Rejects: " + collate.errors);

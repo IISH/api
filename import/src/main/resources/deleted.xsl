@@ -11,16 +11,18 @@ Select deleted records
 
     <xsl:output method="text"/>
 
+    <xsl:template match="record">
+        <xsl:apply-templates select="recordData"/>
+    </xsl:template>
+
+    <xsl:template match="recordData">
+        <xsl:apply-templates/>
+    </xsl:template>
+
     <xsl:template match="marc:record">
-        <xsl:choose>
-            <xsl:when test="marc:controlfield[@tag='008']"/>
-            <xsl:otherwise>
                 <xsl:value-of select="marc:controlfield[@tag='001']"/>
 <xsl:text>
 </xsl:text>
-                <xsl:value-of select="marc:datafield[@tag='902']/marc:subfield[@code='a']"/>
-            </xsl:otherwise>
-        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>

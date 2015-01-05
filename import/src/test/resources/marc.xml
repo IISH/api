@@ -1,5 +1,4 @@
 <marc:record xmlns:marc="http://www.loc.gov/MARC21/slim">
-    <datestamp>2012-01-01T01:02:03Z</datestamp>
     <marc:leader>00857nab a22001810a 4500</marc:leader>
     <marc:controlfield tag="001">12345</marc:controlfield>
     <marc:controlfield tag="003">NL-AMISG</marc:controlfield>

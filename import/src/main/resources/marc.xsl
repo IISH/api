@@ -2,7 +2,6 @@
 
 <!--
 This stylesheet corrects some irregularities from the Evergreen OAI export.
-The VuFind import added a datestamp, which is to be added to a custom 903 datafield.
 -->
 
 <xsl:stylesheet
@@ -10,7 +9,7 @@ The VuFind import added a datestamp, which is to be added to a custom 903 datafi
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
         xmlns:marc="http://www.loc.gov/MARC21/slim">
 
-    <xsl:preserve-space elements="marc:leader" />
+    <xsl:preserve-space elements="marc:leader"/>
 
     <xsl:template match="record">
         <xsl:apply-templates select="recordData"/>
@@ -21,22 +20,9 @@ The VuFind import added a datestamp, which is to be added to a custom 903 datafi
     </xsl:template>
 
     <xsl:template match="marc:record">
-        <xsl:choose>
-            <xsl:when test="marc:controlfield[@tag='008']">
-                <xsl:copy>
-                    <xsl:apply-templates select="@*|node()"/>
-                    <xsl:if test="datestamp">
-                        <marc:datafield tag="903" ind1=" " ind2=" ">
-                            <marc:subfield code="a">
-                                <xsl:value-of select="datestamp"/>
-                            </marc:subfield>
-                        </marc:datafield>
-                    </xsl:if>
-                </xsl:copy>
-            </xsl:when>
-            <xsl:otherwise/>
-        </xsl:choose>
-
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
     </xsl:template>
 
     <xsl:template match="@*|node()">
