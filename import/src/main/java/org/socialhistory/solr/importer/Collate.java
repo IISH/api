@@ -30,6 +30,7 @@ import java.io.*;
 public class Collate {
 
     Transformer transformer;
+    private String extension;
     public int counter = 0;
     public int errors = 0;
 
@@ -49,6 +50,7 @@ public class Collate {
 
     private void process(String source, String target, String extension) throws IOException, XMLStreamException, TransformerException {
 
+        this.extension = extension;
         final FileOutputStream fos = new FileOutputStream(target);
         final OutputStreamWriter writer = new OutputStreamWriter(fos, "utf8");
         writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -59,8 +61,7 @@ public class Collate {
         if (sourceFile.isDirectory()) {
             getFiles(sourceFile, writer);
         } else {
-            if (extension == null || sourceFile.getName().endsWith(extension))
-                getCatalog(sourceFile, writer);
+            getCatalog(sourceFile, writer);
         }
         writer.write("</marc:catalog>");
         writer.flush();
@@ -93,17 +94,18 @@ public class Collate {
             if (file.isDirectory())
                 getFiles(file, writer);
             else {
-                try {
-                    final Document document = loadDocument(file);
-                    if (document.getDocumentElement().hasChildNodes()) {
-                        saveDocument(document, writer);
-                        writer.write("\r\n");
-                        counter++;
+                if (extension == null || file.getName().endsWith(extension))
+                    try {
+                        final Document document = loadDocument(file);
+                        if (document.getDocumentElement().hasChildNodes()) {
+                            saveDocument(document, writer);
+                            writer.write("\r\n");
+                            counter++;
+                        }
+                    } catch (Exception e) {
+                        errors++;
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    errors++;
-                    e.printStackTrace();
-                }
             }
         }
     }
@@ -134,16 +136,21 @@ public class Collate {
 
         final String source = args[0];
         final String target = args[1];
-        final String filter = (args.length == 2) ? null : args[2];
+        final String extension = (args.length == 2) ? null : args[2];
         System.out.println("Source folder: " + source);
         System.out.println("Target folder: " + target);
-        System.out.println("Extension filter: " + filter);
+        System.out.println("Extension filter: " + extension);
 
         final Collate collate = new Collate();
-        collate.process(source, target, filter);
+        collate.setExtension(extension);
+        collate.process(source, target, extension);
 
         System.out.println();
         System.out.println("Records collated: " + collate.counter);
         System.out.println("Rejects: " + collate.errors);
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
     }
 }

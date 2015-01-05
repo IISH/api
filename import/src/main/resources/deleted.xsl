@@ -20,9 +20,9 @@ Select deleted records
     </xsl:template>
 
     <xsl:template match="marc:record">
-                <xsl:value-of select="marc:controlfield[@tag='001']"/>
 <xsl:text>
 </xsl:text>
+        <xsl:value-of select="marc:controlfield[@tag='001']"/>
     </xsl:template>
 
 </xsl:stylesheet>
