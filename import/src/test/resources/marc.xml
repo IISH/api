@@ -1,63 +1,59 @@
-<marc:record xmlns:marc="http://www.loc.gov/MARC21/slim">
-    <marc:leader>00857nab a22001810a 4500</marc:leader>
-    <marc:controlfield tag="001">12345</marc:controlfield>
+<marc:record xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd"><datestamp>2011-08-09T19:25:16Z</datestamp>
+
+    <marc:leader>00523nam a2200169 a 45 0</marc:leader>
+    <marc:controlfield tag="001">998740</marc:controlfield>
     <marc:controlfield tag="003">NL-AMISG</marc:controlfield>
-    <marc:controlfield tag="005">20130405200503</marc:controlfield>
-    <marc:controlfield tag="008">199902suuuuuuuu||||||||||||||||||||||| d</marc:controlfield>
-    <marc:datafield tag="100" ind1=" " ind2=" ">
-        <marc:subfield code="a">Church, R. A.</marc:subfield>
+    <marc:controlfield tag="005">19970407115910.0</marc:controlfield>
+    <marc:controlfield tag="008">199704suuuuuuuune |||||||||||||||||dut d</marc:controlfield>
+    <marc:datafield ind1=" " ind2=" " tag="035">
+        <marc:subfield code="a">(IISG)IISGb10774145</marc:subfield>
     </marc:datafield>
-    <marc:datafield tag="245" ind1=" " ind2=" ">
-        <marc:subfield code="a">Profit-Sharing and Labour Relations in England in the Nineteenth Century</marc:subfield>
-        <marc:subfield code="k">research-article</marc:subfield>
+    <marc:datafield ind1=" " ind2=" " tag="040">
+        <marc:subfield code="a">NL-AmISG</marc:subfield>
     </marc:datafield>
-    <marc:datafield tag="452" ind1=" " ind2=" ">
-        <marc:subfield code="m">irsh</marc:subfield>
+    <marc:datafield ind1="0" ind2=" " tag="041">
+        <marc:subfield code="a">dut</marc:subfield>
     </marc:datafield>
-    <marc:datafield tag="520" ind1=" " ind2=" ">
-        <marc:subfield code="a">An examination of the history of profit-sharing and co-partnership in England in the
-            nineteenth century serves two purposes. One is to add to the growing body of evidence which contradicts the
-            generalization that in the third quarter of the nineteenth century trade unionists were beginning to espouse
-            the capitalist ethic; the other aim of this paper is to draw attention to one of three innovations in the
-            history of labour relations in this period. Of these, both arbitration and conciliation, and cooperation
-            have received considerable attention from historians, but profit-sharing and labour co-partnership schemes,
-            which were forcefully canvassed by such prominent contemporary figures as G. J. Holyoake, respected veteran
-            chartist, and George Potter, the influential labour leader, have not attracted the attention they deserve.
-            The Royal Commission on Trade Unions in 1868 was chiefly concerned with the legal status of trade unions,
-            yet in addition to their discussion of arbitration and conciliation the commissioners took evidence on the
-            progress and achievements of profit-sharing and co-partnership. This reflected the existence of considerable
-            interest in this subject at that time, which in turn provides evidence of the search by contemporaries for a
-            solution to the growing problem of conflict between capital and labour, a matter which generated an
-            extensive literature in the 1860s. The historical failure of profit-sharing, in terms of its limited growth
-            and its lack of success as a method of improving labour relations, even compared with the progress of
-            arbitration and conciliation, does not excuse the historian from neglecting a subject about which a number
-            of influential contemporaries evidently felt strongly – though as it subsequently proved with excessive
-            optimism. This article sets out to describe briefly the origins of the profit-sharing movement of the
-            nineteenth century, proceeds to analyse the course of development, and finally examines its significance
-            within the context of labour relations in England in the period 1850 to 1914.
-        </marc:subfield>
+    <marc:datafield ind1=" " ind2=" " tag="044">
+        <marc:subfield code="a">ne</marc:subfield>
     </marc:datafield>
-    <marc:datafield tag="773" ind1="0" ind2="#">
-        <marc:subfield code="t">International Review of Social History</marc:subfield>
-        <marc:subfield code="g">vol. 16(1971) no.1, p. 2-16.</marc:subfield>
+    <marc:datafield ind1="1" ind2="0" tag="245">
+        <marc:subfield code="a">Op zoek naar de Juventud Sandinista :</marc:subfield>
+        <marc:subfield code="b">over de nicaraguaanse jongeren organisatie /</marc:subfield>
+        <marc:subfield code="c">Luciën van Kolck ... [et al.].</marc:subfield>
     </marc:datafield>
-    <marc:datafield tag="540" ind1=" " ind2=" ">
-        <marc:subfield code="b">Copyright © organization 1971</marc:subfield>
+    <marc:datafield ind1=" " ind2=" " tag="260">
+        <marc:subfield code="a">Utrecht :</marc:subfield>
+        <marc:subfield code="b">FNV Jongerenbeweging,</marc:subfield>
+        <marc:subfield code="c">1987.</marc:subfield>
     </marc:datafield>
-    <marc:datafield tag="852" ind1=" " ind2=" ">
+    <marc:datafield ind1=" " ind2=" " tag="300">
+        <marc:subfield code="a">39 p.</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="2" ind2="4" tag="610">
+        <marc:subfield code="a">Juventud Sandinista 19 de Julio (Nicaragua)</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)166056</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="1" ind2=" " tag="700">
+        <marc:subfield code="a">Kolck, Luciën van.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)402955</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="4" ind2=" " tag="852">
         <marc:subfield code="a">IISG</marc:subfield>
         <marc:subfield code="b">IISG</marc:subfield>
-        <marc:subfield code="c">IRSH</marc:subfield>
-        <marc:subfield code="j">IRSH</marc:subfield>
+        <marc:subfield code="c">IISH</marc:subfield>
+        <marc:subfield code="d">IISG</marc:subfield>
+        <marc:subfield code="j">Bro 1117/11 fol</marc:subfield>
+        <marc:subfield code="n">Available</marc:subfield>
+        <marc:subfield code="p">N10564843</marc:subfield>
     </marc:datafield>
-    <marc:datafield tag="856" ind1="4" ind2=" ">
-        <marc:subfield code="q">application/pdf</marc:subfield>
-        <marc:subfield code="u">http://localhost/12345</marc:subfield>
+    <marc:datafield ind1=" " ind2=" " tag="901">
+        <marc:subfield code="a">998740</marc:subfield>
+        <marc:subfield code="b">Unknown</marc:subfield>
+        <marc:subfield code="c">998740</marc:subfield>
+        <marc:subfield code="t">biblio</marc:subfield>
     </marc:datafield>
-    <marc:datafield tag="902" ind1=" " ind2=" ">
-        <marc:subfield code="a">12345/12345</marc:subfield>
-    </marc:datafield>
-    <marc:datafield tag="903" ind1=" " ind2=" ">
-        <marc:subfield code="a">12345</marc:subfield>
+    <marc:datafield ind1=" " ind2=" " tag="902">
+        <marc:subfield code="a">10622/4F543A83-D4AD-4E87-B413-3D6EE4027D97</marc:subfield>
     </marc:datafield>
 </marc:record>

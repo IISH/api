@@ -48,9 +48,8 @@ public class Collate {
         transformer.setOutputProperty("omit-xml-declaration", "yes");
     }
 
-    private void process(String source, String target, String extension) throws IOException, XMLStreamException, TransformerException {
+    private void process(String source, String target) throws IOException, XMLStreamException, TransformerException {
 
-        this.extension = extension;
         final FileOutputStream fos = new FileOutputStream(target);
         final OutputStreamWriter writer = new OutputStreamWriter(fos, "utf8");
         writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -143,7 +142,7 @@ public class Collate {
 
         final Collate collate = new Collate();
         collate.setExtension(extension);
-        collate.process(source, target, extension);
+        collate.process(source, target);
 
         System.out.println();
         System.out.println("Records collated: " + collate.counter);
