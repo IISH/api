@@ -1,6 +1,6 @@
-<marc:record xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd"><datestamp>2011-08-09T19:25:16Z</datestamp>
-
-    <marc:leader>00523nam a2200169 a 45 0</marc:leader>
+<marc:record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:marc="http://www.loc.gov/MARC21/slim"
+             xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
+    <marc:leader>00523nam a2200169 a 4500</marc:leader>
     <marc:controlfield tag="001">998740</marc:controlfield>
     <marc:controlfield tag="003">NL-AMISG</marc:controlfield>
     <marc:controlfield tag="005">19970407115910.0</marc:controlfield>
@@ -37,15 +37,6 @@
     <marc:datafield ind1="1" ind2=" " tag="700">
         <marc:subfield code="a">Kolck, Luciën van.</marc:subfield>
         <marc:subfield code="0">(NL-AMISG)402955</marc:subfield>
-    </marc:datafield>
-    <marc:datafield ind1="4" ind2=" " tag="852">
-        <marc:subfield code="a">IISG</marc:subfield>
-        <marc:subfield code="b">IISG</marc:subfield>
-        <marc:subfield code="c">IISH</marc:subfield>
-        <marc:subfield code="d">IISG</marc:subfield>
-        <marc:subfield code="j">Bro 1117/11 fol</marc:subfield>
-        <marc:subfield code="n">Notg available</marc:subfield>
-        <marc:subfield code="p">N10564843</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1="4" ind2=" " tag="852">
         <marc:subfield code="a">IISG</marc:subfield>
