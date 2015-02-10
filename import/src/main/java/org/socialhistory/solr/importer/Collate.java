@@ -31,6 +31,7 @@ public class Collate {
 
     Transformer transformer;
     private String extension;
+    private DocumentBuilderFactory dbf;
     public int counter = 0;
     public int errors = 0;
 
@@ -46,6 +47,11 @@ public class Collate {
             transformer = transformerFactory.newTransformer(new StreamSource(resourceAsStream));
         }
         transformer.setOutputProperty("omit-xml-declaration", "yes");
+
+        dbf = DocumentBuilderFactory.newInstance();
+        dbf.setIgnoringComments(true);
+        dbf.setNamespaceAware(true);
+        dbf.setValidating(false);
     }
 
     private void process(String source, String target) throws IOException, XMLStreamException, TransformerException {
@@ -111,10 +117,6 @@ public class Collate {
 
     private Document loadDocument(File file) throws ParserConfigurationException, IOException, SAXException {
 
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        dbf.setIgnoringComments(true);
-        dbf.setNamespaceAware(true);
-        dbf.setValidating(false);
         DocumentBuilder db = dbf.newDocumentBuilder();
         return db.parse(file);
     }
