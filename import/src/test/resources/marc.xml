@@ -44,7 +44,7 @@
         <marc:subfield code="c">IISH</marc:subfield>
         <marc:subfield code="d">IISG</marc:subfield>
         <marc:subfield code="j">Bro 1117/11 fol</marc:subfield>
-        <marc:subfield code="n">aAvailable</marc:subfield>
+        <marc:subfield code="n">Notg available</marc:subfield>
         <marc:subfield code="p">N10564843</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1="4" ind2=" " tag="852">
@@ -55,6 +55,15 @@
         <marc:subfield code="j">Bro 1117/11 fol</marc:subfield>
         <marc:subfield code="n">Available</marc:subfield>
         <marc:subfield code="p">N10564843</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="4" ind2=" " tag="852">
+        <marc:subfield code="a">IISG</marc:subfield>
+        <marc:subfield code="b">IISG</marc:subfield>
+        <marc:subfield code="c">IISH</marc:subfield>
+        <marc:subfield code="d">IISG</marc:subfield>
+        <marc:subfield code="j">Bro 1117/11 fol</marc:subfield>
+        <marc:subfield code="n">Available</marc:subfield>
+        <marc:subfield code="p">30051234567890</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1=" " ind2=" " tag="901">
         <marc:subfield code="a">998740</marc:subfield>
