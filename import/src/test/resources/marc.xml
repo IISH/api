@@ -1,77 +1,59 @@
-<marc:record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:marc="http://www.loc.gov/MARC21/slim"
+<marc:record xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
-    <marc:leader>00523nam a2200169 a 4500</marc:leader>
-    <marc:controlfield tag="001">998740</marc:controlfield>
+    <marc:leader>00285nkm a22001330a 4500</marc:leader>
+    <marc:controlfield tag="001">702574</marc:controlfield>
     <marc:controlfield tag="003">NL-AMISG</marc:controlfield>
-    <marc:controlfield tag="005">19970407115910.0</marc:controlfield>
-    <marc:controlfield tag="008">199704suuuuuuuune |||||||||||||||||dut d</marc:controlfield>
+    <marc:controlfield tag="005">19950210234845.0</marc:controlfield>
+    <marc:controlfield tag="008">199502suuuuuuuu||||||||||||||||||||||| d</marc:controlfield>
     <marc:datafield ind1=" " ind2=" " tag="035">
-        <marc:subfield code="a">(IISG)IISGb10774145</marc:subfield>
+        <marc:subfield code="a">(IISG)IISGb10575142</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1=" " ind2=" " tag="040">
         <marc:subfield code="a">NL-AmISG</marc:subfield>
     </marc:datafield>
-    <marc:datafield ind1="0" ind2=" " tag="041">
-        <marc:subfield code="a">dut</marc:subfield>
-    </marc:datafield>
-    <marc:datafield ind1=" " ind2=" " tag="044">
-        <marc:subfield code="a">ne</marc:subfield>
-    </marc:datafield>
     <marc:datafield ind1="1" ind2="0" tag="245">
-        <marc:subfield code="a">Op zoek naar de Juventud Sandinista :</marc:subfield>
-        <marc:subfield code="b">over de nicaraguaanse jongeren organisatie /</marc:subfield>
-        <marc:subfield code="c">Luciën van Kolck ... [et al.].</marc:subfield>
+        <marc:subfield code="k">Visual document.</marc:subfield>
     </marc:datafield>
-    <marc:datafield ind1=" " ind2=" " tag="260">
-        <marc:subfield code="a">Utrecht :</marc:subfield>
-        <marc:subfield code="b">FNV Jongerenbeweging,</marc:subfield>
-        <marc:subfield code="c">1987.</marc:subfield>
+    <marc:datafield ind1=" " ind2=" " tag="542">
+        <marc:subfield code="m">closed</marc:subfield>
     </marc:datafield>
-    <marc:datafield ind1=" " ind2=" " tag="300">
-        <marc:subfield code="a">39 p.</marc:subfield>
+    <marc:datafield ind1="1" ind2="4" tag="600">
+        <marc:subfield code="a">Gies, Frits.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)118473</marc:subfield>
     </marc:datafield>
-    <marc:datafield ind1="2" ind2="4" tag="610">
-        <marc:subfield code="a">Juventud Sandinista 19 de Julio (Nicaragua)</marc:subfield>
-        <marc:subfield code="0">(NL-AMISG)166056</marc:subfield>
+    <marc:datafield ind1=" " ind2="4" tag="650">
+        <marc:subfield code="a">Portrait.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)306035</marc:subfield>
     </marc:datafield>
-    <marc:datafield ind1="1" ind2=" " tag="700">
-        <marc:subfield code="a">Kolck, Luciën van.</marc:subfield>
-        <marc:subfield code="0">(NL-AMISG)402955</marc:subfield>
+    <marc:datafield ind1=" " ind2="4" tag="655">
+        <marc:subfield code="a">Photo.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)121213</marc:subfield>
     </marc:datafield>
-    <marc:datafield ind1="4" ind2=" " tag="852">
-        <marc:subfield code="a">IISG</marc:subfield>
-        <marc:subfield code="b">IISG</marc:subfield>
-        <marc:subfield code="c">IISH</marc:subfield>
-        <marc:subfield code="d">IISG</marc:subfield>
-        <marc:subfield code="j">Bro 1117/11 fol</marc:subfield>
-        <marc:subfield code="n">Available</marc:subfield>
-        <marc:subfield code="p">N10564843</marc:subfield>
+    <marc:datafield ind1=" " ind2=" " tag="694">
+        <marc:subfield code="a">FNV-voorlichting</marc:subfield>
+        <marc:subfield code="b">BG A15/876</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="2" ind2=" " tag="710">
+        <marc:subfield code="a">FNV.</marc:subfield>
+        <marc:subfield code="b">Voorlichting,</marc:subfield>
+        <marc:subfield code="e">collector.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)573841</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1="4" ind2=" " tag="852">
         <marc:subfield code="a">IISG</marc:subfield>
         <marc:subfield code="b">IISG</marc:subfield>
-        <marc:subfield code="c">IISH</marc:subfield>
-        <marc:subfield code="d">IISG</marc:subfield>
-        <marc:subfield code="j">Bro 1117/11 fol</marc:subfield>
+        <marc:subfield code="c">IISG</marc:subfield>
+        <marc:subfield code="j">BG A15/876</marc:subfield>
         <marc:subfield code="n">Available</marc:subfield>
-        <marc:subfield code="p">30051234567890</marc:subfield>
-    </marc:datafield>
-    <marc:datafield ind1="4" ind2=" " tag="852">
-        <marc:subfield code="a">IISG</marc:subfield>
-        <marc:subfield code="b">IISG</marc:subfield>
-        <marc:subfield code="c">IISH</marc:subfield>
-        <marc:subfield code="d">IISG</marc:subfield>
-        <marc:subfield code="j">Bro 1117/11 fol</marc:subfield>
-        <marc:subfield code="n">Available</marc:subfield>
-        <marc:subfield code="p">10622/30051aaaaaaaa</marc:subfield>
+        <marc:subfield code="p">30051000266020</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1=" " ind2=" " tag="901">
-        <marc:subfield code="a">998740</marc:subfield>
+        <marc:subfield code="a">702574</marc:subfield>
         <marc:subfield code="b">Unknown</marc:subfield>
-        <marc:subfield code="c">998740</marc:subfield>
+        <marc:subfield code="c">702574</marc:subfield>
         <marc:subfield code="t">biblio</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1=" " ind2=" " tag="902">
-        <marc:subfield code="a">10622/4F543A83-D4AD-4E87-B413-3D6EE4027D97</marc:subfield>
+        <marc:subfield code="a">10622/8B03AED2-C8B4-43F2-ACD2-B2ED246877BB</marc:subfield>
     </marc:datafield>
 </marc:record>
