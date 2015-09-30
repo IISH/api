@@ -26,7 +26,7 @@
     		</lst>
 		<lst name="slave">
 			<str name="enable">${enable.slave:false}</str>
-        		<str name="masterUrl">http://api.index0.socialhistoryservices.org:8080/solr/all/replication</str>
+        		<str name="masterUrl">${masterUrl}</str>
 			<str name="pollInterval">00:01:00</str>
  		</lst>
 	</requestHandler>

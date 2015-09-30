@@ -34,9 +34,8 @@ if [ -d target ] ; then
 fi
 
 # Move the files to a folder that has the same name as the app
-rsync -av harvest_import $app
 rsync -av solr $app
-chmod 744 $app/harvest_import/*.sh
+chmod 744 $app/solr/import/*.sh
 
 mkdir target
 tar -zcvf $expect $app

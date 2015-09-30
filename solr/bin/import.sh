@@ -1,7 +1,7 @@
 #!/bin/sh
 
 core=$1
-d="/data/solr-mappings.index0/solr/${core}/conf/import"
+d="/var/www/api/solr/${core}/conf/import"
 
 if [ ! -d $d ];
 then

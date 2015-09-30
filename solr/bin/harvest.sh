@@ -8,7 +8,7 @@ then
     exit 1
 fi
 
-cd /data/solr-mappings.index0/harvest_import
+cd /var/www/api/solr/import
 d=/data/datasets/$dataset
 mkdir -p $d
 ln -s $d
@@ -30,8 +30,8 @@ php harvest_oai.php $dataset > /data/log/$dataset.$now.harvest.log
 
   # Import all records
   # For this we need stylesheets to normalize the marc documents into our model
-  app=/data/solr-mappings.index0/solr/lib/import-1.0.jar
-  java -cp $app org.socialhistory.solr.importer.BatchImport $f "http://localhost:8080/solr/all/update" "/data/solr-mappings.index0/solr/all/conf/normalize/$dataset.xsl,/data/solr-mappings.index0/solr/all/conf/import/add.xsl,/data/solr-mappings.index0/solr/all/conf/import/addSolrDocument.xsl" "collectionName:$dataset"
+  app=/var/www/api/solr/lib/import-1.0.jar
+  java -cp $app org.socialhistory.solr.importer.BatchImport $f "http://localhost:8080/solr/all/update" "/var/www/api/solr/all/conf/normalize/$dataset.xsl,/data/solr-mappings.index0/solr/all/conf/import/add.xsl,/var/www/api/solr/all/conf/import/addSolrDocument.xsl" "collectionName:$dataset"
 
   rm $f
 
