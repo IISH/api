@@ -35,7 +35,7 @@ fi
 
 # Move the files to a folder that has the same name as the app
 rsync -av solr $app
-chmod 744 $app/solr/import/*.sh
+chmod 744 $app/solr/bin/*.sh
 
 mkdir target
 tar -zcvf $expect $app
