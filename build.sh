@@ -9,8 +9,8 @@ set -e
 
 instance=$1
 if [ -z "$instance" ] ; then
-	echo "Need a name of the project build."
-	exit -1
+	instance="api"
+	echo "Default instance name ${instance}"
 fi
 
 version=$2
@@ -34,7 +34,9 @@ if [ -d target ] ; then
 fi
 
 # Move the files to a folder that has the same name as the app
-rsync -av --exclude='analyzers' --exclude='bootstrap' --exclude='import' --exclude='sru' --exclude='widget' --exclude='.git' --exclude='.gitignore' . $app
+rsync -av harvest_import $app
+rsync -av solr $app
+chmod 744 $app/harvest_import/*.sh
 
 mkdir target
 tar -zcvf $expect $app
