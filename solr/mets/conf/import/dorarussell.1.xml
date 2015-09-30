@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataConfig>
+    <dataSource type="FileDataSource" encoding="UTF-8"/>
+    <document>
+        <entity
+                name="xmlfile"
+                stream="true"
+                processor="FileListEntityProcessor"
+                baseDir="/data/datasets/dorarussell/"
+                fileName="concordance.xml"
+                recursive="true"
+                rootEntity="false"
+                transformer="org.socialhistory.solr.transformers.METSTransformer">
+            <entity
+                    name="containers"
+                    processor="XPathEntityProcessor"
+                    forEach="/dataroot/c"
+                    url="${xmlfile.fileAbsolutePath}"
+                    transformer="org.socialhistory.solr.transformers.METSTransformer"
+                     rootEntity="true">
+                <field
+                        column="Inventarisnummer_container"
+                        xpath="//in"
+                        />
+            </entity>
+        </entity>
+    </document>
+</dataConfig>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataConfig>
+
+	<dataSource
+		type="JdbcDataSource"
+		driver="com.mysql.jdbc.Driver"
+		url="${hisco.datasource_url}"
+		user="${hisco.datasource_user"
+		password="${hisco.datasource_password}" />
+
+	<document>
+        <entity name="item"
+                query="SELECT hisco_1_id FROM hisco_1"
+                transformer="org.socialhistory.solr.transformers.SQLTransformer">
+		<entity
+			name="final"
+			query="SELECT *, 'major' as 'table' FROM hisco_1
+                      WHERE (hisco_1_id = ${item.hisco_1_id})"
+			transformer="org.socialhistory.solr.transformers.SQLTransformer"
+            eod="true"
+                /></entity>
+        </document>
+
+</dataConfig>

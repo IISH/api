@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2010 International Institute for Social History, The Netherlands.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<explain xmlns="http://explain.z3950.org/dtd/2.0/">
+
+    <serverInfo protocol="SRW/U">
+        <host>http://api.socialhistoryservices.org/solr/ziegler/srw</host>
+        <port>8080</port>
+        <database>Solr</database>
+        <authentication required="false"/>
+    </serverInfo>
+
+    <databaseInfo>
+        <title lang="nl-NL">Database Ziegler</title>
+        <title lang="en-US">Ziegler Database</title>
+        <description lang="nl-NL">.</description>
+        <description lang="en-US">.</description>
+        <author>mvh@iisg.nl</author>
+        <contact>IISH, www.iisg.nl</contact>
+        <restrictions>Copyright 2010 International Institute for Social History, The Netherlands.</restrictions>
+        <implementation identifier="http://www.oclc.org/research/software/srw" version="1.1">
+            <title>OCLC Research SRW Server version 1.1</title>
+        </implementation>
+    </databaseInfo>
+    <metaInfo>
+        <dateModified>2010-06-14</dateModified>
+        <aggregatedFrom>Lippe.accdb</aggregatedFrom>
+        <dateAggregated>2010-06-14</dateAggregated>
+    </metaInfo>
+
+    <indexInfo>
+        <set name="cql" identifier="info:srw/cql-context-set/1/cql-v1.1"/>
+        <set name="ziegler" identifier="info:srw/schema/1/ziegler"/>
+        <set name="iisg" identifier="info:srw/cql-context-set/1/iish"/>
+
+        <index>
+            <title lang="nl-NL">Zoek naar</title>
+            <title lang="en-US">Search for</title>
+            <map>
+                <name set="cql">serverChoice</name>
+            </map>
+            <map>
+                <name set="solr" search="bath_anywhere" search_range="bath_anywhere" />
+            </map>
+        </index>
+
+        <index>
+            <title>Identifier</title>
+            <map>
+                <name set="strikes">identifier</name>
+            </map>
+            <map>
+                <name set="iisg">identifier</name>
+            </map>
+            <map>
+                <name set="solr" search="iisg_identifier" search_exact="iisg_identifier"/>
+            </map>
+        </index>
+
+        <index>
+            <title>IISH Collections</title>
+            <map>
+                <name set="iisg">collectionName</name>
+                <name set="solr" search_exact="iisg_collectionName"/>
+            </map>
+        </index>
+
+        <index>
+            <title>ID</title>
+            <map>
+                <name set="ziegler">ID</name>
+                <name set="solr" search="ID" search_exact="ID" scan="ID" scan_exact="ID" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">Origin</title>
+            <title lang="de-DE">Quelle</title>
+            <map>
+                <name set="ziegler">origin</name>
+                <name set="solr" search="origin" search_exact="origin" scan="origin" scan_exact="origin" />
+            </map>
+        </index>
+
+        <index>
+            <title>Signatur</title>
+            <map>
+                <name set="ziegler">Signatur</name>
+                <name set="solr" search="Signatur" search_exact="Signatur" scan="Signatur" scan_exact="Signatur" />
+            </map>
+        </index>
+
+        <index>
+            <title>Folio</title>
+            <map>
+                <name set="ziegler">Folio</name>
+                <name set="solr" search="Folio" search_exact="Folio" scan="Folio" scan_exact="Folio" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="de-DE">Jahr</title>
+            <title lang="en-US">Year</title>
+            <title lang="nl-NL">Jaar</title>
+            <map>
+                <name set="ziegler">Jahr</name>
+                <name set="solr" search="Jahr" search_exact="Jahr" scan="Jahr" scan_exact="Jahr" />
+            </map>
+        </index>
+
+        <index>
+            <title>Bezirk</title>
+            <map>
+                <name set="ziegler">Bezirk</name>
+                <name set="solr" search="Bezirk" search_exact="Bezirk" scan="Bezirk" scan_exact="Bezirk" />
+            </map>
+        </index>
+
+        <index>
+            <title>Namen</title>
+            <map>
+                <name set="ziegler">Namen</name>
+                <name set="solr" search="Namen" search_exact="Namen" scan="Namen" scan_exact="Namen" />
+            </map>
+        </index>
+
+        <index>
+            <title>Vornamen</title>
+            <map>
+                <name set="ziegler">Vornamen</name>
+                <name set="solr" search="Vornamen" search_exact="Vornamen" scan="Vornamen" scan_exact="Vornamen" />
+            </map>
+        </index>
+
+        <index>
+            <title>Amt</title>
+            <map>
+                <name set="ziegler">Amt</name>
+                <name set="solr" search="Amt" search_exact="Amt" scan="Amt" scan_exact="Amt" />
+            </map>
+        </index>
+
+        <index>
+            <title>Ortschaft</title>
+            <map>
+                <name set="ziegler">Ortschaft</name>
+                <name set="solr" search="Ortschaft" search_exact="Ortschaft" scan="Ortschaft" scan_exact="Ortschaft" />
+            </map>
+        </index>
+
+        <index>
+            <title>Kataster</title>
+            <map>
+                <name set="ziegler">Kataster</name>
+                <name set="solr" search="Kataster" search_exact="Kataster" scan="Kataster" scan_exact="Kataster" />
+            </map>
+        </index>
+
+        <index>
+            <title>Beziehung</title>
+            <map>
+                <name set="ziegler">Beziehung</name>
+                <name set="solr" search="Beziehung" search_exact="Beziehung" scan="Beziehung" scan_exact="Beziehung" />
+            </map>
+        </index>
+
+        <index>
+            <title>Colon</title>
+            <map>
+                <name set="ziegler">Colon</name>
+                <name set="solr" search="Colon" search_exact="Colon" scan="Colon" scan_exact="Colon" />
+            </map>
+        </index>
+
+        <index>
+            <title>Kotter</title>
+            <map>
+                <name set="ziegler">Kotter</name>
+                <name set="solr" search="Kotter" search_exact="Kotter" scan="Kotter" scan_exact="Kotter" />
+            </map>
+        </index>
+
+        <index>
+            <title>Enrolliert</title>
+            <map>
+                <name set="ziegler">Enrolliert</name>
+                <name set="solr" search="Enrolliert" search_exact="Enrolliert" scan="Enrolliert" scan_exact="Enrolliert" />
+            </map>
+        </index>
+
+        <index>
+            <title>Alter</title>
+            <map>
+                <name set="ziegler">Alter</name>
+                <name set="solr" search="Alter" search_exact="Alter" scan="Alter" scan_exact="Alter" />
+            </map>
+        </index>
+
+        <index>
+            <title>Wohin</title>
+            <map>
+                <name set="ziegler">Wohin</name>
+                <name set="solr" search="Wohin" search_exact="Wohin" scan="Wohin" scan_exact="Wohin" />
+            </map>
+        </index>
+
+        <index>
+            <title>Nachste_Stadt</title>
+            <map>
+                <name set="ziegler">Nachste_Stadt</name>
+                <name set="solr" search="Nachste_Stadt" search_exact="Nachste_Stadt" scan="Nachste_Stadt" scan_exact="Nachste_Stadt" />
+            </map>
+        </index>
+
+        <index>
+            <title>Land</title>
+            <map>
+                <name set="ziegler">Land</name>
+                <name set="solr" search="Land" search_exact="Land" scan="Land" scan_exact="Land" />
+            </map>
+        </index>
+
+        <index>
+            <title>Wie_lange</title>
+            <map>
+                <name set="ziegler">Wie_lange</name>
+                <name set="solr" search="Wie_lange" search_exact="Wie_lange" scan="Wie_lange" scan_exact="Wie_lange" />
+            </map>
+        </index>
+
+        <index>
+            <title>Datum</title>
+            <map>
+                <name set="ziegler">Datum</name>
+                <name set="solr" search="Datum" search_exact="Datum" scan="Datum" scan_exact="Datum" />
+            </map>
+        </index>
+
+        <index>
+            <title>Fabrik</title>
+            <map>
+                <name set="ziegler">Fabrik</name>
+                <name set="solr" search="Fabrik" search_exact="Fabrik" scan="Fabrik" scan_exact="Fabrik" />
+            </map>
+        </index>
+
+        <index>
+            <title>Arbeit</title>
+            <map>
+                <name set="ziegler">Arbeit</name>
+                <name set="solr" search="Arbeit" search_exact="Arbeit" scan="Arbeit" scan_exact="Arbeit" />
+            </map>
+        </index>
+
+        <index>
+            <title>Arbeit_q</title>
+            <map>
+                <name set="ziegler">Arbeit_q</name>
+                <name set="solr" search="Arbeit_q" search_exact="Arbeit_q" scan="Arbeit_q" scan_exact="Arbeit_q" />
+            </map>
+        </index>
+
+        <index>
+            <title>Betragen</title>
+            <map>
+                <name set="ziegler">Betragen</name>
+                <name set="solr" search="Betragen" search_exact="Betragen" scan="Betragen" scan_exact="Betragen" />
+            </map>
+        </index>
+
+        <index>
+            <title>Gruppe</title>
+            <map>
+                <name set="ziegler">Gruppe</name>
+                <name set="solr" search="Gruppe" search_exact="Gruppe" scan="Gruppe" scan_exact="Gruppe" />
+            </map>
+        </index>
+
+        <index>
+            <title>Grosse</title>
+            <map>
+                <name set="ziegler">Grosse</name>
+                <name set="solr" search="Grosse" search_exact="Grosse" scan="Grosse" scan_exact="Grosse" />
+            </map>
+        </index>
+
+        <index>
+            <title>Grosse_q</title>
+            <map>
+                <name set="ziegler">Grosse_q</name>
+                <name set="solr" search="Grosse_q" search_exact="Grosse_q" scan="Grosse_q" scan_exact="Grosse_q" />
+            </map>
+        </index>
+
+        <index>
+            <title>Stellung</title>
+            <map>
+                <name set="ziegler">Stellung</name>
+                <name set="solr" search="Stellung" search_exact="Stellung" scan="Stellung" scan_exact="Stellung" />
+            </map>
+        </index>
+
+        <index>
+            <title>Notiz</title>
+            <map>
+                <name set="ziegler">Notiz</name>
+                <name set="solr" search="Notiz" search_exact="Notiz" scan="Notiz" scan_exact="Notiz" />
+            </map>
+        </index>
+
+    </indexInfo>
+
+    <schemaInfo>
+        <schema name="ziegler" identifier="info:srw/schema/1/ziegler">
+            <title lang="nl-NL">Database Ziegler</title>
+            <title lang="en-US">Ziegler Database</title>
+        </schema>
+    </schemaInfo>
+
+    <configInfo>
+          <default type="maximumRecords">20</default>
+          <default type="numberOfRecords">10</default>
+          <default type="retrieveSchema">info:srw/schema/1/ziegler</default>
+
+          <supports type="relation">all</supports>
+          <supports type="relation">any</supports>
+          <supports type="relation">=</supports>
+          <supports type="relation">exact</supports>
+          <supports type="relation">&lt;</supports>
+          <supports type="relation">&lt;=</supports>
+          <supports type="relation">&gt;=</supports>
+          <supports type="relation">&gt;</supports>
+          <supports type="relation">&lt;&gt;</supports>
+     </configInfo>
+
+</explain>

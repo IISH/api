@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataConfig>
+
+    <dataSource
+            type="JdbcDataSource"
+            driver="com.mysql.jdbc.Driver"
+            url="${migranten.datasource_url}"
+            user="${migranten.datasource_user"
+            password="${migranten.datasource_password}" />
+
+	<document>
+        <entity name="item"
+                query="SELECT
+                idOrg,
+                    importId,
+                    scholar_Id
+                     FROM
+                     tblOrganisatie"
+                transformer="org.socialhistory.solr.transformers.SQLTransformer">
+
+		<entity
+			name="final"
+			query="SELECT
+			                    tblOrganisatie.Naam, tblOrganisatie.Status, tblOrganisatie.KvKNummer, tblOrganisatie.VSNummer, tblOrganisatie.StJaar,
+                                tblOrganisatie.BronStJaar, tblOrganisatie.OphJaar, tblOrganisatie.BronOphJaar, tblOrganisatie.IsOph, tblOrganisatie.Dossier, tblOrganisatie.Internet,
+                                tblOrganisatie.TrefwoordKvK, tblOrganisatie.Doelgroep, tblDoelstelling.Doelstelling, tblDoelstelling.Doelstelling_en, tblEtniciteit.Etniciteit, tblEtniciteit.Etniciteit_en, TblHerkomstregio.Herkomstregio, tblHerkomststad.Herkomststad,
+                                tblLand.Land, tblLand.Land_en, tblReligie.Religie, tblReligie.Religie, TblSchaal.Schaal, TblSchaal.Schaal_en, tblPlaats.Plaats, tblOrganisatie.Soort,
+                                tblOrganisatie.idOrg, tblOrganisatie.importId, tblOrganisatie.scholar_Id
+                      FROM
+                               tblOrganisatie LEFT OUTER JOIN
+                                tblLand ON tblOrganisatie.Herkomstland = tblLand.IdLand LEFT OUTER JOIN
+                                tblHerkomststad ON tblOrganisatie.Herkomststad = tblHerkomststad.IDHerkomststad LEFT OUTER JOIN
+                                tblEtniciteit ON tblOrganisatie.Etniciteit = tblEtniciteit.IdEtniciteit LEFT OUTER JOIN
+                                tblDoelstelling ON tblOrganisatie.Doelstelling = tblDoelstelling.IdDoelstelling LEFT OUTER JOIN
+                                tblReligie ON tblOrganisatie.Religie = tblReligie.IdReligie LEFT OUTER JOIN
+                                TblSchaal ON tblOrganisatie.Schaal = TblSchaal.IdSchaal LEFT OUTER JOIN
+                                tblPlaats ON tblOrganisatie.Vestigingsplaats = tblPlaats.IdPlaats LEFT OUTER JOIN
+                                TblHerkomstregio ON tblOrganisatie.Herkomstregio = TblHerkomstregio.IDHerkomstRegio
+                      WHERE
+                                idOrg = ${item.idOrg} AND importId = ${item.importId} AND scholar_Id = ${item.scholar_Id}"
+			transformer="org.socialhistory.solr.transformers.SQLTransformer" eod="true"/>
+</entity>
+         </document>
+
+</dataConfig>

@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<!--  
+ This is the Solr schema file. This file should be named "schema.xml" and
+ should be in the conf directory under the solr home
+ (i.e. ./solr/conf/schema.xml by default) 
+ or located where the classloader for the Solr webapp can find it.
+
+ This example schema is the recommended starting point for users.
+ It should be kept correct and concise, usable out-of-the-box.
+
+ For more information, on how to customize this file, please see
+ http://wiki.apache.org/solr/SchemaXml
+-->
+
+<schema name="ziegler" version="1.2">
+  <!-- attribute "name" is the name of this schema and is only used for display purposes.
+       Applications should change this to reflect the nature of the search collection.
+       version="1.1" is Solr's version number for the schema syntax and semantics.  It should
+       not normally be changed by applications.
+       1.0: multiValued attribute did not exist, all fields are multiValued by nature
+       1.1: multiValued attribute introduced, false by default -->
+
+  <types>
+    <!-- field type definitions. The "name" attribute is
+       just a label to be used by field definitions.  The "class"
+       attribute and any other attributes determine the real
+       behavior of the fieldType.
+         Class names starting with "solr" refer to java classes in the
+       org.apache.solr.analysis package.
+    -->
+
+    <!-- The StrField type is not analyzed, but indexed/stored verbatim.  
+       - StrField and TextField support an optional compressThreshold which
+       limits compression (if enabled in the derived fields) to values which
+       exceed a certain size (in characters).
+    -->
+    <fieldType name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+
+    <!-- boolean type: "true" or "false" -->
+    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true"/>
+
+    <!-- The optional sortMissingLast and sortMissingFirst attributes are
+         currently supported on types that are sorted internally as strings.
+       - If sortMissingLast="true", then a sort on this field will cause documents
+         without the field to come after documents with the field,
+         regardless of the requested sort order (asc or desc).
+       - If sortMissingFirst="true", then a sort on this field will cause documents
+         without the field to come before documents with the field,
+         regardless of the requested sort order.
+       - If sortMissingLast="false" and sortMissingFirst="false" (the default),
+         then default lucene sorting will be used which places docs without the
+         field first in an ascending sort and last in a descending sort.
+    -->    
+
+
+    <!-- numeric field types that store and index the text
+         value verbatim (and hence don't support range queries, since the
+         lexicographic ordering isn't equal to the numeric ordering) -->
+    <fieldType name="integer" class="solr.IntField" omitNorms="true"/>
+    <fieldType name="long" class="solr.LongField" omitNorms="true"/>
+    <fieldType name="float" class="solr.FloatField" omitNorms="true"/>
+    <fieldType name="double" class="solr.DoubleField" omitNorms="true"/>
+
+
+    <!-- Numeric field types that manipulate the value into
+         a string value that isn't human-readable in its internal form,
+         but with a lexicographic ordering the same as the numeric ordering,
+         so that range queries work correctly. -->
+    <fieldType name="sint" class="solr.SortableIntField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="slong" class="solr.SortableLongField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="sfloat" class="solr.SortableFloatField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="sdouble" class="solr.SortableDoubleField" sortMissingLast="true" omitNorms="true"/>
+
+
+    <!-- The format for this date field is of the form 1995-12-31T23:59:59Z, and
+         is a more restricted form of the canonical representation of dateTime
+         http://www.w3.org/TR/xmlschema-2/#dateTime    
+         The trailing "Z" designates UTC time and is mandatory.
+         Optional fractional seconds are allowed: 1995-12-31T23:59:59.999Z
+         All other components are mandatory.
+
+         Expressions can also be used to denote calculations that should be
+         performed relative to "NOW" to determine the value, ie...
+
+               NOW/HOUR
+                  ... Round to the start of the current hour
+               NOW-1DAY
+                  ... Exactly 1 day prior to now
+               NOW/DAY+6MONTHS+3DAYS
+                  ... 6 months and 3 days in the future from the start of
+                      the current day
+                      
+         Consult the DateField javadocs for more information.
+      -->
+    <fieldType name="date" class="solr.DateField" sortMissingLast="true" omitNorms="true"/>
+
+
+    <!-- The "RandomSortField" is not used to store or search any
+         data.  You can declare fields of this type it in your schema
+         to generate psuedo-random orderings of your docs for sorting 
+         purposes.  The ordering is generated based on the field name 
+         and the version of the index, As long as the index version
+         remains unchanged, and the same field name is reused,
+         the ordering of the docs will be consistent.  
+         If you want differend psuedo-random orderings of documents,
+         for the same version of the index, use a dynamicField and
+         change the name
+     -->
+    <fieldType name="random" class="solr.RandomSortField" indexed="true" />
+
+    <!-- solr.TextField allows the specification of custom text analyzers
+         specified as a tokenizer and a list of token filters. Different
+         analyzers may be specified for indexing and querying.
+
+         The optional positionIncrementGap puts space between multiple fields of
+         this type on the same document, with the purpose of preventing false phrase
+         matching across fields.
+
+         For more info on customizing your analyzer chain, please see
+         http://wiki.apache.org/solr/AnalyzersTokenizersTokenFilters
+     -->
+
+    <!-- One can also specify an existing Analyzer class that has a
+         default constructor via the class attribute on the analyzer element
+    <fieldType name="text_greek" class="solr.TextField">
+      <analyzer class="org.apache.lucene.analysis.el.GreekAnalyzer"/>
+    </fieldType>
+    -->
+
+    <!-- A text field that only splits on whitespace for exact matching of words -->
+    <fieldType name="text_ws" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      </analyzer>
+    </fieldType>
+
+    <!-- A text field that uses WordDelimiterFilter to enable splitting and matching of
+        words on case-change, alpha numeric boundaries, and non-alphanumeric chars,
+        so that a query of "wifi" or "wi fi" could match a document containing "Wi-Fi".
+        Synonyms and stopwords are customized by external files, and stemming is enabled.
+        Duplicate tokens at the same position (which may result from Stemmed Synonyms or
+        WordDelim parts) are removed.
+        -->
+    <fieldType name="text" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.EnglishPorterFilterFactory" protected="protwords.txt"/>
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+    	<filter class="solr.ISOLatin1AccentFilterFactory" />
+        <filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateNumbers="1" catenateAll="0" splitOnCaseChange="0"/>
+
+      </analyzer>
+    </fieldType>
+
+
+    <!-- Less flexible matching, but less false matches.  Probably not ideal for product names,
+         but may be good for SKUs.  Can insert dashes in the wrong place and still match. -->
+    <fieldType name="textTight" class="solr.TextField" positionIncrementGap="100" >
+      <analyzer>
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="false"/>
+        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt"/>
+        <filter class="solr.WordDelimiterFilterFactory" generateWordParts="0" generateNumberParts="0" catenateWords="1" catenateNumbers="1" catenateAll="0"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.EnglishPorterFilterFactory" protected="protwords.txt"/>
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
+    <!-- This is an example of using the KeywordTokenizer along
+         With various TokenFilterFactories to produce a sortable field
+         that does not include some properties of the source text
+      -->
+    <fieldType name="alphaOnlySort" class="solr.TextField" sortMissingLast="true" omitNorms="true">
+      <analyzer>
+        <!-- KeywordTokenizer does no actual tokenizing, so the entire
+             input string is preserved as a single token
+          -->
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <!-- The LowerCase TokenFilter does what you expect, which can be
+             when you want your sorting to be case insensitive
+          -->
+        <filter class="solr.LowerCaseFilterFactory" />
+        <!-- The TrimFilter removes any leading or trailing whitespace -->
+        <filter class="solr.TrimFilterFactory" />
+        <!-- The PatternReplaceFilter gives you the flexibility to use
+             Java Regular expression to replace any sequence of characters
+             matching a pattern with an arbitrary replacement string, 
+             which may include back refrences to portions of the orriginal
+             string matched by the pattern.
+             
+             See the Java Regular Expression documentation for more
+             infomation on pattern and replacement string syntax.
+             
+             http://java.sun.com/j2se/1.5.0/docs/api/java/util/regex/package-summary.html
+          -->
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="([^a-z])" replacement="" replace="all"
+        />
+      </analyzer>
+    </fieldType>
+
+    <!-- since fields of this type are by default not stored or indexed, any data added to 
+         them will be ignored outright 
+     --> 
+    <fieldtype name="ignored" stored="false" indexed="false" class="solr.StrField" /> 
+
+<fieldType name="prefix_full" class="solr.TextField" positionIncrementGap="1">
+<analyzer type="index">
+<tokenizer class="solr.KeywordTokenizerFactory"/>
+<filter class="solr.LowerCaseFilterFactory" />
+<filter class="solr.EdgeNGramFilterFactory" minGramSize="1" maxGramSize="20"/>
+</analyzer>
+<analyzer type="query">
+<tokenizer class="solr.KeywordTokenizerFactory"/>
+<filter class="solr.LowerCaseFilterFactory" />
+</analyzer>
+</fieldType>
+
+<fieldType name="prefix_token" class="solr.TextField" positionIncrementGap="1">
+<analyzer type="index">
+<tokenizer class="solr.WhitespaceTokenizerFactory"/>
+<filter class="solr.LowerCaseFilterFactory" />
+<filter class="solr.EdgeNGramFilterFactory" minGramSize="1" maxGramSize="20"/>
+</analyzer>
+<analyzer type="query">
+<tokenizer class="solr.WhitespaceTokenizerFactory"/>
+<filter class="solr.LowerCaseFilterFactory" />
+</analyzer>
+</fieldType>
+
+ </types>
+
+
+ <fields>
+   <!-- Valid attributes for fields:
+     name: mandatory - the name for the field
+     type: mandatory - the name of a previously defined type from the <types> section
+     indexed: true if this field should be indexed (searchable or sortable)
+     stored: true if this field should be retrievable
+     compressed: [false] if this field should be stored using gzip compression
+       (this will only apply if the field type is compressable; among
+       the standard field types, only TextField and StrField are)
+     multiValued: true if this field may contain multiple values per document
+     omitNorms: (expert) set to true to omit the norms associated with
+       this field (this disables length normalization and index-time
+       boosting for the field, and saves some memory).  Only full-text
+       fields or fields that need an index-time boost need norms.
+     termVectors: [false] set to true to store the term vector for a given field.
+       When using MoreLikeThis, fields used for similarity should be stored for 
+       best performance.
+   -->
+
+     <!--
+        Namespaces are expressed with an underscore during indexing.
+     -->
+
+	<field name="iisg_identifier"               type="string"   indexed="true"  stored="true"   required="true" />
+	<field name="iisg_datestamp"                type="date"     indexed="true"  stored="true"   required="true" default="NOW" />
+	<field name="iisg_collectionName"           type="string"   indexed="true"  stored="true"   required="true" multiValued="true"/>
+	<field name="iisg_isShownAt"                type="string"   indexed="false" stored="true"   required="true" />
+    <field name="iisg_isShownBy"                type="string"   indexed="false" stored="true"   multiValued="true" />
+    <field name="resource"                      type="string"   indexed="false" stored="true"   required="true" compressed="true" />
+    <field name="bath_anywhere"                 type="text"     indexed="true"  stored="false"  required="false" multiValued="true" />
+    <field name="iisg_date_modified"            type="date"     indexed="true"  stored="false" required="false" />
+
+     <field name="ID" indexed="true" stored="false" type="text" />
+         <field name="ID_sort" indexed="true" stored="false" type="text" />
+         <field name="ID_scan" indexed="true" stored="false" type="text" />
+             <copyField source="ID" dest="ID_sort" />
+             <copyField source="ID" dest="ID_scan" />
+
+     <field name="origin" indexed="true" stored="false" type="text" />
+         <field name="origin_sort" indexed="true" stored="false" type="text" />
+         <field name="origin_scan" indexed="true" stored="false" type="text" />
+             <copyField source="origin" dest="origin_sort" />
+             <copyField source="origin" dest="origin_scan" />
+
+     <field name="original_ID" indexed="true" stored="false" type="text" />
+         <field name="original_ID_sort" indexed="true" stored="false" type="text" />
+         <field name="original_ID_scan" indexed="true" stored="false" type="text" />
+             <copyField source="original_ID" dest="original_ID_sort" />
+             <copyField source="original_ID" dest="original_ID_scan" />
+
+     <field name="Signatur" indexed="true" stored="false" type="text" />
+         <field name="Signatur_sort" indexed="true" stored="false" type="text" />
+         <field name="Signatur_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Signatur" dest="Signatur_sort" />
+             <copyField source="Signatur" dest="Signatur_scan" />
+
+     <field name="Folio" indexed="true" stored="false" type="text" />
+         <field name="Folio_sort" indexed="true" stored="false" type="text" />
+         <field name="Folio_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Folio" dest="Folio_sort" />
+             <copyField source="Folio" dest="Folio_scan" />
+
+     <field name="Jahr" indexed="true" stored="false" type="text" />
+         <field name="Jahr_sort" indexed="true" stored="false" type="text" />
+         <field name="Jahr_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Jahr" dest="Jahr_sort" />
+             <copyField source="Jahr" dest="Jahr_scan" />
+
+     <field name="Bezirk" indexed="true" stored="false" type="text" />
+         <field name="Bezirk_sort" indexed="true" stored="false" type="text" />
+         <field name="Bezirk_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Bezirk" dest="Bezirk_sort" />
+             <copyField source="Bezirk" dest="Bezirk_scan" />
+
+     <field name="Namen" indexed="true" stored="false" type="text" />
+         <field name="Namen_sort" indexed="true" stored="false" type="text" />
+         <field name="Namen_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Namen" dest="Namen_sort" />
+             <copyField source="Namen" dest="Namen_scan" />
+
+     <field name="Vornamen" indexed="true" stored="false" type="text" />
+         <field name="Vornamen_sort" indexed="true" stored="false" type="text" />
+         <field name="Vornamen_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Vornamen" dest="Vornamen_sort" />
+             <copyField source="Vornamen" dest="Vornamen_scan" />
+
+     <field name="Amt" indexed="true" stored="false" type="text" />
+         <field name="Amt_sort" indexed="true" stored="false" type="text" />
+         <field name="Amt_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Amt" dest="Amt_sort" />
+             <copyField source="Amt" dest="Amt_scan" />
+
+     <field name="Ortschaft" indexed="true" stored="false" type="text" />
+         <field name="Ortschaft_sort" indexed="true" stored="false" type="text" />
+         <field name="Ortschaft_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Ortschaft" dest="Ortschaft_sort" />
+             <copyField source="Ortschaft" dest="Ortschaft_scan" />
+
+     <field name="Kataster" indexed="true" stored="false" type="text" />
+         <field name="Kataster_sort" indexed="true" stored="false" type="text" />
+         <field name="Kataster_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Kataster" dest="Kataster_sort" />
+             <copyField source="Kataster" dest="Kataster_scan" />
+
+     <field name="Beziehung" indexed="true" stored="false" type="text" />
+         <field name="Beziehung_sort" indexed="true" stored="false" type="text" />
+         <field name="Beziehung_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Beziehung" dest="Beziehung_sort" />
+             <copyField source="Beziehung" dest="Beziehung_scan" />
+
+     <field name="Colon" indexed="true" stored="false" type="text" />
+         <field name="Colon_sort" indexed="true" stored="false" type="text" />
+         <field name="Colon_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Colon" dest="Colon_sort" />
+             <copyField source="Colon" dest="Colon_scan" />
+
+     <field name="Kotter" indexed="true" stored="false" type="text" />
+         <field name="Kotter_sort" indexed="true" stored="false" type="text" />
+         <field name="Kotter_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Kotter" dest="Kotter_sort" />
+             <copyField source="Kotter" dest="Kotter_scan" />
+
+     <field name="Enrolliert" indexed="true" stored="false" type="text" />
+         <field name="Enrolliert_sort" indexed="true" stored="false" type="text" />
+         <field name="Enrolliert_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Enrolliert" dest="Enrolliert_sort" />
+             <copyField source="Enrolliert" dest="Enrolliert_scan" />
+
+     <field name="Alter" indexed="true" stored="false" type="text" />
+         <field name="Alter_sort" indexed="true" stored="false" type="text" />
+         <field name="Alter_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Alter" dest="Alter_sort" />
+             <copyField source="Alter" dest="Alter_scan" />
+
+     <field name="Wohin" indexed="true" stored="false" type="text" />
+         <field name="Wohin_sort" indexed="true" stored="false" type="text" />
+         <field name="Wohin_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Wohin" dest="Wohin_sort" />
+             <copyField source="Wohin" dest="Wohin_scan" />
+
+     <field name="Nachste_Stadt" indexed="true" stored="false" type="text" />
+         <field name="Nachste_Stadt_sort" indexed="true" stored="false" type="text" />
+         <field name="Nachste_Stadt_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Nachste_Stadt" dest="Nachste_Stadt_sort" />
+             <copyField source="Nachste_Stadt" dest="Nachste_Stadt_scan" />
+
+     <field name="Land" indexed="true" stored="false" type="text" />
+         <field name="Land_sort" indexed="true" stored="false" type="text" />
+         <field name="Land_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Land" dest="Land_sort" />
+             <copyField source="Land" dest="Land_scan" />
+
+     <field name="Wie_lange" indexed="true" stored="false" type="text" />
+         <field name="Wie_lange_sort" indexed="true" stored="false" type="text" />
+         <field name="Wie_lange_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Wie_lange" dest="Wie_lange_sort" />
+             <copyField source="Wie_lange" dest="Wie_lange_scan" />
+
+     <field name="Datum" indexed="true" stored="false" type="text" />
+         <field name="Datum_sort" indexed="true" stored="false" type="text" />
+         <field name="Datum_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Datum" dest="Datum_sort" />
+             <copyField source="Datum" dest="Datum_scan" />
+
+     <field name="Fabrik" indexed="true" stored="false" type="text" />
+         <field name="Fabrik_sort" indexed="true" stored="false" type="text" />
+         <field name="Fabrik_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Fabrik" dest="Fabrik_sort" />
+             <copyField source="Fabrik" dest="Fabrik_scan" />
+
+     <field name="Arbeit" indexed="true" stored="false" type="text" />
+         <field name="Arbeit_sort" indexed="true" stored="false" type="text" />
+         <field name="Arbeit_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Arbeit" dest="Arbeit_sort" />
+             <copyField source="Arbeit" dest="Arbeit_scan" />
+
+     <field name="Arbeit_q" indexed="true" stored="false" type="text" />
+         <field name="Arbeit_q_sort" indexed="true" stored="false" type="text" />
+         <field name="Arbeit_q_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Arbeit_q" dest="Arbeit_q_sort" />
+             <copyField source="Arbeit_q" dest="Arbeit_q_scan" />
+
+     <field name="Betragen" indexed="true" stored="false" type="text" />
+         <field name="Betragen_sort" indexed="true" stored="false" type="text" />
+         <field name="Betragen_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Betragen" dest="Betragen_sort" />
+             <copyField source="Betragen" dest="Betragen_scan" />
+
+     <field name="Gruppe" indexed="true" stored="false" type="text" />
+         <field name="Gruppe_sort" indexed="true" stored="false" type="text" />
+         <field name="Gruppe_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Gruppe" dest="Gruppe_sort" />
+             <copyField source="Gruppe" dest="Gruppe_scan" />
+
+     <field name="Grosse" indexed="true" stored="false" type="text" />
+         <field name="Grosse_sort" indexed="true" stored="false" type="text" />
+         <field name="Grosse_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Grosse" dest="Grosse_sort" />
+             <copyField source="Grosse" dest="Grosse_scan" />
+
+     <field name="Grosse_q" indexed="true" stored="false" type="text" />
+         <field name="Grosse_q_sort" indexed="true" stored="false" type="text" />
+         <field name="Grosse_q_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Grosse_q" dest="Grosse_q_sort" />
+             <copyField source="Grosse_q" dest="Grosse_q_scan" />
+
+     <field name="Stellung" indexed="true" stored="false" type="text" />
+         <field name="Stellung_sort" indexed="true" stored="false" type="text" />
+         <field name="Stellung_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Stellung" dest="Stellung_sort" />
+             <copyField source="Stellung" dest="Stellung_scan" />
+
+     <field name="Notiz" indexed="true" stored="false" type="text" />
+         <field name="Notiz_sort" indexed="true" stored="false" type="text" />
+         <field name="Notiz_scan" indexed="true" stored="false" type="text" />
+             <copyField source="Notiz" dest="Notiz_sort" />
+             <copyField source="Notiz" dest="Notiz_scan" />
+
+     <copyField source="*" dest="bath_anywhere" />
+
+    </fields>
+
+     <uniqueKey>iisg_identifier</uniqueKey>
+
+ <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+ <defaultSearchField>bath_anywhere</defaultSearchField>
+
+ <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
+ <solrQueryParser defaultOperator="AND"/>
+
+
+</schema>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2010 International Institute for Social History, The Netherlands.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+
+<!--
+Maak voor scan, sort en search aparte lijsten.
+Delete alle tweede map instanties van solr en op zichtzelf staande instanties van solr
+-->
+
+
+<explain xmlns="http://explain.z3950.org/dtd/2.0/">
+
+    <serverInfo protocol="SRW/U">
+        <host>http://api.socialhistoryservices.org/solr/strikes/srw_en</host>
+        <port>8080</port>
+        <database>Solr</database>
+        <authentication required="false"/>
+    </serverInfo>
+
+    <databaseInfo>
+        <title lang="nl-NL">Database stakingen in Nederland</title>
+        <title lang="en-US">Database Strikes in the Netherlands</title>
+        <description lang="nl-NL">Ruim 16.000 stakingen en uitsluitingen in Nederland in de jaren 1372-2006 voorzien van vermelding van onder andere de deelnemers, de aantallen stakers, de betrokken bedrijven, de aanleiding en de afloop.</description>
+        <description lang="en-US">Over 16,000 strikes in the Netherlands from 1372-2006, with a list of participants, their numbers, companies involved, the reason and outcome of the strike. The data is in Dutch.</description>
+        <author>Sjaak van der Velden, svv@iisg.nl</author>
+        <contact>IISH, www.iisg.nl</contact>
+        <restrictions>Copyright 2010 International Institute for Social History, The Netherlands.</restrictions>
+        <implementation identifier="http://www.oclc.org/research/software/srw" version="1.1">
+            <title>OCLC Research SRW Server version 1.1</title>
+        </implementation>
+    </databaseInfo>
+    <metaInfo>
+        <dateModified>2010-02-16</dateModified>
+        <aggregatedFrom>sql database CMG</aggregatedFrom>
+        <dateAggregated>2010-02-16</dateAggregated>
+    </metaInfo>
+
+    <indexInfo>
+        <set name="cql" identifier="info:srw/cql-context-set/1/cql-v1.1"/>
+        <set name="strikes" identifier="info:srw/schema/1/strikes"/>
+        <set name="iisg" identifier="info:srw/cql-context-set/1/iish"/>
+
+        <index>
+            <title lang="nl-NL">Zoek naar</title>
+            <title lang="en-US">Search for</title>
+            <map>
+                <name set="cql">serverChoice</name>
+                <name set="solr" search="bath_anywhere" search_range="bath_anywhere" scan="bath_anywhere" />
+            </map>
+        </index>
+
+        <index>
+            <title>Identifier</title>
+            <map>
+                <name set="strikes">identifier</name>
+            </map>
+            <map>
+                <name set="iisg">identifier</name>
+            </map>
+            <map>
+                <name set="solr" search="iisg_identifier" search_exact="iisg_identifier"/>
+            </map>
+        </index>
+
+        <index>
+            <title>IISH Collections</title>
+            <map>
+                <name set="iisg">collectionName</name>
+                <name set="solr" search_exact="iisg_collectionName"/>
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">Action</title>
+            <title lang="nl-NL">Actie</title>
+            <map>
+                <name set="strikes">actiesoort</name>
+                <name set="solr" search="actiesoort_en" search_exact="actiesoort_sort_en" scan_exact="actiesoort_sort_en" sort="actiesoort_sort_en" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">Company</title>
+            <title lang="nl-NL">Bedrijf</title>
+            <map>
+                <name set="strikes">bedrijf</name>
+                <name set="solr" search="bedrijf" search_exact="bedrijf_sort" scan_exact="bedrijf_sort" sort="bedrijf_sort" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Plaats</title>
+            <title lang="en-US">City</title>
+            <map>
+                <name set="strikes">plaats</name>
+                <name set="solr" search="plaats" scan_exact="plaats_sort" sort="plaats_sort" />
+            </map>
+        </index>
+
+                <index>
+            <title lang="nl-NL">Beroep</title>
+            <title lang="en-US">Occupation</title>
+            <map>
+                <name set="strikes">beroep</name>
+                <name set="solr" search="beroep_en" search_exact="beroep_sort_en" scan_exact="beroep_sort_en" sort="beroep_sort_en" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Beroepsgroep</title>
+            <title lang="en-US">Occupational group</title>
+            <map>
+                <name set="strikes">beroepsgroep</name>
+                <name set="solr" search="beroepsgroep_en" search_exact="beroepsgroep_sort_en" scan_exact="beroepsgroep_sort_en" sort="beroepsgroep_sort_en" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Sector</title>
+            <title lang="en-US">Sector</title>
+            <map>
+                <name set="strikes">sector</name>
+                <name set="solr" search="sector_en" search_exact="sector_sort_en" scan_exact="sector_sort_en" sort="sector_sort_en"/>
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Reden</title>
+            <title lang="en-US">Goal</title>
+            <map>
+                <name set="strikes">reden</name>
+                <name set="solr" search="reden_en" search_exact="reden_sort_en" scan_exact="reden_sort_en" sort="reden_sort_en"/>
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Type</title>
+            <title lang="en-US">Type</title>
+            <map>
+                <name set="strikes">type</name>
+                <name set="solr" search="type_en" search_exact="type_sort_en" scan_exact="type_sort_en" sort="type_sort_en" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Uitkomst</title>
+            <title lang="en-US">Result</title>
+            <map>
+                <name set="strikes">uitkomst</name>
+                <name set="solr" search="uitkomst_en" search_exact="uitkomst_sort_en" scan_exact="uitkomst_sort_en" sort="uitkomst_sort_en" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Karakter</title>
+            <title lang="en-US">Nature</title>
+            <map>
+                <name set="strikes">karakter</name>
+                <name set="solr" search="karakter_en" search_exact="karakter_sort_en" scan_exact="karakter_sort_en" sort="karakter_sort_en" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Jaar</title>
+            <title lang="en-US">Year</title>
+            <map>
+                <name set="strikes">jaar</name>
+                <name set="solr" search="jaar" scan_exact="jaar_scan" sort="jaar_sort" />
+            </map>
+        </index>
+
+        <!-- The following indexes are unused -->
+        <index>
+            <title lang="nl-NL">Bron</title>
+            <title lang="en-US">Source</title>
+            <map>
+                <name set="strikes">source</name>
+            </map>
+        </index>
+        <index>
+            <title lang="nl-NL">Datum</title>
+            <title lang="en-US">Date</title>
+            <map>
+                <name set="strikes">datum</name>
+            </map>
+        </index>
+        <index>
+            <title lang="nl-NL">Duur van de actie</title>
+            <title lang="en-US">Length of the action</title>
+            <map>
+                <name set="strikes">duur</name>
+            </map>
+        </index>
+        <index>
+            <title lang="nl-NL">Uitleg</title>
+            <title lang="en-US">Explanation</title>
+            <map>
+                <name set="strikes">uitleg</name>
+            </map>
+        </index>
+
+    </indexInfo>
+
+    <schemaInfo>
+        <schema name="strikes" identifier="info:srw/schema/1/strikes">
+            <title lang="nl-NL">Database stakingen in Nederland</title>
+        </schema>
+        <schema name="solr" identifier="info:srw/cql-context-set/2/solr">
+            <title lang="nl-NL">Non standarized Solr response output</title>
+        </schema>
+    </schemaInfo>
+
+    <configInfo>
+          <default type="maximumRecords">20</default>
+          <default type="numberOfRecords">10</default>
+          <default type="retrieveSchema">info:srw/schema/1/strikes</default>
+
+          <supports type="relation">all</supports>
+          <supports type="relation">any</supports>
+          <supports type="relation">=</supports>
+          <supports type="relation">exact</supports>
+          <supports type="relation">&lt;</supports>
+          <supports type="relation">&lt;=</supports>
+          <supports type="relation">&gt;=</supports>
+          <supports type="relation">&gt;</supports>
+          <supports type="relation">&lt;&gt;</supports>
+     </configInfo>
+
+</explain>

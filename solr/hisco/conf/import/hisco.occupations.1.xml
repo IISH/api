@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataConfig>
+
+    <dataSource
+            type="JdbcDataSource"
+            driver="com.mysql.jdbc.Driver"
+            url="${hisco.datasource_url}"
+            user="${hisco.datasource_user"
+            password="${hisco.datasource_password}" />
+
+	<document>
+        <entity name="item"
+                query="SELECT link_id, hisco_id FROM occupation_link_hisco;"
+                transformer="org.socialhistory.solr.transformers.SQLTransformer">
+		<entity
+			name="final"
+			query="SELECT status.status_id,
+	status.label AS status_label,
+	relation.relation_id,
+	relation.label AS relation_label,
+	product.product_id,
+	product.label AS product_label,
+	occupation.occupation_id,
+	occupation.label AS occupation_label,
+	occupation.english_translation,
+	occupation.country_code,
+	occupation.lang_code,
+	occupation_link_hisco.link_id,
+	occupation_link_hisco.hisco_id,
+	occupation_link_hisco.comnum,
+	occupation_link_hisco.comtxt,
+	occupation_link_hisco.provenance,
+	'occupations' as 'table'
+FROM
+	occupation_link_hisco
+LEFT JOIN status ON occupation_link_hisco.status_id=status.status_id
+LEFT JOIN product ON occupation_link_hisco.product_id=product.product_id
+LEFT JOIN occupation ON occupation_link_hisco.occupation_id=occupation.occupation_id
+LEFT JOIN relation ON occupation_link_hisco.relation_id=relation.relation_id
+WHERE (occupation_link_hisco.link_id=${item.link_id})"
+			transformer="org.socialhistory.solr.transformers.SQLTransformer"/>
+            <entity close="true" name="images" transformer="org.socialhistory.solr.transformers.SQLTransformer" query="SELECT images.image_url FROM images WHERE (images.hisco_id=${item.hisco_id} AND NOT images.hisco_id=-1)"/>
+        <entity ignore="true" name="eod" transformer="org.socialhistory.solr.transformers.SQLTransformer" query="SELECT 'eod' as 'eod'"/></entity>
+        </document>
+
+</dataConfig>

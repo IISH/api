@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/
+         http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2002-08-11T07:21:33Z</responseDate>
+     <request verb="Identify">http://api.socialhistoryservices.org/solr/all/oai</request>
+    <Identify>
+        <repositoryName>International Institute of Social History</repositoryName>
+        <baseURL>http://api.socialhistoryservices.org/solr/all/oai</baseURL>
+        <protocolVersion>2.0</protocolVersion>
+        <adminEmail>lwo@iisg.nl</adminEmail>
+        <earliestDatestamp>2011-06-01T12:00:00Z</earliestDatestamp>
+        <deletedRecord>transient</deletedRecord>
+        <granularity>YYYY-MM-DDThh:mm:ssZ</granularity>
+        <compression>none</compression>
+        <description>
+            <oai-identifier
+                    xmlns="http://www.openarchives.org/OAI/2.0/oai-identifier"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai-identifier http://www.openarchives.org/OAI/2.0/oai-identifier.xsd">
+                <scheme>oai</scheme>
+                <repositoryIdentifier>socialhistoryservices.org</repositoryIdentifier>
+                <delimiter>:</delimiter>
+                <sampleIdentifier>oai:socialhistoryservices.org:10622/12345-abcde</sampleIdentifier>
+            </oai-identifier>
+        </description>
+    </Identify>
+</OAI-PMH>

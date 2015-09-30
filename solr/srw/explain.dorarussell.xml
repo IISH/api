@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2010 International Institute for Social History, The Netherlands.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<explain xmlns="http://explain.z3950.org/dtd/2.0/">
+
+    <serverInfo protocol="SRW/U">
+        <host>http://api.socialhistoryservices.org/solr/mets/srw</host>
+        <port>8080</port>
+        <database>Solr</database>
+        <authentication required="false"/>
+    </serverInfo>
+
+    <databaseInfo>
+        <title lang="nl-NL">Dora Winifred Russell Papers</title>
+        <title lang="en-US">Dora Winifred Russell archief</title>
+        <description lang="nl-NL"></description>
+        <description lang="en-US"></description>
+        <author>Jack Hofman, jho@iisg.nl</author>
+        <contact>IISH, www.iisg.nl</contact>
+        <restrictions>Copyright 2010 International Institute for Social History, The Netherlands.</restrictions>
+        <implementation identifier="http://www.oclc.org/research/software/srw" version="1.1">
+            <title>OCLC Research SRW Server version 1.1</title>
+        </implementation>
+    </databaseInfo>
+    <metaInfo>
+        <dateModified>2010-06-14</dateModified>
+        <aggregatedFrom>concordance table that was delivered from a scanning factory</aggregatedFrom>
+        <dateAggregated>2010-06-14</dateAggregated>
+    </metaInfo>
+
+    <indexInfo>
+        <set name="cql" identifier="info:srw/cql-context-set/1/cql-v1.1"/>
+        <set name="ead" identifier="info:srw/ead-context-set/1/ead-2002"/>
+        <set name="iisg" identifier="info:srw/cql-context-set/1/iish"/>
+
+        <index>
+            <title lang="nl-NL">Zoek naar</title>
+            <title lang="en-US">Search for</title>
+            <map>
+                <name set="cql">serverChoice</name>
+                <name set="solr" search="bath_anywhere" search_range="bath_anywhere" scan="bath_anywhere" />
+            </map>
+        </index>
+
+        <index>
+            <title>Identifier</title>
+            <map>
+                <name set="iisg">identifier</name>
+                <name set="solr" search="iisg_identifier" search_exact="iisg_identifier" />
+            </map>
+        </index>
+
+        <index>
+            <title>IISH Collections</title>
+            <map>
+                <name set="iisg">collectionName</name>
+                <name set="solr" search_exact="iisg_collectionName"/>
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">series</title>
+            <title lang="nl-NL">series</title>
+            <map>
+                <name set="ead">series</name>
+                <name set="solr" search="level_series" search_exact="level_series_sort" scan_exact="level_series_sort" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">subseries</title>
+            <title lang="nl-NL">subseries</title>
+            <map>
+                <name set="ead">subseries</name>
+                <name set="solr" search="level_subseries" search_exact="level_subseries_sort" scan_exact="level_subseries_sort"/>
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">file</title>
+            <title lang="nl-NL">map</title>
+            <map>
+                <name set="ead">file</name>
+                <name set="solr" search="level_file" search_exact="level_file_sort" scan_exact="level_file_sort"/>
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">item</title>
+            <title lang="nl-NL">archiefstuk</title>
+            <map>
+                <name set="ead">item</name>
+                <name set="solr" search="level_item" search_exact="level_item_sort" scan_exact="level_item_sort"/>
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">level</title>
+            <title lang="nl-NL">level</title>
+            <map>
+                <name set="ead">level</name>
+                <name set="solr" search="level" search_exact="level_sort" scan_exact="level_sort"/>
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">Inv.num.</title>
+            <title lang="nl-NL">Inv.num.</title>
+            <map>
+                <name set="ead">container</name>
+            </map>
+        </index>
+        <index>
+            <title lang="en-US">head</title>
+            <title lang="nl-NL">head</title>
+            <map>
+                <name set="ead">head</name>
+            </map>
+        </index>
+
+    </indexInfo>
+
+    <schemaInfo>
+        <schema name="mets" identifier="info:srw/schema/1/mets">
+            <title lang="nl-NL">Mets and EAD</title>
+        </schema>
+        <schema name="solr" identifier="info:srw/cql-context-set/2/solr">
+            <title lang="nl-NL">Non standarized Solr response output</title>
+        </schema>
+    </schemaInfo>
+
+    <configInfo>
+          <default type="maximumRecords">20</default>
+          <default type="numberOfRecords">10</default>
+          <default type="retrieveSchema">info:srw/schema/1/mets</default>
+
+          <supports type="relation">all</supports>
+          <supports type="relation">any</supports>
+          <supports type="relation">=</supports>
+          <supports type="relation">exact</supports>
+          <supports type="relation">&lt;</supports>
+          <supports type="relation">&lt;=</supports>
+          <supports type="relation">&gt;=</supports>
+          <supports type="relation">&gt;</supports>
+          <supports type="relation">&lt;&gt;</supports>
+     </configInfo>
+
+</explain>

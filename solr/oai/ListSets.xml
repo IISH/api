@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/
+         http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2012-03-07T09:21:33Z</responseDate>
+    <request verb="ListSets">http://api.socialhistoryservices.org/solr/all/oai</request>
+
+    <ListSets>
+        <set>
+            <setSpec>iish.evergreen.biblio</setSpec>
+            <setName>IISH library catalog</setName>
+        </set>
+        <set>
+            <setSpec>iish.archieven</setSpec>
+            <setName>Archives</setName>
+        </set>
+        <set>
+            <setSpec>iish.eci</setSpec>
+            <setName>Audio and visual material</setName>
+        </set>
+        <set>
+            <setSpec>VIS-DutchLabourMovements</setSpec>
+            <setName>Dutch labour Movements</setName>
+            <setDescription>Dutch labour Movements until 1918 image collection</setDescription>
+        </set>
+        <set>
+            <setSpec>VIS-ParadisoMelkweg</setSpec>
+            <setName>Posters paradiso en melkweg</setName>
+            <setDescription>Posters paradiso en melkweg image collection</setDescription>
+        </set>
+        <set>
+            <setSpec>VIS-AHP</setSpec>
+            <setName>Algemeen Hollands Fotopersburo</setName>
+            <setDescription>Algemeen Hollands Fotopersburo image collection</setDescription>
+        </set>
+        <set>
+            <setSpec>VIS-DutchPoliticalSocialMovements</setSpec>
+            <setName>Posters Dutch political and social movements 1890-1995</setName>
+            <setDescription>Posters Dutch political and social movements 1890-1995 image collection</setDescription>
+        </set>
+        <set>
+            <setSpec>VIS-EuropeanSocialMovements</setSpec>
+            <setName>Social movements 19-20th century photo's en posters</setName>
+            <setDescription>Image and Sound collection, social movements 19-20th century photo's en posters
+            </setDescription>
+        </set>
+        <set>
+            <setSpec>VIS-NonEuropeanMovement</setSpec>
+            <setName>Social movements 19-20th century photo's en posters</setName>
+            <setDescription>Image and Sound collection, social movements 19-20th century photo's en posters
+            </setDescription>
+        </set>
+        <set>
+            <setSpec>irsh</setSpec>
+            <setName>International Review of Social History</setName>
+        </set>
+        <set>
+            <setSpec>IISG</setSpec>
+            <setName>IISG collections</setName>
+        </set>
+        <set>
+            <setSpec>PM</setSpec>
+            <setName>Persmuseum</setName>
+        </set>
+        <set>
+            <setSpec>PM.HahnAlbert</setSpec>
+            <setName>Persmuseum Hahn Albert</setName>
+        </set>
+
+        <set>
+            <setSpec>nondig</setSpec>
+            <setName>No digital content</setName>
+        </set>
+        <set>
+            <setSpec>nondig.serials</setSpec>
+            <setName>No Digital Content Serial</setName>
+        </set>
+        <set>
+            <setSpec>nondig.books_and_brochures</setSpec>
+            <setName>No Digital Content Book</setName>
+        </set>
+        <set>
+            <setSpec>nondig.music_and_sound</setSpec>
+            <setName>No Digital Content Music and Sound</setName>
+        </set>
+        <set>
+            <setSpec>nondig.documentation</setSpec>
+            <setName>No Digital Content Documentation</setName>
+        </set>
+        <set>
+            <setSpec>nondig.archives</setSpec>
+            <setName>No Digital Content Archives</setName>
+        </set>
+        <set>
+            <setSpec>nondig.visual_documents</setSpec>
+            <setName>No Digital Content Visual documents</setName>
+        </set>
+        <set>
+            <setSpec>nondig.other</setSpec>
+            <setName>No Digital Content Miscellaneous</setName>
+        </set>
+    </ListSets>
+</OAI-PMH>
+
+

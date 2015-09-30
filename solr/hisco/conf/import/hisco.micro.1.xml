@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataConfig>
+
+    <dataSource
+            type="JdbcDataSource"
+            driver="com.mysql.jdbc.Driver"
+            url="${hisco.datasource_url}"
+            user="${hisco.datasource_user"
+            password="${hisco.datasource_password}" />
+
+	<document>
+        <entity name="item"
+                query="SELECT hisco_1_id, hisco_2_id, hisco_3_id, hisco_45_id FROM hisco_45"
+                transformer="org.socialhistory.solr.transformers.SQLTransformer">
+		<entity
+			name="final"
+			query="SELECT *, 'micro' as 'table' FROM hisco_45
+                      WHERE (hisco_1_id = ${item.hisco_1_id} AND hisco_2_id = ${item.hisco_2_id} AND hisco_3_id = ${item.hisco_3_id} AND hisco_45_id = ${item.hisco_45_id})"
+			transformer="org.socialhistory.solr.transformers.SQLTransformer" eod="true" /></entity>
+        </document>
+
+</dataConfig>

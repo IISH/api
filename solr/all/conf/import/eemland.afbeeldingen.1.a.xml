@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Modified by: GCU (2011-03-25) -->
+
+<dataConfig>
+        <dataSource name="fs" type="FileDataSource" encoding="UTF-8" />
+        <document>
+	        <entity
+                    name="xmlfile"
+                    dataSource="null"
+                    stream="true"
+                    processor="FileListEntityProcessor"
+                    baseDir="/data/datasets/migranten/eemland.afbeeldingen.1.a/import"
+                    filename="^.*\.xml$"
+                    recursive="true"
+                    rootEntity="true"
+                    transformer="org.socialhistory.solr.transformers.FSTransformer"
+            />
+        </document>
+</dataConfig>

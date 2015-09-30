@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/
+         http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2002-02-08T14:27:19Z</responseDate>
+    <request verb="ListMetadataFormats"
+             identifier="oai:domain.org:1">.
+    </request>
+    <ListMetadataFormats>
+        <metadataFormat>
+            <metadataPrefix>oai_dc</metadataPrefix>
+            <schema>http://www.openarchives.org/OAI/2.0/oai_dc.xsd</schema>
+            <metadataNamespace>http://www.openarchives.org/OAI/2.0/oai_dc/</metadataNamespace>
+        </metadataFormat>
+        <metadataFormat>
+            <metadataPrefix>marcxml</metadataPrefix>
+            <schema>http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd</schema>
+            <metadataNamespace>http://www.loc.gov/MARC21/slim</metadataNamespace>
+        </metadataFormat>
+        <metadataFormat>
+            <metadataPrefix>rdfvufind</metadataPrefix>
+            <schema>http://www.w3.org/1999/02/22-rdf-syntax-ns#</schema>
+            <metadataNamespace>http://www.w3.org/1999/02/22-rdf-syntax-ns#</metadataNamespace>
+        </metadataFormat>
+        <metadataFormat>
+            <metadataPrefix>rdfsimili</metadataPrefix>
+            <schema>http://www.w3.org/1999/02/22-rdf-syntax-ns#</schema>
+            <metadataNamespace>http://www.w3.org/1999/02/22-rdf-syntax-ns#</metadataNamespace>
+        </metadataFormat>
+        <metadataFormat>
+            <metadataPrefix>mods</metadataPrefix>
+            <schema>http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-0.xsd</schema>
+            <metadataNamespace>http://www.loc.gov/mods/v3</metadataNamespace>
+        </metadataFormat>
+        <metadataFormat>
+            <metadataPrefix>solr</metadataPrefix>
+            <schema>http://wiki.apache.org/solr/solr.xsd</schema>
+            <metadataNamespace>http://wiki.apache.org/solr/</metadataNamespace>
+        </metadataFormat>
+        <metadataFormat>
+            <metadataPrefix>ead</metadataPrefix>
+            <schema>http://www.loc.gov/ead/ead.xsd</schema>
+            <metadataNamespace>urn:isbn:1-931666-22-9</metadataNamespace>
+        </metadataFormat>
+        <metadataFormat>
+            <metadataPrefix>eci</metadataPrefix>
+            <schema>ead.xsd</schema>
+            <metadataNamespace>urn:eci</metadataNamespace>
+        </metadataFormat>
+    </ListMetadataFormats>
+</OAI-PMH>

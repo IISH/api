@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2010 International Institute for Social History, The Netherlands.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<explain xmlns="http://explain.z3950.org/dtd/2.0/">
+
+    <serverInfo protocol="SRW/U">
+        <host>http://api.socialhistoryservices.org/solr/hisco/srw</host>
+        <port>8080</port>
+        <database>Solr</database>
+        <authentication required="false"/>
+    </serverInfo>
+
+    <databaseInfo>
+        <title lang="nl-NL">Database historische beroepen</title>
+        <title lang="en-US">Database Historical Occupations</title>
+        <description lang="nl-NL">Door de tijd heen hebben hisco in Nederland duizenden organisaties opgericht om hun belangen te verdedigen, hun religieuze leven vorm te geven, hun maatschappelijke welzijn te verhogen, hun cultuur te beleven of om welke andere redenen dan ook. In de afgelopen tien jaar hebben CGM-leden in het kader van verschillende onderzoeksprojecten databases gemaakt. Deze zijn nu bij elkaar gebracht in de CGM database Migrantenorganisaties in Nederland. Deze ongeveer 6000 organisaties zijn online doorzoekbaar.</description>
+        <description lang="en-US">This database offers tens of thousands of occupational titles from countries and languages around the world from the sixteenth to the twentieth centuries, with a short description of the content of the work.</description>
+        <author>historyofwork@iisg.nl</author>
+        <contact>IISH, www.iisg.nl</contact>
+        <restrictions>Copyright 2010 International Institute for Social History, The Netherlands.</restrictions>
+        <implementation identifier="http://www.oclc.org/research/software/srw" version="1.1">
+            <title>OCLC Research SRW Server version 1.1</title>
+        </implementation>
+    </databaseInfo>
+    <metaInfo>
+        <dateModified>2010-02-16</dateModified>
+        <aggregatedFrom>sql database CMG</aggregatedFrom>
+        <dateAggregated>2010-02-16</dateAggregated>
+    </metaInfo>
+
+    <indexInfo>
+        <set name="cql" identifier="info:srw/cql-context-set/1/cql-v1.1"/>
+        <set name="hisco" identifier="info:srw/schema/1/hisco"/>
+        <set name="iisg" identifier="info:srw/cql-context-set/1/iish"/>
+
+        <index>
+            <title lang="nl-NL">Zoek naar</title>
+            <title lang="en-US">Search for</title>
+            <map>
+                <name set="cql">serverChoice</name>
+                <name set="solr" search="bath_anywhere" search_range="bath_anywhere" scan="bath_anywhere" />
+            </map>
+        </index>
+
+        <index>
+            <title>Identifier</title>
+            <map>
+                <name set="iisg">identifier</name>
+            </map>
+            <map>
+                <name set="solr" search="iisg_identifier" search_exact="iisg_identifier"/>
+            </map>
+        </index>
+
+        <index>
+            <title>Group identifier</title>
+            <map>
+                <name set="hisco">group_id</name>
+            </map>
+            <map>
+                <name set="solr" search="group_id" search_exact="group_id" />
+            </map>
+        </index>
+
+        <index>
+            <title>Group identifiers</title>
+            <map>
+                <name set="hisco">group_ids</name>
+            </map>
+            <map>
+                <name set="solr" search="group_ids" search_exact="group_ids" />
+            </map>
+        </index>
+
+        <index>
+            <title>Hisco major identifier</title>
+            <map>
+                <name set="hisco">major_id</name>
+            </map>
+            <map>
+                <name set="solr" search="major_id" search_exact="major_id" />
+            </map>
+        </index>
+
+        <index>
+            <title>Hisco minor identifier</title>
+            <map>
+                <name set="hisco">minor_id</name>
+            </map>
+            <map>
+                <name set="solr" search="minor_id" search_exact="minor_id" />
+            </map>
+        </index>
+
+        <index>
+            <title>Hisco unit identifier</title>
+            <map>
+                <name set="hisco">unit_id</name>
+            </map>
+            <map>
+                <name set="solr" search="unit_id" search_exact="unit_id" />
+            </map>
+        </index>
+
+        <index>
+            <title>Hisco minor identifier</title>
+            <map>
+                <name set="hisco">minor_id</name>
+            </map>
+            <map>
+                <name set="solr" search="minor_id" search_exact="minor_id" />
+            </map>
+        </index>
+
+        <index>
+            <title>Hisco occupations identifier</title>
+            <map>
+                <name set="hisco">occupations_id</name>
+            </map>
+            <map>
+                <name set="solr" search="occupations_id" search_exact="occupations_id" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">Hisco code</title>
+            <title lang="nl-NL">Hiscocode</title>
+            <map>
+                <name set="hisco">hisco_id</name>
+            </map>
+            <map>
+                <name set="solr" search="hisco_id" search_exact="hisco_id" />
+            </map>
+        </index>
+
+        <index>
+            <title>IISH Collections</title>
+            <map>
+                <name set="iisg">collectionName</name>
+                <name set="solr" search_exact="iisg_collectionName"/>
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">Table</title>
+            <title lang="nl-NL">Tabel</title>
+            <map>
+                <name set="hisco">table</name>
+                <name set="solr" search_exact="table" scan_exact="table"/>
+            </map>
+            <configInfo>
+              <supports type="relation">exact</supports>
+            </configInfo>
+        </index>
+
+        <index>
+            <title lang="en-US">Title</title>
+            <title lang="nl-NL">Titel</title>
+            <map>
+                <name set="hisco">label</name>
+                <name set="solr" search="label" scan="label" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">Description</title>
+            <title lang="nl-NL">Beschrijving</title>
+            <map>
+                <name set="hisco">description</name>
+                <name set="solr" search="description" />
+            </map>
+        </index>
+
+         <index>
+            <title lang="en-US">Country</title>
+            <title lang="nl-NL">Land</title>
+            <map>
+                <name set="hisco">country_code_label</name>
+                <name set="solr" search_exact="country_code_label" scan_exact="country_code_label" />
+            </map>
+            <configInfo>
+              <supports type="relation">exact</supports>
+            </configInfo>
+        </index>
+
+        <index>
+            <title lang="en-US">Country code</title>
+            <title lang="nl-NL">Land code</title>
+            <map>
+                <name set="hisco">country_code_id</name>
+                <name set="solr" search_exact="country_code_id" scan_exact="country_code_id" />
+            </map>
+            <configInfo>
+              <supports type="relation">exact</supports>
+            </configInfo>
+        </index>
+
+        <index>
+            <title lang="en-US">Language</title>
+            <title lang="nl-NL">Taal</title>
+            <map>
+                <name set="hisco">language_code_label</name>
+                <name set="solr" search_exact="language_code_label" scan_exact="language_code_label" />
+            </map>
+            <configInfo>
+              <supports type="relation">exact</supports>
+            </configInfo>
+        </index>
+
+        <index>
+            <title lang="en-US">Language code</title>
+            <title lang="nl-NL">Taal code</title>
+            <map>
+                <name set="hisco">language_code_id</name>
+                <name set="solr" search_exact="language_code_id" scan_exact="language_code_id" />
+            </map>
+            <configInfo>
+              <supports type="relation">exact</supports>
+            </configInfo>
+        </index>
+
+        <index>
+            <title lang="en-US">Products</title>
+            <title lang="nl-NL">Producten</title>
+            <map>
+                <name set="hisco">product_label</name>
+                <name set="solr" search_exact="product_label" scan_exact="product_label" />
+            </map>
+            <configInfo>
+              <supports type="relation">exact</supports>
+            </configInfo>
+        </index>
+
+        <index>
+            <title lang="en-US">Provenance</title>
+            <title lang="nl-NL">Provenance</title>
+            <map>
+                <name set="hisco">provenance_label</name>
+                <name set="solr" search_exact="provenance_label" scan_exact="provenance_label" />
+            </map>
+            <configInfo>
+              <supports type="relation">exact</supports>
+            </configInfo>
+        </index>
+
+        <index>
+            <title lang="en-US">Provenance code</title>
+            <title lang="nl-NL">Provenance code</title>
+            <map>
+                <name set="hisco">provenance_id</name>
+                <name set="solr" search_exact="provenance_id" scan_exact="provenance_id" />
+            </map>
+            <configInfo>
+              <supports type="relation">exact</supports>
+            </configInfo>
+        </index>
+
+        <index>
+            <title lang="en-US">Status</title>
+            <title lang="nl-NL">Status</title>
+            <map>
+                <name set="hisco">status_label</name>
+                <name set="solr" search_exact="status_label" scan_exact="status_label" />
+            </map>
+            <configInfo>
+              <supports type="relation">exact</supports>
+            </configInfo>
+        </index>
+
+        <index>
+            <title lang="en-US">Occupation</title>
+            <title lang="nl-NL">Beroep</title>
+            <map>
+                <name set="hisco">occupation</name>
+                <name set="solr" search_exact="occupation_label" scan_exact="occupation_label" />
+                <name set="solr" search_exact="english_translation" scan_exact="english_translation" />
+            </map>
+            <configInfo>
+              <supports type="relation">exact</supports>
+            </configInfo>
+        </index>
+
+        <index>
+            <title lang="en-US">Relation</title>
+            <title lang="nl-NL">Relatie</title>
+            <map>
+                <name set="hisco">relation_label</name>
+                <name set="solr" search_exact="relation_label" scan_exact="relation_label" />
+            </map>
+            <configInfo>
+              <supports type="relation">exact</supports>
+            </configInfo>
+        </index>
+
+        <index>
+            <title lang="en-US">Has got images: Yes\No</title>
+            <title lang="nl-NL">Heeft afbeeldingen en schetsen: Yes\No</title>
+            <map>
+                <name set="hisco">images</name>
+                <name set="solr" search_exact="has_images" scan_exact="has_images" />
+            </map>
+            <configInfo>
+              <supports type="relation">exact</supports>
+            </configInfo>
+        </index>
+
+        <index>
+            <title lang="en-US">English translation</title>
+            <title lang="nl-NL">Engelse vertaling</title>
+            <map>
+                <name set="hisco">english_translation</name>
+            </map>
+        </index>
+        <index>
+            <title lang="en-US">Occupational title</title>
+            <title lang="nl-NL">Titel beroep</title>
+            <map>
+                <name set="hisco">occupational_label</name>
+            </map>
+        </index>
+
+    </indexInfo>
+
+    <schemaInfo>
+        <schema name="hisco" identifier="info:srw/schema/1/hisco">
+            <title lang="nl-NL">Database historische beroepen</title>
+            <title lang="en-US">Database Historical Occupations</title>
+        </schema>
+    </schemaInfo>
+
+    <configInfo>
+          <default type="maximumRecords">20</default>
+          <default type="numberOfRecords">10</default>
+          <default type="retrieveSchema">info:srw/schema/1/hisco</default>
+
+          <supports type="relation">all</supports>
+          <supports type="relation">any</supports>
+          <supports type="relation">=</supports>
+          <supports type="relation">exact</supports>
+          <supports type="relation">&lt;</supports>
+          <supports type="relation">&lt;=</supports>
+          <supports type="relation">&gt;=</supports>
+          <supports type="relation">&gt;</supports>
+          <supports type="relation">&lt;&gt;</supports>
+     </configInfo>
+
+</explain>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataConfig>
+
+
+	<dataSource
+		type="JdbcDataSource"
+		driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+		url="${hbm.datasource_url}"
+		user="${hbm.datasource_user}"
+		password="${hbm.datasource_password}" />
+
+	<document>
+        <entity name="item"
+                query="SELECT
+                dbo.tbl_Fotos.codefoto,
+                dbo.tbl_Fotos.codecollectie
+                     FROM
+                     dbo.tbl_Fotos"
+                transformer="org.socialhistory.solr.transformers.SQLTransformer">
+
+        <entity
+			name="final"
+            eod="true"
+            query="SELECT
+            dbo.tbl_Fotos.codefoto,
+            dbo.tbl_Fotos.codecollectie,
+            dbo.tbl_Fotos.volgnummer,
+            dbo.tbl_Fotos.plaatsnummerIISG,
+            dbo.tbl_Fotos.materiaalsoort,
+            dbo.tbl_Fotos.afmetingen,
+            dbo.tbl_Fotos.fotograaf,
+            dbo.tbl_Fotos.[fotobureau/studio] AS fotobureau_studio,
+            dbo.tbl_Fotos.plaats,
+            dbo.tbl_Fotos.datum,
+            dbo.tbl_Fotos.beschrijving,
+            dbo.tbl_Fotos.vrij,
+            dbo.tbl_Fotos.annotatie,
+            dbo.tbl_Fotos.code_user,
+            dbo.tbl_Fotos.done,
+            dbo.tbl_Fotos.beperktopenbaar,
+            dbo.tbl_Fotos.fld_source,
+            dbo.tbl_Collecties.collectie AS collectienaam,
+            dbo.getBevolkingsgroepen(dbo.tbl_Fotos.codefoto,
+            dbo.tbl_Fotos.fld_source) AS Bevolkingsgroepen,
+            dbo.getTrefwoorden(dbo.tbl_Fotos.codefoto,
+            dbo.tbl_Fotos.fld_source) AS Trefwoorden
+            FROM dbo.tbl_Fotos INNER JOIN dbo.tbl_Collecties ON dbo.tbl_Fotos.codecollectie = dbo.tbl_Collecties.codecollectie AND dbo.tbl_Fotos.fld_source = dbo.tbl_Collecties.fld_source AND dbo.tbl_Collecties.openbaar = 'ja'
+            WHERE
+            (dbo.tbl_Fotos.vrij = 'ja' AND dbo.tbl_Fotos.codefoto=${item.codefoto} AND dbo.tbl_Fotos.codecollectie=${item.codecollectie});"
+			transformer="org.socialhistory.solr.transformers.SQLTransformer" /></entity>
+    </document>
+
+</dataConfig>

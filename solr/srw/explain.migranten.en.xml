@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2010 International Institute for Social History, The Netherlands.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<explain xmlns="http://explain.z3950.org/dtd/2.0/">
+
+    <serverInfo protocol="SRW/U">
+        <host>http://api.socialhistoryservices.org/solr/migranten/srw</host>
+        <port>8080</port>
+        <database>Solr</database>
+        <authentication required="false"/>
+    </serverInfo>
+
+    <databaseInfo>
+        <title lang="nl-NL">Migrantenorganisaties in Nederland</title>
+        <title lang="en-US">Migrant Organizations in The Netherlands</title>
+        <description lang="nl-NL">Door de tijd heen hebben migranten in Nederland duizenden organisaties opgericht om hun belangen te verdedigen, hun religieuze leven vorm te geven, hun maatschappelijke welzijn te verhogen, hun cultuur te beleven of om welke andere redenen dan ook. In de afgelopen tien jaar hebben CGM-leden in het kader van verschillende onderzoeksprojecten databases gemaakt. Deze zijn nu bij elkaar gebracht in de CGM database Migrantenorganisaties in Nederland. Deze ongeveer 6000 organisaties zijn online doorzoekbaar.</description>
+        <description lang="en-US">Thousands of migrant organizations have been established in the Netherlands in the course of time. These organizations have been addressing a variety from religious, cultural and material concerns. Over the past decade members of the CGM (Centre for Migration History) have put together a number of databases. These are now brought together in the CMG database migrant organizations in the Netherlands. Data on these 6,000 migrant organizations are online searchable.</description>
+        <author>Ulbe Bosma, ubo@iisg.nl</author>
+        <contact>IISH, www.iisg.nl</contact>
+        <restrictions>Copyright 2010 International Institute for Social History, The Netherlands.</restrictions>
+        <implementation identifier="http://www.oclc.org/research/software/srw" version="1.1">
+            <title>OCLC Research SRW Server version 1.1</title>
+        </implementation>
+    </databaseInfo>
+    <metaInfo>
+        <dateModified>2010-02-16</dateModified>
+        <aggregatedFrom>sql database CMG</aggregatedFrom>
+        <dateAggregated>2010-02-16</dateAggregated>
+    </metaInfo>
+
+    <indexInfo>
+        <set name="cql" identifier="info:srw/cql-context-set/1/cql-v1.1"/>
+        <set name="migranten" identifier="info:srw/schema/1/migranten"/>
+        <set name="iisg" identifier="info:srw/cql-context-set/1/iish"/>
+        <!--<set name="solr" identifier="info:srw/cql-context-set/2/solr"/>-->
+
+        <index>
+            <title lang="nl-NL">Zoek naar</title>
+            <title lang="en-US">Search for</title>
+            <map>
+                <name set="cql">serverChoice</name>
+                <name set="solr" search="bath_anywhere" search_range="bath_anywhere" scan="bath_anywhere" />
+            </map>
+        </index>
+
+        <index>
+            <title>Identifier</title>
+            <map>
+                <name set="migranten">identifier</name>
+            </map>
+            <map>
+                <name set="iisg">identifier</name>
+            </map>
+            <map>
+                <name set="solr" search="iisg_identifier" search_exact="iisg_identifier"/>
+            </map>
+        </index>
+
+        <index>
+            <title>IISH Collections</title>
+            <map>
+                <name set="iisg">collectionName</name>
+                <name set="solr" search_exact="iisg_collectionName"/>
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">Name</title>
+            <title lang="nl-NL">Naam</title>
+            <map>
+                <name set="migranten">naam</name>
+                <name set="solr" search="naam" scan="naam_sort" sort="naam_sort" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="en-US">Location</title>
+            <title lang="nl-NL">Plaats</title>
+            <map>
+                <name set="migranten">plaats</name>
+                <name set="solr" search="plaats" search_exact="plaats_sort" scan="plaats" scan_exact="plaats_sort" sort="plaats_sort" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Land</title>
+            <title lang="en-US">Country</title>
+            <map>
+                <name set="migranten">land</name>
+                <name set="solr" search="land_en" search_exact="land_sort_en" scan="land_en" scan_exact="land_sort_en" sort="land_sort_en" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Etniciteit</title>
+            <title lang="en-US">Ethnicity</title>
+            <map>
+                <name set="migranten">etniciteit</name>
+                <name set="solr" search="etniciteit_en" search_exact="etniciteit_sort_en" scan="etniciteit_en" scan_exact="etniciteit_sort_en" sort="etniciteit_sort_en" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Religie</title>
+            <title lang="en-US">Religion</title>
+            <map>
+                <name set="migranten">religie</name>
+                <name set="solr" search="religie_en" search_exact="religie_sort_en" scan="religie_en" scan_exact="religie_sort_en" sort="religie_sort_en" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Rechtsvorm</title>
+            <title lang="en-US">Type of institution</title>
+            <map>
+                <name set="migranten">soort</name>
+                <name set="solr" search="soort_en" search_exact="soort_sort_en" scan="soort_en" scan_exact="soort_sort_en" sort="soort_sort_en"/>
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Doelstelling</title>
+            <title lang="en-US">Objective</title>
+            <map>
+                <name set="migranten">doelstelling</name>
+                <name set="solr" search="doelstelling_en" search_exact="doelstelling_sort_en" scan="doelstelling_en" scan_exact="doelstelling_sort_en"  sort="doelstelling_sort_en"/>
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Doelgroep</title>
+            <title lang="en-US">Target group</title>
+            <map>
+                <name set="migranten">doelgroep</name>
+                <name set="solr" search="doelgroep_en" search_exact="doelgroep_sort_en" scan="doelgroep_en" scan_exact="doelgroep_sort_en" sort="doelgroep_sort_en" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Schaal</title>
+            <title lang="en-US">Scale</title>
+            <map>
+                <name set="migranten">schaal</name>
+                <name set="solr" search="schaal_en" search_exact="schaal_sort_en" scan="schaal_en" scan_exact="schaal_sort_en" sort="schaal_sort_en" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Stichtingsjaar</title>
+            <title lang="en-US">Date of foundation</title>
+            <map>
+                <name set="migranten">stichtingsjaar</name>
+                <name set="solr" search_range="stichtingsjaar" search_exact="stichtingsjaar_sort" scan="stichtingsjaar" scan_exact="stichtingsjaar_sort" sort="stichtingsjaar_sort" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Opgeheven</title>
+            <title lang="en-US">Discontinued</title>
+            <map>
+                <name set="migranten">opgeheven</name>
+                <name set="solr" search="opgeheven_en" search_exact="opgeheven_sort_en" scan="opgeheven_en" scan_exact="opgeheven_sort_en" sort="opgeheven_sort_en" />
+            </map>
+        </index>
+
+        <index>
+            <title lang="nl-NL">Kamer van Koophandel</title>
+            <title lang="en-US">Chamber of Commerce</title>
+            <map>
+                <name set="migranten">kvknummer</name>
+            </map>
+        </index>
+
+    </indexInfo>
+
+    <schemaInfo>
+        <schema name="migranten" identifier="info:srw/schema/1/migranten">
+            <title lang="nl-NL">Postkoloniale Migranten organisaties</title>
+        </schema>
+        <schema name="solr" identifier="info:srw/cql-context-set/2/solr">
+            <title lang="nl-NL">Non standarized Solr response output</title>
+        </schema>
+    </schemaInfo>
+
+    <configInfo>
+          <default type="maximumRecords">20</default>
+          <default type="numberOfRecords">10</default>
+          <default type="retrieveSchema">info:srw/schema/1/migranten</default>
+
+          <supports type="relation">all</supports>
+          <supports type="relation">any</supports>
+          <supports type="relation">=</supports>
+          <supports type="relation">exact</supports>
+          <supports type="relation">&lt;</supports>
+          <supports type="relation">&lt;=</supports>
+          <supports type="relation">&gt;=</supports>
+          <supports type="relation">&gt;</supports>
+          <supports type="relation">&lt;&gt;</supports>
+     </configInfo>
+
+</explain>

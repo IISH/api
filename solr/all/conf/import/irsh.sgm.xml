@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- import for sgml 2012 format -->
+
+<dataConfig>
+	<dataSource name="fs" type="FileDataSource" encoding="UTF-8" />
+	<document>
+		<entity
+		    name="xmlfile"
+            dataSource="null"
+		    stream="true"
+		    processor="FileListEntityProcessor"
+		    baseDir="/data/datasets/irsh/sgm"
+		    filename="^.*\.xml$"
+		    recursive="true"
+		    rootEntity="true"
+		    transformer="org.socialhistory.solr.transformers.FSTransformer"
+        />
+	</document>
+</dataConfig>
