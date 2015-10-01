@@ -85,6 +85,6 @@ fi
     sleep 30
 
     subject="${HOSTNAME} - Automatic restart by ${0}"
-    /usr/bin/sendmail --body "$body" --from "search@${HOSTNAME}" --to "$MAIL_TO" --subject "$subject" --mail_relay "$VUFIND_MAIL_HOST"
+    /usr/bin/sendmail --body "$body" --from "search@${HOSTNAME}" --to "$MAIL_TO" --subject "$subject" --mail_relay "$MAIL_HOST"
 
     exit 1
