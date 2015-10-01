@@ -32,20 +32,21 @@ rm -f $content $headers
 wget -S -T 5 -t 3 -O $content $q 2>$headers
 rc=$?
 if [[ $rc == 0 ]] ; then
-
+    echo "$(date)">$f
+    exit 0
     # The response time from Solr was ok.
     # Now check the CPU usage. It should not be higher than the CPU count.
-    cpu_count=$(grep -c ^processor /proc/cpuinfo)
-    benchmark="${cpu_count}.10"
-    cpu_load=`cat /proc/loadavg | awk '{print $1}'`
-    response=`echo | awk -v T=$benchmark -v L=$cpu_load 'BEGIN{if ( L > T){ print "1"} else {print "0"} }'`
-    if [[ $response == 0 ]] ; then
-        echo "$(date)">$f
-        exit 0
-    else
-        rc=1
-        sleep 30 # status.txt is removed, so we wait a little until the proxy no longer sends traffic.
-    fi
+    #cpu_count=$(grep -c ^processor /proc/cpuinfo)
+    #benchmark="${cpu_count}.10"
+    #cpu_load=`cat /proc/loadavg | awk '{print $1}'`
+    #response=`echo | awk -v T=$benchmark -v L=$cpu_load 'BEGIN{if ( L > T){ print "1"} else {print "0"} }'`
+    #if [[ $response == 0 ]] ; then
+    #    echo "$(date)">$f
+    #    exit 0
+    #else
+    #    rc=1
+    #    sleep 30 # status.txt is removed, so we wait a little until the proxy no longer sends traffic.
+    #fi
 fi
 
     echo "$(date): Invalid response ${rc}" >> $s
