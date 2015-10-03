@@ -42,6 +42,8 @@ wget -S -T 5 -t 3 -O $content $q 2>$headers
 rc=$?
 if [[ $rc == 0 ]] ; then
 
+    echo "Response ok"
+
     # The response time from Solr was ok.
     # Now check the CPU usage. It should not be higher than the CPU count.
     if [[ $cpu_check == 0 ]] ; then
