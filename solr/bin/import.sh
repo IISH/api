@@ -3,7 +3,7 @@
 # import.sh
 # Send files from the io to the solr core.
 
-if [-z "$API_HOME" ] ; then
+if [ -z "$API_HOME" ] ; then
     echo "Environmental variable API_HOME not set."
     exit 1
 fi

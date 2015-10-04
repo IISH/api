@@ -221,13 +221,13 @@ class HarvestOAI
     private function _setBasePath($target)
     {
         // Get the base VuFind path:
-        $home = getenv('VUFIND_HOME');
+        $home = getenv('API_HOME');
         if (empty($home)) {
             die("Please set the VUFIND_HOME environment variable.\n");
         }
 
         // Build the full harvest path:
-        $this->_basePath = $home . '/harvest_import/' . $target . '/';
+        $this->_basePath = $home . '/solr/bin/' . $target . '/';
 
         // Create the directory if it does not already exist:
         if (!is_dir($this->_basePath)) {

@@ -3,7 +3,7 @@
 # harvest.sh
 # Start an OAI2 harvest
 
-if [-z "$API_HOME" ] ; then
+if [ -z "$API_HOME" ] ; then
     echo "Environmental variable API_HOME not set."
     exit 1
 fi
