@@ -1,7 +1,16 @@
 #!/bin/sh
+#
+# import.sh
+# Send files from the io to the solr core.
+
+if [-z "$API_HOME" ] ; then
+    echo "Environmental variable API_HOME not set."
+    exit 1
+fi
+
 
 core=$1
-d="/var/www/api/solr/${core}/conf/import"
+d="$API_HOME/solr/${core}/conf/import"
 
 if [ ! -d $d ];
 then
@@ -25,4 +34,6 @@ for file in ${d}/$filter ; do
    echo "Calling handler at $url"
    wget $url -q
 done
+
+exit 0
 
