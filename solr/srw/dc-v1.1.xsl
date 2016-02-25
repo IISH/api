@@ -19,8 +19,9 @@ limitations under the License.
                 xmlns:saxon="http://saxon.sf.net/"
                 xmlns:zr="http://explain.z3950.org/dtd/2.0/"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                xmlns:marc="http://www.loc.gov/MARC21/slim"
                 xmlns:iisg="http://www.iisg.nl/api/sru/"
-                exclude-result-prefixes="dc iisg zr saxon"
+                exclude-result-prefixes="dc iisg marc zr saxon"
         >
 
     <xsl:import href="marc2dc.xsl"/>
