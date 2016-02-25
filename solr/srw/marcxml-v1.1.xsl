@@ -27,20 +27,28 @@ limitations under the License.
         <xsl:variable name="transport" select="str[@name='transport']/text()"/>
         <xsl:variable name="header" select="$record/extraRecordData"/>
         <xsl:variable name="metadata" select="$record/recordData"/>
+        <xsl:variable name="pid">
+            <xsl:choose>
+                <xsl:when test="$metadata/marc:record/marc:datafield[@tag='902']/marc:subfield[@code='a']">
+                    <xsl:value-of select="$metadata/marc:record/marc:datafield[@tag='902']/marc:subfield[@code='a']"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$header/*/iisg:identifier"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
         <record>
             <recordData>
                 <xsl:copy-of select="$metadata/marc:record"/>
             </recordData>
             <xsl:if test="not($transport='JSON')">
                 <extraRecordData>
-                    <xsl:copy-of select="$header/*/*"/>
+                    <iisg:identifier><xsl:value-of select="$pid"/></iisg:identifier>
+                    <xsl:copy-of select="$header/*/*[not(local-name()='identifier')]"/>
                 </extraRecordData>
                 <Identifier>
-                    <xsl:variable name="pid" select="$metadata/marc:record/marc:datafield[@tag='902']/marc:subfield[@code='a']"/>
-                    <xsl:choose>
-                        <xsl:when test="$pid"><xsl:value-of select="$pid" /></xsl:when>
-                        <xsl:otherwise><xsl:value-of select="$header/*/iisg:identifier"/></xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:value-of select="$pid"/>
                 </Identifier>
             </xsl:if>
         </record>
