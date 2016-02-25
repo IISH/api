@@ -36,7 +36,11 @@ limitations under the License.
                     <xsl:copy-of select="$header/*/*"/>
                 </extraRecordData>
                 <Identifier>
-                    <xsl:value-of select="$header/*/iisg:identifier"/>
+                    <xsl:variable name="pid" select="$metadata/marc:record/marc:datafield[@tag='902']/marc:subfield[@code='a']"/>
+                    <xsl:choose>
+                        <xsl:when test="$pid"><xsl:value-of select="$pid" /></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="$header/*/iisg:identifier"/></xsl:otherwise>
+                    </xsl:choose>
                 </Identifier>
             </xsl:if>
         </record>
