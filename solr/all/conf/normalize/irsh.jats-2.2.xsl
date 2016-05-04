@@ -19,7 +19,7 @@
 
     <xsl:template match="article">
 
-        <xsl:variable name="identifier" select="concat('10622/', front/article-meta/article-id[@pub-id-type='pii'])"/>
+        <xsl:variable name="identifier" select="concat('10622', '/', front/article-meta/article-id[@pub-id-type='pii'])"/>
         <xsl:variable name="isShownBy"
                       select="concat('http://hdl.handle.net/', $identifier, '?locatt=view:master')"/>
 
@@ -27,7 +27,7 @@
             <extraRecordData>
                 <iisg:iisg>
                     <xsl:call-template name="insertIISHIdentifiers">
-                        <xsl:with-param name="identifier" select="front/article-meta/article-id[@pub-id-type='pii']"/>
+                        <xsl:with-param name="identifier" select="$identifier"/>
                     </xsl:call-template>
                     <xsl:call-template name="insertCollection">
                         <xsl:with-param name="collection" select="$collectionName"/>
@@ -107,29 +107,6 @@
                         </xsl:if>
                     </marc:datafield>
 
-<!--
-                    <marc:datafield tag="260" ind1=" " ind2=" ">
-                        <marc:subfield code="a">
-                            <xsl:value-of select="concat(front/journal-meta/publisher/publisher-loc, ' :')"/>
-                        </marc:subfield>
-                        <marc:subfield code="b">
-                            <xsl:value-of select="concat(front/journal-meta/publisher/publisher-name, ',')"/>
-                        </marc:subfield>
-                        <marc:subfield code="c">
-                            <xsl:value-of select="front/article-meta/pub-date[1]/year"/>
-                        </marc:subfield>
-                    </marc:datafield>
--->
-
-<!--
-                    <xsl:call-template name="insertSingleElement">
-                        <xsl:with-param name="tag">300</xsl:with-param>
-                        <xsl:with-param name="code">a</xsl:with-param>
-                        <xsl:with-param name="value"
-                                        select="concat(front/article-meta/counts/page-count/@count, ' p.')"/>
-                    </xsl:call-template>
--->
-
                     <xsl:call-template name="insertElement">
                         <xsl:with-param name="tag">452</xsl:with-param>
                         <xsl:with-param name="code">m</xsl:with-param>
@@ -143,8 +120,7 @@
                     </xsl:call-template>
                     <marc:datafield tag="773" ind1="0" ind2="#">
                         <marc:subfield code="t">
-                            <xsl:value-of
-                                    select="front/journal-meta/journal-title"/>
+                            <xsl:value-of select="concat(front/journal-meta/journal-title, ' ', front/journal-meta/journal-title-group/journal-title)"/>
                         </marc:subfield>
                         <marc:subfield code="g">
                             <xsl:choose>

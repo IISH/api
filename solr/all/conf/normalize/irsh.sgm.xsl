@@ -88,28 +88,6 @@
                             </marc:subfield>
                         </xsl:if>
                     </marc:datafield>
-<!--
-                    <marc:datafield tag="260" ind1=" " ind2=" ">
-                        <marc:subfield code="a">
-                            <xsl:value-of select="concat(ISSUE/PINFO/LOC, ' :')"/>
-                        </marc:subfield>
-                        <marc:subfield code="b">
-                            <xsl:value-of select="concat(ISSUE/PINFO/PNM, ',')"/>
-                        </marc:subfield>
-                        <marc:subfield code="c">
-                            <xsl:value-of select="ISSUE/PUBINFO/CD/@YEAR"/>
-                        </marc:subfield>
-                    </marc:datafield>
--->
-
-<!--
-                    <xsl:call-template name="insertSingleElement">
-                        <xsl:with-param name="tag">300</xsl:with-param>
-                        <xsl:with-param name="code">a</xsl:with-param>
-                        <xsl:with-param name="value"
-                                        select="concat(ARTCON/GENHDR/ARTINFO/ARTTY/PPCT/@COUNT, ' p.')"/>
-                    </xsl:call-template>
--->
 
                     <marc:datafield tag="773" ind1="0" ind2="#">
                         <marc:subfield code="t">
