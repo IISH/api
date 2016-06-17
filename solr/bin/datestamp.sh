@@ -45,15 +45,17 @@ function oai {
 
     if [ ! -f "$catalog_file" ]
     then
-      echo "Did not find ${catalog_file}"
-      exit 1
+        echo "Did not find ${catalog_file}"
+        exit 1
+    else
+        php "${API_HOME}/solr/bin/getrecord.php" -f "$catalog_file"
     fi
-
-    php "${API_HOME}/solr/bin/getrecord.php" -f "$catalog_file"
 
     app="${API_HOME}/solr/lib/import-1.0.jar"
     java -cp $app org.socialhistory.solr.importer.BatchImport "$catalog_file" "http://localhost:8080/solr/all/update" "${API_HOME}/solr/all/conf/normalize/${dataset}.xsl,${API_HOME}/solr/all/conf/import/add.xsl,${API_HOME}/solr/all/conf/import/addSolrDocument.xsl" "collectionName:$dataset"
-    if [[ $? != 0 ]] ; then
+    if [[ $? == 0 ]] ; then
+        wget "http://localhost:8080/solr/all/update?commit=true"
+    else
         subject="Error while indexing: ${catalog_file}"
         echo $subject >> $LOG
         /usr/bin/sendmail --body "$LOG" --from "$MAIL_FROM" --to "$MAIL_TO" --subject "$subject" --mail_relay "$MAIL_HOST"
