@@ -31,7 +31,7 @@ class MarcHandler(xml.sax.handler.ContentHandler):
     # tcn
     # Return the tcn value when we found control field 001
     def tcn(self):
-        return self.identifier
+        return self.identifier if self.identifier else ''
 
 
 def usage():

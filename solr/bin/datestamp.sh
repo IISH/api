@@ -22,7 +22,7 @@ if [ -z "$API_HOME" ] ; then
 fi
 
 
-HOTFOLDER="$2"
+HOTFOLDER="$1"
 if [ -z "$HOTFOLDER" ]
 then
     HOTFOLDER="/tmp/datestamp"
@@ -39,9 +39,9 @@ SRU="http://api.socialhistoryservices.org/solr/all/srw"
 function oai {
     id="$1"
     dataset="iish.evergreen.biblio"
-    url="${OAI}?verb=GetRecord&identifier=oai:evergreen.iisg.nl:${id}&metadataPrefix=marcxml"
+    oai_call="${OAI}?verb=GetRecord&identifier=oai:evergreen.iisg.nl:${id}&metadataPrefix=marcxml"
     catalog_file="${HOTFOLDER}/${id}.xml"
-    wget -O "$catalog_file" "$url"
+    wget --no-check-certificate -O "$catalog_file" "$oai_call"
 
     if [ ! -f "$catalog_file" ]
     then
@@ -67,12 +67,14 @@ function oai {
 #-----------------------------------------------------------------------------------------------------------------------
 function sru {
   id="$1"
-  url="${SRU}?query=marc.852\$p=\"${id}\"&version=1.1&operation=searchRetrieve&recordSchema=info:srw/schema/1/marcxml-v1.1&maximumRecords=1&startRecord=1&resultSetTTL=0&recordPacking=xml"
-  tcn=$(python "${API_HOME}/solr/bin/sru_call.py" --url "$url")
+  sru_call="${SRU}?query=marc.852\$p=\"${id}\"&version=1.1&operation=searchRetrieve&recordSchema=info:srw/schema/1/marcxml-v1.1&maximumRecords=1&startRecord=1&resultSetTTL=0&recordPacking=xml"
+  tcn=$(python "${API_HOME}/solr/bin/sru_call.py" --url "$sru_call")
   if [ -z "$tcn" ]
   then
       echo "No tcn value found for ${sru_call}"
       exit 1
+  else
+      echo "${tcn}"
   fi
 }
 
@@ -81,16 +83,21 @@ function sru {
 # main
 #-----------------------------------------------------------------------------------------------------------------------
 function main {
+    echo "Scanning ${HOTFOLDER}"
     for na in $HOTFOLDER/*
     do
       if [ -d "$na" ]
       then
         for id in $na/*
         do
+          id=$(basename $id)
           echo "Found: ${na}/${id}"
-          sru "$id"
-          oai "$id"
+          tcn=$(sru "$id")
+          oai "$tcn"
         done
       fi
     done
 }
+
+
+main  "$@"
