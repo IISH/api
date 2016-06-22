@@ -55,6 +55,7 @@ function oai {
     java -cp $app org.socialhistory.solr.importer.BatchImport "$catalog_file" "http://localhost:8080/solr/all/update" "${API_HOME}/solr/all/conf/normalize/${dataset}.xsl,${API_HOME}/solr/all/conf/import/add.xsl,${API_HOME}/solr/all/conf/import/addSolrDocument.xsl" "collectionName:$dataset"
     if [[ $? == 0 ]] ; then
         wget "http://localhost:8080/solr/all/update?commit=true"
+        rm -f "$catalog_file"
     else
         subject="Error while indexing: ${catalog_file} for ${id}"
         exit 1
