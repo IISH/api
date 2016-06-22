@@ -67,7 +67,7 @@ function oai {
 #-----------------------------------------------------------------------------------------------------------------------
 function sru {
   id="$1"
-  sru_call="${SRU}?query=marc.852\$p=\"${id}\"&version=1.1&operation=searchRetrieve&recordSchema=info:srw/schema/1/marcxml-v1.1&maximumRecords=1&startRecord=1&resultSetTTL=0&recordPacking=xml"
+  sru_call="${SRU}?query=marc.852\$p+exact+\"${id}\"&version=1.1&operation=searchRetrieve&recordSchema=info:srw/schema/1/marcxml-v1.1&maximumRecords=1&startRecord=1&resultSetTTL=0&recordPacking=xml"
   tcn=$(python "${API_HOME}/solr/bin/sru_call.py" --url "$sru_call")
   if [ -z "$tcn" ]
   then
