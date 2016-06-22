@@ -56,9 +56,7 @@ function oai {
     if [[ $? == 0 ]] ; then
         wget "http://localhost:8080/solr/all/update?commit=true"
     else
-        subject="Error while indexing: ${catalog_file}"
-        echo $subject >> $LOG
-        /usr/bin/sendmail --body "$LOG" --from "$MAIL_FROM" --to "$MAIL_TO" --subject "$subject" --mail_relay "$MAIL_HOST"
+        subject="Error while indexing: ${catalog_file} for ${id}"
         exit 1
     fi
 }
@@ -90,12 +88,13 @@ function main {
     do
       if [ -d "$na" ]
       then
-        for id in $na/*
+        for file in $na/*
         do
-          id=$(basename $id)
+          id=$(basename $file)
           echo "Found: ${na}/${id}"
           tcn=$(sru "$id")
           oai "$tcn"
+          rm -f "$file"
         done
       fi
     done
