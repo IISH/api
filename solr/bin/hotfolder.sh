@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# datestamp.sh
+# hotfolder.sh
 #
 # Index individual documents based on their PID
 #
