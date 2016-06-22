@@ -48,7 +48,7 @@ function oai {
         echo "Did not find ${catalog_file}"
         exit 1
     else
-        php "${API_HOME}/solr/bin/getrecord.php" -f "$catalog_file"
+        php "${API_HOME}/solr/bin/getRecord.php" -f "$catalog_file"
     fi
 
     app="${API_HOME}/solr/lib/import-1.0.jar"
