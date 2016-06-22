@@ -73,14 +73,14 @@ limitations under the License.
                 <name set="solr" search="marc_009"/>
             </map>
             <map>
-                <name set="solr" search="iisg_identifier"/>
-                <name set="solr" search="marc_020_a"/>
-                <name set="solr" search="marc_022_a"/>
-                <name set="solr" search="marc_024_a"/>
-                <name set="solr" search="marc_856_u"/>
-                <name set="solr" search="marc_852_p"/>
-                <name set="solr" search="marc_901_a"/>
-                <name set="solr" search="marc_902_a"/>
+                <name set="solr" search="iisg_identifier" search_exact="iisg_identifier"/>
+                <name set="solr" search="marc_020_a" search_exact="marc_020_a"/>
+                <name set="solr" search="marc_022_a" search_exact="marc_022_a"/>
+                <name set="solr" search="marc_024_a" search_exact="marc_024_a"/>
+                <name set="solr" search="marc_856_u" search_exact="marc_856_u"/>
+                <name set="solr" search="marc_852_p" search_exact="marc_852_p"/>
+                <name set="solr" search="marc_902_a" search_exact="marc_901_a"/>
+                <name set="solr" search="marc_902_a" search_exact="marc_902_a"/>
             </map>
             <map>
                 <name set="iisg">identifier</name>
@@ -616,7 +616,7 @@ limitations under the License.
             <title>Piece</title>
             <map>
                 <name set="marc">852$p</name>
-                <name set="solr" search="marc_852_p"/>
+                <name set="solr" search="marc_852_p" search_exact="marc_852_p" />
             </map>
         </index>
 
