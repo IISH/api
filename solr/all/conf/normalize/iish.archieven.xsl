@@ -449,6 +449,19 @@
                                             select="normalize-space(lower-case(@normal))"/>
                         </xsl:call-template>
                     </xsl:for-each>
+                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'655$a')]">
+                        <marc:datafield tag="655" ind1=" " ind2=" ">
+                            <xsl:call-template name="subfield">
+                                <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
+                                <xsl:with-param name="text">
+                                    <xsl:value-of select="text()"/>
+                                    <xsl:if test="not(position()=last())">
+                                        <xsl:text> </xsl:text>
+                                    </xsl:if>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </marc:datafield>
+                    </xsl:for-each>
 
                     <xsl:for-each select="//node()[@encodinganalog='100$a']">
                         <xsl:if test="position()>1">
