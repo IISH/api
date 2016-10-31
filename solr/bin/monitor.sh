@@ -33,7 +33,7 @@ body=/tmp/body.txt
 content=/tmp/content.txt
 headers=/tmp/headers.txt
 s=/opt/status.txt
-q="http://127.0.0.1:8080/solr/all/select?q=*:*"
+q="http://127.0.0.1:8080/solr/all/select?q=*:*&rows=0"
 
 rm -f $f # This will remove the status.txt file
 rm -f $content $headers
