@@ -13,6 +13,7 @@
     </marc:datafield>
     <marc:datafield ind1="1" ind2="0" tag="245">
         <marc:subfield code="a">[Jaarverslag = Annual report.]</marc:subfield>
+        <marc:subfield code="b">[bbb</marc:subfield>
         <marc:subfield code="k">Jaarverslag = Annual report.</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1=" " ind2=" " tag="260">
