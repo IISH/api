@@ -11,7 +11,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="marc:datafield[@tag='245']/marc:subfield[@code='a' and text()=$huidige_titel]">
+    <xsl:template match="marc:datafield[@tag='245']/marc:subfield[@code='a' and text()=$huidige_titel]/text()">
         <xsl:choose>
             <xsl:when test="string-length($toevoeging_titel)=0"><xsl:value-of select="text()"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="concat($nieuwe_titel, $toevoeging_titel)"/></xsl:otherwise>

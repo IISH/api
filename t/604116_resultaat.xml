@@ -11,7 +11,7 @@
         <marc:subfield code="a">NL-AmISG</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1="1" ind2="0" tag="245">
-        Photograph / Postcard directed to Adolf Hitler, demanding to lift the deathsentence of Edgar André.
+        <marc:subfield code="a">Photograph / Postcard directed to Adolf Hitler, demanding to lift the deathsentence of Edgar André.</marc:subfield>
         <marc:subfield code="k">Visual document.</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1=" " ind2=" " tag="260">

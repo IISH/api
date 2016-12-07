@@ -11,7 +11,7 @@
         <marc:subfield code="a">NL-AmISG</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1="1" ind2="0" tag="245">
-        Poster / Schone Kleren Kampagne (Amsterdam)
+        <marc:subfield code="a">Poster / Schone Kleren Kampagne (Amsterdam)</marc:subfield>
         <marc:subfield code="f">1969-1999.</marc:subfield>
         <marc:subfield code="k">Visual document.</marc:subfield>
     </marc:datafield>

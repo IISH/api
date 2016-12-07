@@ -2,7 +2,7 @@
                 xmlns:marc="http://www.loc.gov/MARC21/slim" exclude-result-prefixes="marc ">
 
     <xsl:variable name="huidige_titel">[Jaarverslag = Annual report.]</xsl:variable>
-    <xsl:variable name="nieuwe_titel">[Jaarverslag = Annual report.]</xsl:variable>
+    <xsl:variable name="nieuwe_titel">[Jaarverslag = Annual report nieuwe titel.]</xsl:variable>
     <xsl:variable name="toevoeging_titel_a"
                   select="normalize-space(marc:record/marc:datafield[@tag='710'][1]/marc:subfield[@code='a'])"/>
     <xsl:variable name="toevoeging_titel_b"
@@ -20,10 +20,6 @@
                 <xsl:value-of select="$nieuwe_titel"/>
             </marc:subfield>
             <xsl:apply-templates select="marc:subfield[@code='b']"/>
-            <xsl:if test="string-length($toevoeging_titel_a) > 0">
-                <marc:subfield code="c"><xsl:value-of select="concat($toevoeging_titel_a, ' ', $toevoeging_titel_b)"/></marc:subfield>
-            </xsl:if>
-            <xsl:apply-templates select="marc:subfield[@code='c']"/>
             <xsl:apply-templates select="marc:subfield[@code='d']"/>
             <xsl:apply-templates select="marc:subfield[@code='e']"/>
             <xsl:apply-templates select="marc:subfield[@code='f']"/>
@@ -48,6 +44,9 @@
             <xsl:apply-templates select="marc:subfield[@code='y']"/>
             <xsl:apply-templates select="marc:subfield[@code='z']"/>
         </marc:datafield>
+        <xsl:if test="string-length($toevoeging_titel_a) > 0">
+            <marc:subfield code="c"><xsl:value-of select="concat($toevoeging_titel_a, ' ', $toevoeging_titel_b)"/></marc:subfield>
+        </xsl:if>
     </xsl:template>
 
 

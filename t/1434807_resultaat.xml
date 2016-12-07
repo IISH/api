@@ -10,7 +10,7 @@
     <marc:datafield ind1=" " ind2=" " tag="040">
         <marc:subfield code="a">NL-AmISG</marc:subfield>
     </marc:datafield>
-    <marc:datafield ind1="1" ind2="0" tag="245"><marc:subfield code="a">[Jaarverslag = Annual report.]</marc:subfield><marc:subfield code="b">[bbb</marc:subfield><marc:subfield code="c">Industriebond FNV. Divisionele Kadergroep ENKA.</marc:subfield><marc:subfield code="k">Jaarverslag = Annual report.</marc:subfield></marc:datafield>
+    <marc:datafield ind1="1" ind2="0" tag="245"><marc:subfield code="a">[Jaarverslag = Annual report nieuwe titel.]</marc:subfield><marc:subfield code="b">[bbb</marc:subfield><marc:subfield code="k">Jaarverslag = Annual report.</marc:subfield></marc:datafield><marc:subfield code="c">Industriebond FNV. Divisionele Kadergroep ENKA.</marc:subfield>
     <marc:datafield ind1=" " ind2=" " tag="260">
         <marc:subfield code="a">Amsterdam.</marc:subfield>
     </marc:datafield>
