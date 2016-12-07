@@ -1,0 +1,60 @@
+<marc:record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:marc="http://www.loc.gov/MARC21/slim"
+             xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
+    <marc:leader>00435nkm a22001577a 4500</marc:leader>
+    <marc:controlfield tag="001">604116</marc:controlfield>
+    <marc:controlfield tag="003">NL-AMISG</marc:controlfield>
+    <marc:controlfield tag="005">20110228143706.0</marc:controlfield>
+    <marc:controlfield tag="008">201102suuuuuuuuxx und            d</marc:controlfield>
+    <marc:datafield ind1=" " ind2=" " tag="035">
+        <marc:subfield code="a">(IISG)IISGb1045863802</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="040">
+        <marc:subfield code="a">NL-AmISG</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="1" ind2="0" tag="245">
+        <marc:subfield code="a">[Picture postcard.]</marc:subfield>
+        <marc:subfield code="k">Visual document.</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="260">
+        <marc:subfield code="c">1936.</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="500">
+        <marc:subfield code="a">Postcard directed to Adolf Hitler, demanding to lift the deathsentence of Edgar André.
+        </marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="542">
+        <marc:subfield code="m">pictoright</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="1" ind2="4" tag="600">
+        <marc:subfield code="a">André, Edgar.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)18586</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2="4" tag="650">
+        <marc:subfield code="a">Portrait.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)306035</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2="4" tag="655">
+        <marc:subfield code="a">Picture postcard.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)197051</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="902">
+        <marc:subfield code="a">10622/5C7C8AC1-D757-4FB6-8BAA-B5084DBA78EA</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="4" ind2=" " tag="852">
+        <marc:subfield code="a">IISG</marc:subfield>
+        <marc:subfield code="b">IISG</marc:subfield>
+        <marc:subfield code="c">IISG</marc:subfield>
+        <marc:subfield code="j">BG A1/248B</marc:subfield>
+        <marc:subfield code="n">Available</marc:subfield>
+        <marc:subfield code="p">30051002950696</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="4" ind2="0" tag="856">
+        <marc:subfield code="u">http://hdl.handle.net/10622/30051002950696</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="901">
+        <marc:subfield code="a">604116</marc:subfield>
+        <marc:subfield code="b">Unknown</marc:subfield>
+        <marc:subfield code="c">604116</marc:subfield>
+        <marc:subfield code="t">biblio</marc:subfield>
+    </marc:datafield>
+</marc:record>

@@ -1,0 +1,110 @@
+<marc:record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:marc="http://www.loc.gov/MARC21/slim"
+             xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
+    <marc:leader>00723nkm a22002657a 4500</marc:leader>
+    <marc:controlfield tag="001">1223991</marc:controlfield>
+    <marc:controlfield tag="003">NL-AMISG</marc:controlfield>
+    <marc:controlfield tag="005">20070508093852.0</marc:controlfield>
+    <marc:controlfield tag="008">200705suuuuuuuuxx und d</marc:controlfield>
+    <marc:datafield ind1=" " ind2=" " tag="035">
+        <marc:subfield code="a">(IISG)IISGb1101856719</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="040">
+        <marc:subfield code="a">NL-AmISG</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="1" ind2="0" tag="245">
+        <marc:subfield code="a">[Poster.]</marc:subfield>
+        <marc:subfield code="f">1969-1999.</marc:subfield>
+        <marc:subfield code="k">Visual document.</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="500">
+        <marc:subfield code="a">Internationale solidariteit: Solidariteit met Azie.</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="542">
+        <marc:subfield code="m">pictoright</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="2" ind2="4" tag="610">
+        <marc:subfield code="a">C &amp; A (Amsterdam)</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)32709</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="2" ind2="4" tag="611">
+        <marc:subfield code="a">Actie Indonesië</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)2486</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="2" ind2="4" tag="611">
+        <marc:subfield code="a">Actie Filippijnen.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)421822</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="2" ind2="4" tag="611">
+        <marc:subfield code="a">Actie Oost-Timor.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)3771</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="2" ind2="4" tag="611">
+        <marc:subfield code="a">Actie Vietnam</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)2642</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="2" ind2="4" tag="611">
+        <marc:subfield code="a">Actie West Papua.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)417936</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="2" ind2="4" tag="611">
+        <marc:subfield code="a">Actie Bangladesh.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)480689</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="2" ind2="4" tag="611">
+        <marc:subfield code="a">Actie Afghanistan.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)418920</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2="4" tag="648">
+        <marc:subfield code="a">1950-1974.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)364548</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2="4" tag="648">
+        <marc:subfield code="a">1975-1999.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)366946</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2="4" tag="651">
+        <marc:subfield code="a">Netherlands.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)569282</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2="4" tag="655">
+        <marc:subfield code="a">Poster.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)3248</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="694">
+        <marc:subfield code="a">Staatsarchief</marc:subfield>
+        <marc:subfield code="b">BG D77/22</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="695">
+        <marc:subfield code="a">NED</marc:subfield>
+        <marc:subfield code="e">Nederland</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="2" ind2=" " tag="710">
+        <marc:subfield code="a">Schone Kleren Kampagne (Amsterdam)</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)295988</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="2" ind2=" " tag="710">
+        <marc:subfield code="a">Staatsarchief (Amsterdam),</marc:subfield>
+        <marc:subfield code="e">collector.</marc:subfield>
+        <marc:subfield code="0">(NL-AMISG)574074</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="902">
+        <marc:subfield code="a">10622/7C4A6C57-A009-41B4-A69E-A98D800B93D0</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="4" ind2=" " tag="852">
+        <marc:subfield code="a">IISG</marc:subfield>
+        <marc:subfield code="b">IISG</marc:subfield>
+        <marc:subfield code="c">IISG</marc:subfield>
+        <marc:subfield code="j">BG D77/22</marc:subfield>
+        <marc:subfield code="n">Available</marc:subfield>
+        <marc:subfield code="p">30051002296421</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1="4" ind2="0" tag="856">
+        <marc:subfield code="u">http://hdl.handle.net/10622/30051002296421</marc:subfield>
+    </marc:datafield>
+    <marc:datafield ind1=" " ind2=" " tag="901">
+        <marc:subfield code="a">1223991</marc:subfield>
+        <marc:subfield code="b">Unknown</marc:subfield>
+        <marc:subfield code="c">1223991</marc:subfield>
+        <marc:subfield code="t">biblio</marc:subfield>
+    </marc:datafield>
+</marc:record>
