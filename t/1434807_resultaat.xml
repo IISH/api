@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><marc:record xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<marc:record xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
     <marc:leader>00353nas a22001457a 4500</marc:leader>
     <marc:controlfield tag="001">1434807</marc:controlfield>
     <marc:controlfield tag="003">NL-AMISG</marc:controlfield>
@@ -10,7 +12,13 @@
     <marc:datafield ind1=" " ind2=" " tag="040">
         <marc:subfield code="a">NL-AmISG</marc:subfield>
     </marc:datafield>
-    <marc:datafield ind1="1" ind2="0" tag="245"><marc:subfield code="a">[Jaarverslag = Annual report nieuwe titel.]</marc:subfield><marc:subfield code="b">[bbb</marc:subfield><marc:subfield code="k">Jaarverslag = Annual report.</marc:subfield></marc:datafield><marc:subfield code="c">Industriebond FNV. Divisionele Kadergroep ENKA.</marc:subfield>
+    <marc:datafield ind1="1" ind2="0" tag="245">
+        <marc:subfield code="a">[Jaarverslag = Annual report nieuwe titel.]</marc:subfield>
+        <marc:subfield code="b">DIt is het B veld</marc:subfield>
+        <marc:subfield code="c">Industriebond FNV. Divisionele Kadergroep ENKA.</marc:subfield>
+        <marc:subfield code="c">DIt is het C veld</marc:subfield>
+        <marc:subfield code="k">Jaarverslag = Annual report.</marc:subfield>
+    </marc:datafield>
     <marc:datafield ind1=" " ind2=" " tag="260">
         <marc:subfield code="a">Amsterdam.</marc:subfield>
     </marc:datafield>
