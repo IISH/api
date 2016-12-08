@@ -16,8 +16,8 @@
             <xsl:when test="string-length($toevoeging_titel)=0"><xsl:value-of select="text()"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="concat($nieuwe_titel, $toevoeging_titel)"/></xsl:otherwise>
         </xsl:choose>
-
     </xsl:template>
 
+    <xsl:template match="marc:datafield[@tag='500']"/>
 
 </xsl:stylesheet>
