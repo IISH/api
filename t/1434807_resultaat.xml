@@ -13,7 +13,7 @@
         <marc:subfield code="a">NL-AmISG</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1="1" ind2="0" tag="245">
-        <marc:subfield code="a">[Jaarverslag = Annual report nieuwe titel.]</marc:subfield>
+        <marc:subfield code="a">De nieuwe titel</marc:subfield>
         <marc:subfield code="b">DIt is het B veld</marc:subfield>
         <marc:subfield code="c">Industriebond FNV. Divisionele Kadergroep ENKA.</marc:subfield>
         <marc:subfield code="c">DIt is het C veld</marc:subfield>

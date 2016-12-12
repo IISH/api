@@ -1,9 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><marc:record xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<marc:record xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
     <marc:leader>00435nkm a22001577a 4500</marc:leader>
     <marc:controlfield tag="001">604116</marc:controlfield>
     <marc:controlfield tag="003">NL-AMISG</marc:controlfield>
     <marc:controlfield tag="005">20110228143706.0</marc:controlfield>
-    <marc:controlfield tag="008">201102suuuuuuuuxx und            d</marc:controlfield>
+    <marc:controlfield tag="008">201102suuuuuuuuxx und d</marc:controlfield>
     <marc:datafield ind1=" " ind2=" " tag="035">
         <marc:subfield code="a">(IISG)IISGb1045863802</marc:subfield>
     </marc:datafield>
@@ -11,13 +13,13 @@
         <marc:subfield code="a">NL-AmISG</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1="1" ind2="0" tag="245">
-        <marc:subfield code="a">Photograph / Postcard directed to Adolf Hitler, demanding to lift the deathsentence of Edgar André.</marc:subfield>
+        <marc:subfield code="a"/>
         <marc:subfield code="k">Visual document.</marc:subfield>
     </marc:datafield>
     <marc:datafield ind1=" " ind2=" " tag="260">
         <marc:subfield code="c">1936.</marc:subfield>
     </marc:datafield>
-    Hoi
+
     <marc:datafield ind1=" " ind2=" " tag="542">
         <marc:subfield code="m">pictoright</marc:subfield>
     </marc:datafield>
