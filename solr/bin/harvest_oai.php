@@ -453,6 +453,15 @@ class HarvestOAI
             return;
         }
 
+        # Must have at least one 852 datafield
+        $xpath = new DOMXPath($marc);
+        $xpath->registerNameSpace('marc', 'http://www.loc.gov/MARC21/slim');
+        $list = $xpath->query('//marc:record/marc:datafield[@tag="852"]');
+        if ($list->length == 0) {
+            print("No 852 datafields present. Skipping " . $id . "\n");
+            return;
+        }
+
         // If we are supposed to inject any values, do so now inside the first
         // tag of the file:
         $insert = '';
