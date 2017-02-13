@@ -459,6 +459,7 @@ class HarvestOAI
         $list = $xpath->query('//marc:record/marc:datafield[@tag="852"]');
         if ($list->length == 0) {
             print("No 852 datafields present. Skipping " . $id . "\n");
+            $this->_saveDeletedRecord($id, $record);
             return;
         }
 
