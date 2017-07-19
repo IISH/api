@@ -51,7 +51,7 @@
             <recordData>
                 <marc:record xmlns:marc="http://www.loc.gov/MARC21/slim">
 
-                    <marc:leader>00742npc a22001930a 45 0</marc:leader>
+                    <marc:leader>00620npc a22     7i 4500</marc:leader>
 
                     <marc:controlfield tag="001">
                         <xsl:value-of select="$identifier"/>
@@ -62,112 +62,149 @@
                     -->
                     <xsl:variable name="lm" select="//ead:langmaterial/ead:language/@langcode"/>
 
-                    <!--
-                      http://www.loc.gov/marc/bibliographic/bd044.html
-                    -->
                     <marc:controlfield tag="008">
-                        <xsl:variable name="tmp"
-                                      select="lower-case(normalize-space(//ead:controlaccess/ead:geogname[@encodinganalog='044$c'][0]/@normal))"/>
-                        <xsl:variable name="geocode">
+
+                        <xsl:variable name="year_from">
+                            <xsl:variable name="year"
+                                          select="substring-before(ead:archdesc/ead:did/ead:unitdate/@normal, '/')"/>
                             <xsl:choose>
-                                <xsl:when test="$tmp='ao'">ao</xsl:when>
-                                <xsl:when test="$tmp='ar'">ag</xsl:when>
-                                <xsl:when test="$tmp='am'">ai</xsl:when>
-                                <xsl:when test="$tmp='au'">au</xsl:when>
-                                <xsl:when test="$tmp='at'">at</xsl:when>
-                                <xsl:when test="$tmp='az'">aj</xsl:when>
-                                <xsl:when test="$tmp='bd'">bg</xsl:when>
-                                <xsl:when test="$tmp='be'">be</xsl:when>
-                                <xsl:when test="$tmp='bo'">bo</xsl:when>
-                                <xsl:when test="$tmp='br'">bl</xsl:when>
-                                <xsl:when test="$tmp='bg'">bu</xsl:when>
-                                <xsl:when test="$tmp='kh'">cb</xsl:when>
-                                <xsl:when test="$tmp='cm'">cm</xsl:when>
-                                <xsl:when test="$tmp='cl'">cl</xsl:when>
-                                <xsl:when test="$tmp='cn'">ch</xsl:when>
-                                <xsl:when test="$tmp='hr'">ci</xsl:when>
-                                <xsl:when test="$tmp='cu'">cu</xsl:when>
-                                <xsl:when test="$tmp='cz'">xr</xsl:when>
-                                <xsl:when test="$tmp='cs'">cs</xsl:when>
-                                <xsl:when test="$tmp='cshh'">cs</xsl:when>
-                                <xsl:when test="$tmp='dk'">dk</xsl:when>
-                                <xsl:when test="$tmp='eg'">ua</xsl:when>
-                                <xsl:when test="$tmp='sv'">es</xsl:when>
-                                <xsl:when test="$tmp='fr'">fr</xsl:when>
-                                <xsl:when test="$tmp='ge'">gs</xsl:when>
-                                <xsl:when test="$tmp='de'">gw</xsl:when>
-                                <xsl:when test="$tmp='gb'">gb</xsl:when>
-                                <xsl:when test="$tmp='gr'">gr</xsl:when>
-                                <xsl:when test="$tmp='gd'">gd</xsl:when>
-                                <xsl:when test="$tmp='gt'">gt</xsl:when>
-                                <xsl:when test="$tmp='hk'">hk</xsl:when>
-                                <xsl:when test="$tmp='hu'">hu</xsl:when>
-                                <xsl:when test="$tmp='in'">ii</xsl:when>
-                                <xsl:when test="$tmp='id'">io</xsl:when>
-                                <xsl:when test="$tmp='ia'">vp</xsl:when>
-                                <xsl:when test="$tmp='ir'">ir</xsl:when>
-                                <xsl:when test="$tmp='iq'">iq</xsl:when>
-                                <xsl:when test="$tmp='ie'">ie</xsl:when>
-                                <xsl:when test="$tmp='il'">is</xsl:when>
-                                <xsl:when test="$tmp='it'">it</xsl:when>
-                                <xsl:when test="$tmp='lv'">lv</xsl:when>
-                                <xsl:when test="$tmp='lb'">le</xsl:when>
-                                <xsl:when test="$tmp='mk'">xn</xsl:when>
-                                <xsl:when test="$tmp='my'">my</xsl:when>
-                                <xsl:when test="$tmp='mx'">mx</xsl:when>
-                                <xsl:when test="$tmp='bu'">br</xsl:when>
-                                <xsl:when test="$tmp='mm'">br</xsl:when>
-                                <xsl:when test="$tmp='na'">sx</xsl:when>
-                                <xsl:when test="$tmp='nl'">ne</xsl:when>
-                                <xsl:when test="$tmp='ni'">nq</xsl:when>
-                                <xsl:when test="$tmp='ne'">ng</xsl:when>
-                                <xsl:when test="$tmp='ng'">nr</xsl:when>
-                                <xsl:when test="$tmp='pk'">pk</xsl:when>
-                                <xsl:when test="$tmp='py'">py</xsl:when>
-                                <xsl:when test="$tmp='pe'">pe</xsl:when>
-                                <xsl:when test="$tmp='ph'">ph</xsl:when>
-                                <xsl:when test="$tmp='pl'">pl</xsl:when>
-                                <xsl:when test="$tmp='pt'">po</xsl:when>
-                                <xsl:when test="$tmp='pr'">pr</xsl:when>
-                                <xsl:when test="$tmp='ro'">ru</xsl:when>
-                                <xsl:when test="$tmp='ru'">ru</xsl:when>
-                                <xsl:when test="$tmp='sa'">su</xsl:when>
-                                <xsl:when test="$tmp='si'">xv</xsl:when>
-                                <xsl:when test="$tmp='za'">sa</xsl:when>
-                                <xsl:when test="$tmp='su'">xxr</xsl:when>
-                                <xsl:when test="$tmp='suhh'">xxr</xsl:when>
-                                <xsl:when test="$tmp='es'">sp</xsl:when>
-                                <xsl:when test="$tmp='lk'">ce</xsl:when>
-                                <xsl:when test="$tmp='sd'">sj</xsl:when>
-                                <xsl:when test="$tmp='sr'">sr</xsl:when>
-                                <xsl:when test="$tmp='se'">sw</xsl:when>
-                                <xsl:when test="$tmp='ch'">sz</xsl:when>
-                                <xsl:when test="$tmp='th'">th</xsl:when>
-                                <xsl:when test="$tmp='tr'">tu</xsl:when>
-                                <xsl:when test="$tmp='uk'">xxk</xsl:when>
-                                <xsl:when test="$tmp='us'">xxu</xsl:when>
-                                <xsl:when test="$tmp='vn'">vm</xsl:when>
-                                <xsl:when test="$tmp='yu'">yu</xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="$tmp"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:variable>
-                        <xsl:variable name="firstlanguagematerial">
-                            <xsl:choose>
-                                <xsl:when test="count($lm)>0">
-                                    <xsl:value-of select="normalize-space($lm[1])"/>
+                                <xsl:when test="string-length($year)=0">
+                                    <xsl:value-of select="ead:archdesc/ead:did/ead:unitdate/@normal"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:text>   </xsl:text>
+                                    <xsl:value-of select="$year"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:variable>
+
+                        <xsl:variable name="year_until">
+                            <xsl:variable name="year"
+                                          select="substring-after(ead:archdesc/ead:did/ead:unitdate/@normal, '/')"/>
+                            <xsl:choose>
+                                <xsl:when test="string-length($year)=0">
+                                    <xsl:value-of select="ead:archdesc/ead:did/ead:unitdate/@normal"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$year"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+
+                        <xsl:variable name="year">
+                            <xsl:choose>
+                                <xsl:when test="string-length($year_from)=0 and string-length($year_until)=0">uuuu</xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="concat($year_from, $year_until)"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+
+                        <xsl:variable name="geocode">
+                            <xsl:variable name="tmp"
+                                          select="ead:archdesc/ead:descgrp[@type='content_and_structure']/ead:controlaccess/ead:controlaccess/ead:geogname[@role='country of origin']/@normal"/>
+                            <xsl:choose>
+                                <xsl:when test="$tmp='AO'">ao</xsl:when>
+                                <xsl:when test="$tmp='AR'">ag</xsl:when>
+                                <xsl:when test="$tmp='AM'">ai</xsl:when>
+                                <xsl:when test="$tmp='AU'">au</xsl:when>
+                                <xsl:when test="$tmp='AT'">at</xsl:when>
+                                <xsl:when test="$tmp='AZ'">aj</xsl:when>
+                                <xsl:when test="$tmp='BD'">bg</xsl:when>
+                                <xsl:when test="$tmp='BE'">be</xsl:when>
+                                <xsl:when test="$tmp='BO'">bo</xsl:when>
+                                <xsl:when test="$tmp='BR'">bl</xsl:when>
+                                <xsl:when test="$tmp='BG'">bu</xsl:when>
+                                <xsl:when test="$tmp='KH'">cb</xsl:when>
+                                <xsl:when test="$tmp='CM'">cm</xsl:when>
+                                <xsl:when test="$tmp='CL'">cl</xsl:when>
+                                <xsl:when test="$tmp='CN'">ch</xsl:when>
+                                <xsl:when test="$tmp='HR'">ci</xsl:when>
+                                <xsl:when test="$tmp='CU'">cu</xsl:when>
+                                <xsl:when test="$tmp='CZ'">xr</xsl:when>
+                                <xsl:when test="$tmp='CS'">cs</xsl:when>
+                                <xsl:when test="$tmp='CSHH'">cs</xsl:when>
+                                <xsl:when test="$tmp='DK'">dk</xsl:when>
+                                <xsl:when test="$tmp='EG'">ua</xsl:when>
+                                <xsl:when test="$tmp='SV'">es</xsl:when>
+                                <xsl:when test="$tmp='FR'">fr</xsl:when>
+                                <xsl:when test="$tmp='GE'">gs</xsl:when>
+                                <xsl:when test="$tmp='DE'">gw</xsl:when>
+                                <xsl:when test="$tmp='GB'">gb</xsl:when>
+                                <xsl:when test="$tmp='GR'">gr</xsl:when>
+                                <xsl:when test="$tmp='GD'">gd</xsl:when>
+                                <xsl:when test="$tmp='GT'">gt</xsl:when>
+                                <xsl:when test="$tmp='HK'">hk</xsl:when>
+                                <xsl:when test="$tmp='HU'">hu</xsl:when>
+                                <xsl:when test="$tmp='IN'">ii</xsl:when>
+                                <xsl:when test="$tmp='ID'">io</xsl:when>
+                                <xsl:when test="$tmp='IA'">vp</xsl:when>
+                                <xsl:when test="$tmp='IR'">ir</xsl:when>
+                                <xsl:when test="$tmp='IQ'">iq</xsl:when>
+                                <xsl:when test="$tmp='IE'">ie</xsl:when>
+                                <xsl:when test="$tmp='IL'">is</xsl:when>
+                                <xsl:when test="$tmp='IT'">it</xsl:when>
+                                <xsl:when test="$tmp='LV'">lv</xsl:when>
+                                <xsl:when test="$tmp='LB'">le</xsl:when>
+                                <xsl:when test="$tmp='MK'">xn</xsl:when>
+                                <xsl:when test="$tmp='MY'">my</xsl:when>
+                                <xsl:when test="$tmp='MX'">mx</xsl:when>
+                                <xsl:when test="$tmp='BU'">br</xsl:when>
+                                <xsl:when test="$tmp='MM'">br</xsl:when>
+                                <xsl:when test="$tmp='NA'">sx</xsl:when>
+                                <xsl:when test="$tmp='NL'">ne</xsl:when>
+                                <xsl:when test="$tmp='NI'">nq</xsl:when>
+                                <xsl:when test="$tmp='NE'">ng</xsl:when>
+                                <xsl:when test="$tmp='NG'">nr</xsl:when>
+                                <xsl:when test="$tmp='PK'">pk</xsl:when>
+                                <xsl:when test="$tmp='PY'">py</xsl:when>
+                                <xsl:when test="$tmp='PE'">pe</xsl:when>
+                                <xsl:when test="$tmp='PH'">ph</xsl:when>
+                                <xsl:when test="$tmp='PL'">pl</xsl:when>
+                                <xsl:when test="$tmp='PT'">po</xsl:when>
+                                <xsl:when test="$tmp='PR'">pr</xsl:when>
+                                <xsl:when test="$tmp='RO'">ru</xsl:when>
+                                <xsl:when test="$tmp='RU'">ru</xsl:when>
+                                <xsl:when test="$tmp='SA'">su</xsl:when>
+                                <xsl:when test="$tmp='SI'">xv</xsl:when>
+                                <xsl:when test="$tmp='ZA'">sa</xsl:when>
+                                <xsl:when test="$tmp='SU'">xxr</xsl:when>
+                                <xsl:when test="$tmp='SUHH'">xxr</xsl:when>
+                                <xsl:when test="$tmp='ES'">sp</xsl:when>
+                                <xsl:when test="$tmp='LK'">ce</xsl:when>
+                                <xsl:when test="$tmp='SD'">sj</xsl:when>
+                                <xsl:when test="$tmp='SR'">sr</xsl:when>
+                                <xsl:when test="$tmp='SE'">sw</xsl:when>
+                                <xsl:when test="$tmp='CH'">sz</xsl:when>
+                                <xsl:when test="$tmp='TH'">th</xsl:when>
+                                <xsl:when test="$tmp='TR'">tu</xsl:when>
+                                <xsl:when test="$tmp='UK'">xxk</xsl:when>
+                                <xsl:when test="$tmp='US'">xxu</xsl:when>
+                                <xsl:when test="$tmp='VN'">vm</xsl:when>
+                                <xsl:when test="$tmp='YU'">yu</xsl:when>
+                                <xsl:otherwise><xsl:text>  </xsl:text></xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+
+                        <xsl:variable name="firstlanguagematerial">
+                            <xsl:choose>
+                                <xsl:when test="count($lm)=0">
+                                    <xsl:text>\\\</xsl:text>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="normalize-space($lm[1])"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+
                         <xsl:value-of
-                                select="concat('199507suuuuuuuu', substring(concat($geocode, '   '), 1, 3),'|||||||||||||||||',$firstlanguagematerial,' d')"/>
+                                select="concat('110701i', $year, $geocode, '\\\\\\\\\\\\\\\\\\', $firstlanguagematerial, '\d')"/>
                     </marc:controlfield>
 
-                    <xsl:if test="$lm">
+                    <marc:datafield tag="040" ind1=" " ind2=" ">
+                        <marc:subfield code="a">NL-AmISG</marc:subfield>
+                    </marc:datafield>
+
+                    <xsl:if test="count($lm)>1">
                         <marc:datafield tag="041" ind1=" " ind2=" ">
                             <xsl:for-each select="$lm">
                                 <marc:subfield code="a">
@@ -177,15 +214,17 @@
                         </marc:datafield>
                     </xsl:if>
 
-                    <xsl:if test="//node()[@encodinganalog='044$c']">
-                        <marc:datafield tag="044" ind1=" " ind2=" ">
-                            <xsl:for-each select="//node()[@encodinganalog='044$c']">
-                                <marc:subfield code="c">
-                                    <xsl:value-of select="lower-case(@normal)"/>
-                                </marc:subfield>
-                            </xsl:for-each>
-                        </marc:datafield>
-                    </xsl:if>
+                    <!--
+                                        <xsl:if test="//node()[@encodinganalog='044$c']">
+                                            <marc:datafield tag="044" ind1=" " ind2=" ">
+                                                <xsl:for-each select="//node()[@encodinganalog='044$c']">
+                                                    <marc:subfield code="c">
+                                                        <xsl:value-of select="lower-case(@normal)"/>
+                                                    </marc:subfield>
+                                                </xsl:for-each>
+                                            </marc:datafield>
+                                        </xsl:if>
+                    -->
 
                     <xsl:for-each select="//node()[@encodinganalog='100$a']">
                         <xsl:if test="position()=1">
@@ -267,12 +306,7 @@
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
                                 <xsl:with-param name="text">
-                                    <xsl:for-each select="ead:p">
-                                        <xsl:value-of select="text()"/>
-                                        <xsl:if test="not(position()=last())">
-                                            <xsl:text> </xsl:text>
-                                        </xsl:if>
-                                    </xsl:for-each>
+                                    <xsl:apply-templates select="node()" mode="text" />
                                 </xsl:with-param>
                             </xsl:call-template>
                         </marc:datafield>
@@ -283,12 +317,7 @@
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
                                 <xsl:with-param name="text">
-                                    <xsl:for-each select="ead:p">
-                                        <xsl:value-of select="text()"/>
-                                        <xsl:if test="not(position()=last())">
-                                            <xsl:text> </xsl:text>
-                                        </xsl:if>
-                                    </xsl:for-each>
+                                    <xsl:apply-templates select="node()" mode="text" />
                                 </xsl:with-param>
                             </xsl:call-template>
                         </marc:datafield>
@@ -322,12 +351,10 @@
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
                                 <xsl:with-param name="text">
-                                    <xsl:for-each select="ead:p">
-                                        <xsl:value-of select="text()"/>
-                                        <xsl:if test="not(position()=last())">
-                                            <xsl:text> </xsl:text>
-                                        </xsl:if>
-                                    </xsl:for-each>
+                                    <xsl:choose>
+                                        <xsl:when test="ead:p"><xsl:apply-templates select="node()" mode="text" /></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="text()"/></xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:with-param>
                             </xsl:call-template>
                         </marc:datafield>
@@ -338,12 +365,10 @@
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
                                 <xsl:with-param name="text">
-                                    <xsl:for-each select="ead:p">
-                                        <xsl:value-of select="text()"/>
-                                        <xsl:if test="not(position()=last())">
-                                            <xsl:text> </xsl:text>
-                                        </xsl:if>
-                                    </xsl:for-each>
+                                    <xsl:choose>
+                                        <xsl:when test="ead:p"><xsl:apply-templates select="node()" mode="text" /></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="text()"/></xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:with-param>
                             </xsl:call-template>
                         </marc:datafield>
@@ -354,81 +379,145 @@
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
                                 <xsl:with-param name="text">
-                                    <xsl:for-each select="ead:p">
-                                        <xsl:value-of select="text()"/>
-                                        <xsl:if test="not(position()=last())">
-                                            <xsl:text> </xsl:text>
-                                        </xsl:if>
-                                    </xsl:for-each>
+                                    <xsl:choose>
+                                        <xsl:when test="ead:p"><xsl:apply-templates select="node()" mode="text" /></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="text()"/></xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:with-param>
                             </xsl:call-template>
                         </marc:datafield>
                     </xsl:for-each>
 
-                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'535$a')]">
+                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'535$a') and not(@audience='internal')]">
                         <marc:datafield tag="535" ind1=" " ind2=" ">
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
                                 <xsl:with-param name="text">
-                                    <xsl:for-each select="ead:p">
-                                        <xsl:value-of select="text()"/>
-                                        <xsl:if test="not(position()=last())">
-                                            <xsl:text> </xsl:text>
-                                        </xsl:if>
-                                    </xsl:for-each>
+                                    <xsl:choose>
+                                        <xsl:when test="ead:p"><xsl:apply-templates select="node()" mode="text" /></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="text()"/></xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:with-param>
                             </xsl:call-template>
                         </marc:datafield>
                     </xsl:for-each>
 
-                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'544$a')]">
+                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'540$a') and not(@audience='internal')]">
+                        <marc:datafield tag="540" ind1=" " ind2=" ">
+                            <xsl:call-template name="subfield">
+                                <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
+                                <xsl:with-param name="text">
+                                    <xsl:choose>
+                                        <xsl:when test="ead:p"><xsl:apply-templates select="node()" mode="text" /></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="text()"/></xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </marc:datafield>
+                    </xsl:for-each>
+
+                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'541$a') and not(@audience='internal')]">
+                        <marc:datafield tag="541" ind1=" " ind2=" ">
+                            <xsl:call-template name="subfield">
+                                <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
+                                <xsl:with-param name="text">
+                                    <xsl:choose>
+                                        <xsl:when test="ead:p"><xsl:apply-templates select="node()" mode="text" /></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="text()"/></xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </marc:datafield>
+                    </xsl:for-each>
+
+                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'544$a') and not(@audience='internal')]">
                         <marc:datafield tag="544" ind1=" " ind2=" ">
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
                                 <xsl:with-param name="text">
-                                    <xsl:for-each select="ead:p">
-                                        <xsl:value-of select="text()"/>
-                                        <xsl:if test="not(position()=last())">
-                                            <xsl:text> </xsl:text>
-                                        </xsl:if>
-                                    </xsl:for-each>
+                                    <xsl:choose>
+                                        <xsl:when test="ead:p"><xsl:apply-templates select="node()" mode="text" /></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="text()"/></xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:with-param>
                             </xsl:call-template>
                         </marc:datafield>
                     </xsl:for-each>
 
-                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'545$')]">
+
+                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'545$') and not(@audience='internal')]">
                         <xsl:sort select="@encodinganalog" data-type="text"/>
                         <marc:datafield tag="545" ind1=" " ind2=" ">
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
                                 <xsl:with-param name="text">
-                                    <xsl:for-each select="ead:p">
-                                        <xsl:value-of select="text()"/>
-                                        <xsl:if test="not(position()=last())"></xsl:if>
-                                    </xsl:for-each>
+                                    <xsl:choose>
+                                        <xsl:when test="ead:p"><xsl:apply-templates select="node()" mode="text" /></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="text()"/></xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:with-param>
                             </xsl:call-template>
                         </marc:datafield>
                     </xsl:for-each>
 
-                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'583$a')]">
+                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'561$') and not(@audience='internal')]">
+                        <xsl:sort select="@encodinganalog" data-type="text"/>
+                        <marc:datafield tag="561" ind1=" " ind2=" ">
+                            <xsl:call-template name="subfield">
+                                <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
+                                <xsl:with-param name="text">
+                                    <xsl:choose>
+                                        <xsl:when test="ead:p"><xsl:apply-templates select="node()" mode="text" /></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="text()"/></xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </marc:datafield>
+                    </xsl:for-each>
+
+                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'583$a') and not(@audience='internal')]">
                         <marc:datafield tag="583" ind1=" " ind2=" ">
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
                                 <xsl:with-param name="text">
-                                    <xsl:for-each select="ead:p">
-                                        <xsl:value-of select="text()"/>
-                                        <xsl:if test="not(position()=last())">
-                                            <xsl:text> </xsl:text>
-                                        </xsl:if>
-                                    </xsl:for-each>
+                                    <xsl:choose>
+                                        <xsl:when test="ead:p"><xsl:apply-templates select="node()" mode="text" /></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="text()"/></xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:with-param>
                             </xsl:call-template>
                         </marc:datafield>
                     </xsl:for-each>
 
-                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'650$a')]">
+                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'600$a') and not(@audience='internal')]">
+                        <marc:datafield tag="600" ind1="1" ind2="4">
+                            <xsl:call-template name="subfield">
+                                <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
+                                <xsl:with-param name="text">
+                                    <xsl:choose>
+                                        <xsl:when test="ead:p"><xsl:apply-templates select="node()" mode="text" /></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="text()"/></xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </marc:datafield>
+                    </xsl:for-each>
+
+                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'610$a') and not(@audience='internal')]">
+                        <marc:datafield tag="610" ind1="2" ind2="4">
+                            <xsl:call-template name="subfield">
+                                <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
+                                <xsl:with-param name="text">
+                                    <xsl:choose>
+                                        <xsl:when test="ead:p"><xsl:apply-templates select="node()" mode="text" /></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="text()"/></xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </marc:datafield>
+                    </xsl:for-each>
+
+                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'650$a') and not(@audience='internal')]">
                         <marc:datafield tag="650" ind1=" " ind2=" ">
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
@@ -441,15 +530,18 @@
                             </xsl:call-template>
                         </marc:datafield>
                     </xsl:for-each>
+
                     <xsl:for-each select="//ead:controlaccess/ead:controlaccess/ead:geogname">
                         <xsl:call-template name="insertSingleElement">
                             <xsl:with-param name="tag" select="'651'"/>
                             <xsl:with-param name="code" select="'a'"/>
+                            <xsl:with-param name="ind2" select="'4'"/>
                             <xsl:with-param name="value"
-                                            select="normalize-space(lower-case(@normal))"/>
+                                            select="text()"/>
                         </xsl:call-template>
                     </xsl:for-each>
-                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'655$a')]">
+
+                    <xsl:for-each select="//node()[starts-with(@encodinganalog,'655$a') and not(@audience='internal')]">
                         <marc:datafield tag="655" ind1=" " ind2=" ">
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
@@ -569,7 +661,8 @@
                         <marc:datafield tag="856" ind1="4" ind2="2">
                             <marc:subfield code="q">image/jpeg</marc:subfield>
                             <marc:subfield code="u">
-                                <xsl:value-of select="concat('http://hdl.handle.net/', $identifier, '?locatt=view:level3')"/>
+                                <xsl:value-of
+                                        select="concat('http://hdl.handle.net/', $identifier, '?locatt=view:level3')"/>
                             </marc:subfield>
                         </marc:datafield>
                     </xsl:if>
@@ -593,6 +686,13 @@
         <marc:subfield code="{$code}">
             <xsl:value-of select="$text"/>
         </marc:subfield>
+    </xsl:template>
+
+    <xsl:template match="@*|node()" mode="text">
+        <xsl:if test="local-name()='date'"><xsl:value-of select="text()"/></xsl:if>
+        <xsl:if test="local-name()='p'"><xsl:value-of select="text()"/></xsl:if>
+        <xsl:if test="local-name()='extref'"><xsl:value-of select="concat(text(), ': ', @xlink:href, ' ; ')"/></xsl:if>
+        <xsl:apply-templates select="@*|node()" mode="text"/>
     </xsl:template>
 
 </xsl:stylesheet>

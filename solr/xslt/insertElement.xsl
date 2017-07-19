@@ -88,10 +88,12 @@
         <xsl:param name="tag"/>
         <xsl:param name="value"/>
         <xsl:param name="code"/>
+        <xsl:param name="ind1" select="' '"/>
+        <xsl:param name="ind2" select="' '"/>
         <xsl:variable name="tmp2" select="normalize-space($value)"/>
 
         <xsl:if test="$tmp2 and string-length($tmp2)!=0">
-            <marc:datafield tag="{$tag}" ind1=" " ind2=" ">
+            <marc:datafield tag="{$tag}" ind1="{$ind1}" ind2="{$ind2}">
                 <marc:subfield code="{$code}">
                     <xsl:value-of select="$tmp2"/>
                 </marc:subfield>
