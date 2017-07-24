@@ -57,6 +57,8 @@
                         <xsl:value-of select="$identifier"/>
                     </marc:controlfield>
 
+                    <marc:controlfield tag="003">NL-AmISG</marc:controlfield>
+
                     <!-- For language codes see
                     http://www.loc.gov/standards/codelists/languages.xml
                     -->
@@ -99,7 +101,7 @@
                             </xsl:choose>
                         </xsl:variable>
 
-                        <xsl:variable name="geocode">
+                        <xsl:variable name="place">
                             <xsl:variable name="tmp"
                                           select="ead:archdesc/ead:descgrp[@type='content_and_structure']/ead:controlaccess/ead:controlaccess/ead:geogname[@role='country of origin']/@normal"/>
                             <xsl:choose>
@@ -181,6 +183,26 @@
                                 <xsl:when test="$tmp='US'">xxu</xsl:when>
                                 <xsl:when test="$tmp='VN'">vm</xsl:when>
                                 <xsl:when test="$tmp='YU'">yu</xsl:when>
+                                <xsl:when test="$tmp='SG'">si</xsl:when>
+                                <xsl:when test="$tmp='SN'">sg</xsl:when>
+                                <xsl:when test="$tmp='CG'">cg</xsl:when>
+                                <xsl:when test="$tmp='AW'">aw</xsl:when>
+                                <xsl:when test="$tmp='ET'">et</xsl:when>
+                                <xsl:when test="$tmp='KE'">ke</xsl:when>
+                                <xsl:when test="$tmp='MA'">mr</xsl:when>
+                                <xsl:when test="$tmp='SO'">so</xsl:when>
+                                <xsl:when test="$tmp='NP'">np</xsl:when>
+                                <xsl:when test="$tmp='MZ'">mz</xsl:when>
+                                <xsl:when test="$tmp='GH'">gh</xsl:when>
+                                <xsl:when test="$tmp='LU'">lu</xsl:when>
+                                <xsl:when test="$tmp='TN'">ti</xsl:when>
+                                <xsl:when test="$tmp='VE'">ve</xsl:when>
+                                <xsl:when test="$tmp='NZ'">nz</xsl:when>
+                                <xsl:when test="$tmp='UY'">uy</xsl:when>
+                                <xsl:when test="$tmp='NO'">no</xsl:when>
+                                <xsl:when test="$tmp='JM'">jm</xsl:when>
+                                <xsl:when test="$tmp='HN'">ho</xsl:when>
+                                <xsl:when test="$tmp='HT'">ht</xsl:when>
                                 <xsl:otherwise><xsl:text>  </xsl:text></xsl:otherwise>
                             </xsl:choose>
                         </xsl:variable>
@@ -197,7 +219,7 @@
                         </xsl:variable>
 
                         <xsl:value-of
-                                select="concat('110701i', $year, $geocode, '\\\\\\\\\\\\\\\\\\', $firstlanguagematerial, '\d')"/>
+                                select="concat('110701i', $year, $place, '\\\\\\\\\\\\\\\\\\', $firstlanguagematerial, '\d')"/>
                     </marc:controlfield>
 
                     <marc:datafield tag="040" ind1=" " ind2=" ">
