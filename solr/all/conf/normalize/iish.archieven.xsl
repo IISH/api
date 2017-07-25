@@ -305,10 +305,7 @@
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
                                 <xsl:with-param name="text">
-                                    <xsl:value-of select="text()"/>
-                                    <xsl:if test="not(position()=last())">
-                                        <xsl:text> </xsl:text>
-                                    </xsl:if>
+                                    <xsl:value-of select="normalize-space(text())"/>
                                 </xsl:with-param>
                             </xsl:call-template>
                         </marc:datafield>
