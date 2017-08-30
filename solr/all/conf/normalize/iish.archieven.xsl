@@ -94,8 +94,7 @@
 
                         <xsl:variable name="year">
                             <xsl:choose>
-                                <xsl:when test="string-length($year_from)=0 and string-length($year_until)=0">uuuuuuuu
-                                </xsl:when>
+                                <xsl:when test="string-length($year_from)=0 and string-length($year_until)=0"><xsl:text>uuuuuuuu</xsl:text></xsl:when>
                                 <xsl:otherwise>
                                     <xsl:value-of select="concat($year_from, $year_until)"/>
                                 </xsl:otherwise>
