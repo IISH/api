@@ -105,104 +105,104 @@
                             <xsl:variable name="tmp"
                                           select="ead:archdesc/ead:descgrp[@type='content_and_structure']/ead:controlaccess/ead:controlaccess/ead:geogname[@role='country of origin']/@normal"/>
                             <xsl:choose>
-                                <xsl:when test="$tmp='AO'">ao</xsl:when>
-                                <xsl:when test="$tmp='AR'">ag</xsl:when>
-                                <xsl:when test="$tmp='AM'">ai</xsl:when>
-                                <xsl:when test="$tmp='AU'">au</xsl:when>
-                                <xsl:when test="$tmp='AT'">at</xsl:when>
-                                <xsl:when test="$tmp='AZ'">aj</xsl:when>
-                                <xsl:when test="$tmp='BD'">bg</xsl:when>
-                                <xsl:when test="$tmp='BE'">be</xsl:when>
-                                <xsl:when test="$tmp='BO'">bo</xsl:when>
-                                <xsl:when test="$tmp='BR'">bl</xsl:when>
-                                <xsl:when test="$tmp='BG'">bu</xsl:when>
-                                <xsl:when test="$tmp='KH'">cb</xsl:when>
-                                <xsl:when test="$tmp='CM'">cm</xsl:when>
-                                <xsl:when test="$tmp='CL'">cl</xsl:when>
-                                <xsl:when test="$tmp='CN'">ch</xsl:when>
-                                <xsl:when test="$tmp='HR'">ci</xsl:when>
-                                <xsl:when test="$tmp='CU'">cu</xsl:when>
-                                <xsl:when test="$tmp='CZ'">xr</xsl:when>
-                                <xsl:when test="$tmp='CS'">cs</xsl:when>
-                                <xsl:when test="$tmp='CSHH'">cs</xsl:when>
-                                <xsl:when test="$tmp='DK'">dk</xsl:when>
-                                <xsl:when test="$tmp='EG'">ua</xsl:when>
-                                <xsl:when test="$tmp='SV'">es</xsl:when>
-                                <xsl:when test="$tmp='FR'">fr</xsl:when>
-                                <xsl:when test="$tmp='GE'">gs</xsl:when>
-                                <xsl:when test="$tmp='DE'">gw</xsl:when>
+                                <xsl:when test="$tmp='AO'">ao </xsl:when>
+                                <xsl:when test="$tmp='AR'">ag </xsl:when>
+                                <xsl:when test="$tmp='AM'">ai </xsl:when>
+                                <xsl:when test="$tmp='AU'">au </xsl:when>
+                                <xsl:when test="$tmp='AT'">at </xsl:when>
+                                <xsl:when test="$tmp='AZ'">aj </xsl:when>
+                                <xsl:when test="$tmp='BD'">bg </xsl:when>
+                                <xsl:when test="$tmp='BE'">be </xsl:when>
+                                <xsl:when test="$tmp='BO'">bo </xsl:when>
+                                <xsl:when test="$tmp='BR'">bl </xsl:when>
+                                <xsl:when test="$tmp='BG'">bu </xsl:when>
+                                <xsl:when test="$tmp='KH'">cb </xsl:when>
+                                <xsl:when test="$tmp='CM'">cm </xsl:when>
+                                <xsl:when test="$tmp='CL'">cl </xsl:when>
+                                <xsl:when test="$tmp='CN'">ch </xsl:when>
+                                <xsl:when test="$tmp='HR'">ci </xsl:when>
+                                <xsl:when test="$tmp='CU'">cu </xsl:when>
+                                <xsl:when test="$tmp='CZ'">xr </xsl:when>
+                                <xsl:when test="$tmp='CS'">cs </xsl:when>
+                                <xsl:when test="$tmp='CSHH'">cs </xsl:when>
+                                <xsl:when test="$tmp='DK'">dk </xsl:when>
+                                <xsl:when test="$tmp='EG'">ua </xsl:when>
+                                <xsl:when test="$tmp='SV'">es </xsl:when>
+                                <xsl:when test="$tmp='FR'">fr </xsl:when>
+                                <xsl:when test="$tmp='GE'">gs </xsl:when>
+                                <xsl:when test="$tmp='DE'">gw </xsl:when>
                                 <xsl:when test="$tmp='GB'">xxk</xsl:when>
-                                <xsl:when test="$tmp='GR'">gr</xsl:when>
-                                <xsl:when test="$tmp='GD'">gd</xsl:when>
-                                <xsl:when test="$tmp='GT'">gt</xsl:when>
-                                <xsl:when test="$tmp='HK'">hk</xsl:when>
-                                <xsl:when test="$tmp='HU'">hu</xsl:when>
-                                <xsl:when test="$tmp='IN'">ii</xsl:when>
-                                <xsl:when test="$tmp='ID'">io</xsl:when>
-                                <xsl:when test="$tmp='IA'">vp</xsl:when>
-                                <xsl:when test="$tmp='IR'">ir</xsl:when>
-                                <xsl:when test="$tmp='IQ'">iq</xsl:when>
-                                <xsl:when test="$tmp='IE'">ie</xsl:when>
-                                <xsl:when test="$tmp='IL'">is</xsl:when>
-                                <xsl:when test="$tmp='IT'">it</xsl:when>
-                                <xsl:when test="$tmp='LV'">lv</xsl:when>
-                                <xsl:when test="$tmp='LB'">le</xsl:when>
-                                <xsl:when test="$tmp='MK'">xn</xsl:when>
-                                <xsl:when test="$tmp='MY'">my</xsl:when>
-                                <xsl:when test="$tmp='MX'">mx</xsl:when>
-                                <xsl:when test="$tmp='BU'">br</xsl:when>
-                                <xsl:when test="$tmp='MM'">br</xsl:when>
-                                <xsl:when test="$tmp='NA'">sx</xsl:when>
-                                <xsl:when test="$tmp='NL'">ne</xsl:when>
-                                <xsl:when test="$tmp='NI'">nq</xsl:when>
-                                <xsl:when test="$tmp='NE'">ng</xsl:when>
-                                <xsl:when test="$tmp='NG'">nr</xsl:when>
-                                <xsl:when test="$tmp='PK'">pk</xsl:when>
-                                <xsl:when test="$tmp='PY'">py</xsl:when>
-                                <xsl:when test="$tmp='PE'">pe</xsl:when>
-                                <xsl:when test="$tmp='PH'">ph</xsl:when>
-                                <xsl:when test="$tmp='PL'">pl</xsl:when>
-                                <xsl:when test="$tmp='PT'">po</xsl:when>
-                                <xsl:when test="$tmp='PR'">pr</xsl:when>
-                                <xsl:when test="$tmp='RO'">ru</xsl:when>
-                                <xsl:when test="$tmp='RU'">ru</xsl:when>
-                                <xsl:when test="$tmp='SA'">su</xsl:when>
-                                <xsl:when test="$tmp='SI'">xv</xsl:when>
-                                <xsl:when test="$tmp='ZA'">sa</xsl:when>
+                                <xsl:when test="$tmp='GR'">gr </xsl:when>
+                                <xsl:when test="$tmp='GD'">gd </xsl:when>
+                                <xsl:when test="$tmp='GT'">gt </xsl:when>
+                                <xsl:when test="$tmp='HK'">hk </xsl:when>
+                                <xsl:when test="$tmp='HU'">hu </xsl:when>
+                                <xsl:when test="$tmp='IN'">ii </xsl:when>
+                                <xsl:when test="$tmp='ID'">io </xsl:when>
+                                <xsl:when test="$tmp='IA'">vp </xsl:when>
+                                <xsl:when test="$tmp='IR'">ir </xsl:when>
+                                <xsl:when test="$tmp='IQ'">iq </xsl:when>
+                                <xsl:when test="$tmp='IE'">ie </xsl:when>
+                                <xsl:when test="$tmp='IL'">is </xsl:when>
+                                <xsl:when test="$tmp='IT'">it </xsl:when>
+                                <xsl:when test="$tmp='LV'">lv </xsl:when>
+                                <xsl:when test="$tmp='LB'">le </xsl:when>
+                                <xsl:when test="$tmp='MK'">xn </xsl:when>
+                                <xsl:when test="$tmp='MY'">my </xsl:when>
+                                <xsl:when test="$tmp='MX'">mx </xsl:when>
+                                <xsl:when test="$tmp='BU'">br </xsl:when>
+                                <xsl:when test="$tmp='MM'">br </xsl:when>
+                                <xsl:when test="$tmp='NA'">sx </xsl:when>
+                                <xsl:when test="$tmp='NL'">ne </xsl:when>
+                                <xsl:when test="$tmp='NI'">nq </xsl:when>
+                                <xsl:when test="$tmp='NE'">ng </xsl:when>
+                                <xsl:when test="$tmp='NG'">nr </xsl:when>
+                                <xsl:when test="$tmp='PK'">pk </xsl:when>
+                                <xsl:when test="$tmp='PY'">py </xsl:when>
+                                <xsl:when test="$tmp='PE'">pe </xsl:when>
+                                <xsl:when test="$tmp='PH'">ph </xsl:when>
+                                <xsl:when test="$tmp='PL'">pl </xsl:when>
+                                <xsl:when test="$tmp='PT'">po </xsl:when>
+                                <xsl:when test="$tmp='PR'">pr </xsl:when>
+                                <xsl:when test="$tmp='RO'">ru </xsl:when>
+                                <xsl:when test="$tmp='RU'">ru </xsl:when>
+                                <xsl:when test="$tmp='SA'">su </xsl:when>
+                                <xsl:when test="$tmp='SI'">xv </xsl:when>
+                                <xsl:when test="$tmp='ZA'">sa </xsl:when>
                                 <xsl:when test="$tmp='SU'">xxr</xsl:when>
                                 <xsl:when test="$tmp='SUHH'">xxr</xsl:when>
-                                <xsl:when test="$tmp='ES'">sp</xsl:when>
-                                <xsl:when test="$tmp='LK'">ce</xsl:when>
-                                <xsl:when test="$tmp='SD'">sj</xsl:when>
-                                <xsl:when test="$tmp='SR'">sr</xsl:when>
-                                <xsl:when test="$tmp='SE'">sw</xsl:when>
-                                <xsl:when test="$tmp='CH'">sz</xsl:when>
-                                <xsl:when test="$tmp='TH'">th</xsl:when>
-                                <xsl:when test="$tmp='TR'">tu</xsl:when>
+                                <xsl:when test="$tmp='ES'">sp </xsl:when>
+                                <xsl:when test="$tmp='LK'">ce </xsl:when>
+                                <xsl:when test="$tmp='SD'">sj </xsl:when>
+                                <xsl:when test="$tmp='SR'">sr </xsl:when>
+                                <xsl:when test="$tmp='SE'">sw </xsl:when>
+                                <xsl:when test="$tmp='CH'">sz </xsl:when>
+                                <xsl:when test="$tmp='TH'">th </xsl:when>
+                                <xsl:when test="$tmp='TR'">tu </xsl:when>
                                 <xsl:when test="$tmp='UK'">xxk</xsl:when>
                                 <xsl:when test="$tmp='US'">xxu</xsl:when>
-                                <xsl:when test="$tmp='VN'">vm</xsl:when>
-                                <xsl:when test="$tmp='YU'">yu</xsl:when>
-                                <xsl:when test="$tmp='SG'">si</xsl:when>
-                                <xsl:when test="$tmp='SN'">sg</xsl:when>
-                                <xsl:when test="$tmp='CG'">cg</xsl:when>
-                                <xsl:when test="$tmp='AW'">aw</xsl:when>
-                                <xsl:when test="$tmp='ET'">et</xsl:when>
-                                <xsl:when test="$tmp='KE'">ke</xsl:when>
-                                <xsl:when test="$tmp='MA'">mr</xsl:when>
-                                <xsl:when test="$tmp='SO'">so</xsl:when>
-                                <xsl:when test="$tmp='NP'">np</xsl:when>
-                                <xsl:when test="$tmp='MZ'">mz</xsl:when>
-                                <xsl:when test="$tmp='GH'">gh</xsl:when>
-                                <xsl:when test="$tmp='LU'">lu</xsl:when>
-                                <xsl:when test="$tmp='TN'">ti</xsl:when>
-                                <xsl:when test="$tmp='VE'">ve</xsl:when>
-                                <xsl:when test="$tmp='NZ'">nz</xsl:when>
-                                <xsl:when test="$tmp='UY'">uy</xsl:when>
-                                <xsl:when test="$tmp='NO'">no</xsl:when>
-                                <xsl:when test="$tmp='JM'">jm</xsl:when>
-                                <xsl:when test="$tmp='HN'">ho</xsl:when>
-                                <xsl:when test="$tmp='HT'">ht</xsl:when>
+                                <xsl:when test="$tmp='VN'">vm </xsl:when>
+                                <xsl:when test="$tmp='YU'">yu </xsl:when>
+                                <xsl:when test="$tmp='SG'">si </xsl:when>
+                                <xsl:when test="$tmp='SN'">sg </xsl:when>
+                                <xsl:when test="$tmp='CG'">cg </xsl:when>
+                                <xsl:when test="$tmp='AW'">aw </xsl:when>
+                                <xsl:when test="$tmp='ET'">et </xsl:when>
+                                <xsl:when test="$tmp='KE'">ke </xsl:when>
+                                <xsl:when test="$tmp='MA'">mr </xsl:when>
+                                <xsl:when test="$tmp='SO'">so </xsl:when>
+                                <xsl:when test="$tmp='NP'">np </xsl:when>
+                                <xsl:when test="$tmp='MZ'">mz </xsl:when>
+                                <xsl:when test="$tmp='GH'">gh </xsl:when>
+                                <xsl:when test="$tmp='LU'">lu </xsl:when>
+                                <xsl:when test="$tmp='TN'">ti </xsl:when>
+                                <xsl:when test="$tmp='VE'">ve </xsl:when>
+                                <xsl:when test="$tmp='NZ'">nz </xsl:when>
+                                <xsl:when test="$tmp='UY'">uy </xsl:when>
+                                <xsl:when test="$tmp='NO'">no </xsl:when>
+                                <xsl:when test="$tmp='JM'">jm </xsl:when>
+                                <xsl:when test="$tmp='HN'">ho </xsl:when>
+                                <xsl:when test="$tmp='HT'">ht </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:text>   </xsl:text>
                                 </xsl:otherwise>
