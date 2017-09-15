@@ -279,7 +279,7 @@
                         </xsl:if>
                     </xsl:for-each>
 
-                    <marc:datafield tag="245" ind1="1" ind2=" ">
+                    <marc:datafield tag="245" ind1="1" ind2="0">
                         <xsl:for-each select="//node()[starts-with(@encodinganalog,'245$')]">
                             <xsl:sort select="@encodinganalog" data-type="text"/>
                             <xsl:call-template name="subfield">
@@ -576,7 +576,7 @@
                     </xsl:for-each>
 
                     <xsl:for-each select="//node()[starts-with(@encodinganalog,'650$a') and not(@audience='internal')]">
-                        <marc:datafield tag="650" ind1=" " ind2=" ">
+                        <marc:datafield tag="650" ind1=" " ind2="4">
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
                                 <xsl:with-param name="text">
@@ -600,7 +600,7 @@
                     </xsl:for-each>
 
                     <xsl:for-each select="//node()[starts-with(@encodinganalog,'655$a') and not(@audience='internal')]">
-                        <marc:datafield tag="655" ind1=" " ind2=" ">
+                        <marc:datafield tag="655" ind1=" " ind2="4">
                             <xsl:call-template name="subfield">
                                 <xsl:with-param name="encodinganalog" select="@encodinganalog"/>
                                 <xsl:with-param name="text">
