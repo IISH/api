@@ -68,10 +68,10 @@
 
                         <xsl:variable name="year_from">
                             <xsl:variable name="year"
-                                          select="substring-before(ead:archdesc/ead:did/ead:unitdate/@normal, '/')"/>
+                                          select="substring-before(ead:archdesc/ead:did/ead:unitdate[@type='inclusive']/@normal, '/')"/>
                             <xsl:choose>
                                 <xsl:when test="string-length($year)=0">
-                                    <xsl:value-of select="ead:archdesc/ead:did/ead:unitdate/@normal"/>
+                                    <xsl:value-of select="ead:archdesc/ead:did/ead:unitdate[@type='inclusive']/@normal"/>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:value-of select="$year"/>
@@ -81,10 +81,10 @@
 
                         <xsl:variable name="year_until">
                             <xsl:variable name="year"
-                                          select="substring-after(ead:archdesc/ead:did/ead:unitdate/@normal, '/')"/>
+                                          select="substring-after(ead:archdesc/ead:did/ead:unitdate[@type='inclusive']/@normal, '/')"/>
                             <xsl:choose>
                                 <xsl:when test="string-length($year)=0">
-                                    <xsl:value-of select="ead:archdesc/ead:did/ead:unitdate/@normal"/>
+                                    <xsl:value-of select="ead:archdesc/ead:did/ead:unitdate[@type='inclusive']/@normal"/>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:value-of select="$year"/>
