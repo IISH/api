@@ -83,6 +83,7 @@ class HarvestOAI
     private $_startDate = null; // Harvest start date (null for all records)
     private $_granularity = 'auto'; // Date granularity
     private $_injectId = false; // Tag to use for injecting IDs into XML
+    private $_require_852 = false; // Tag to use for check for this datafield.
     private $_injectSetSpec = false; // Tag to use for injecting setSpecs
     private $_injectSetName = false; // Tag to use for injecting set names
     private $_injectDate = false; // Tag to use for injecting datestamp
@@ -144,6 +145,9 @@ class HarvestOAI
         }
         if (isset($settings['injectId'])) {
             $this->_injectId = $settings['injectId'];
+        }
+        if (isset($settings['require_852'])) {
+            $this->_require_852 = $settings['require_852'];
         }
         if (isset($settings['injectSetSpec'])) {
             $this->_injectSetSpec = $settings['injectSetSpec'];
@@ -454,13 +458,15 @@ class HarvestOAI
         }
 
         # Must have at least one 852 datafield
-        $xpath = new DOMXPath($marc);
-        $xpath->registerNameSpace('marc', 'http://www.loc.gov/MARC21/slim');
-        $list = $xpath->query('//marc:record/marc:datafield[@tag="852"]');
-        if ($list->length == 0) {
-            print("No 852 datafields present. Skipping " . $id . "\n");
-            $this->_saveDeletedRecord($id, $record);
-            return;
+        if (!empty($this->_require_852)) {
+            $xpath = new DOMXPath($marc);
+            $xpath->registerNameSpace('marc', 'http://www.loc.gov/MARC21/slim');
+            $list = $xpath->query('//marc:record/marc:datafield[@tag="852"]');
+            if ($list->length == 0) {
+                print("No 852 datafields present. Skipping " . $id . "\n");
+                $this->_saveDeletedRecord($id, $record);
+                return;
+            }
         }
 
         // If we are supposed to inject any values, do so now inside the first
