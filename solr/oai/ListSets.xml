@@ -8,8 +8,12 @@
 
     <ListSets>
         <set>
+            <setSpec>iish.evergreen.authority</setSpec>
+            <setName>IISH library catalog authority list</setName>
+        </set>
+        <set>
             <setSpec>iish.evergreen.biblio</setSpec>
-            <setName>IISH library catalog</setName>
+            <setName>IISH library catalog bibliographies</setName>
         </set>
         <set>
             <setSpec>iish.archieven</setSpec>

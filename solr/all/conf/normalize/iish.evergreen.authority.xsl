@@ -48,6 +48,7 @@
                     <xsl:call-template name="insertCollection">
                         <xsl:with-param name="collection" select="$collectionName"/>
                     </xsl:call-template>
+                    <iisg:isShownAt>#</iisg:isShownAt>
                     <iisg:date_modified>
                         <xsl:value-of select="$datestamp"/>
                     </iisg:date_modified>
