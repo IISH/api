@@ -53,6 +53,11 @@
                         <xsl:with-param name="identifier"
                                         select="marc:datafield[@tag='901']/marc:subfield[@code='a']/text()"/>
                     </xsl:call-template>
+
+                    <xsl:call-template name="beeld_en_geluid">
+                        <xsl:with-param name="collection" select="marc:datafield[@tag='852' and marc:subfield[@code='c']/text()='PM']"/>
+                    </xsl:call-template>
+
                     <xsl:call-template name="insertCollection">
                         <xsl:with-param name="collection" select="$collectionName"/>
                     </xsl:call-template>
@@ -132,6 +137,11 @@
 
     <xsl:template match="marc:subfield[@code='p' and starts-with( text(), '10622/30051')]/text()">
         <xsl:value-of select="substring-after(., '/')"/>
+    </xsl:template>
+
+    <xsl:template name="beeld_en_geluid">
+        <xsl:param name="collection"/>
+        <xsl:if test="$collection"><iisg:collectionName>PM</iisg:collectionName></xsl:if>
     </xsl:template>
 
     <xsl:template name="non-digital">
