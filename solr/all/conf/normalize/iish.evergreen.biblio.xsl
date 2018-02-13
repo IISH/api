@@ -141,7 +141,10 @@
 
     <xsl:template name="beeld_en_geluid">
         <xsl:param name="collection"/>
-        <xsl:if test="$collection"><iisg:collectionName>PM</iisg:collectionName></xsl:if>
+        <xsl:if test="$collection">
+            <iisg:collectionName>PM</iisg:collectionName>
+            <iisg:collectionName>PM.biblio</iisg:collectionName>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="non-digital">

@@ -68,6 +68,14 @@
             <setName>Persmuseum</setName>
         </set>
         <set>
+            <setSpec>PM.archive</setSpec>
+            <setName>Persmuseum archive</setName>
+        </set>
+        <set>
+            <setSpec>PM.biblio</setSpec>
+            <setName>Persmuseum bibliographies</setName>
+        </set>
+        <set>
             <setSpec>PM.HahnAlbert</setSpec>
             <setName>Persmuseum Hahn Albert</setName>
         </set>
