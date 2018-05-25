@@ -33,7 +33,7 @@
                     <iisg:collectionName>iisg_ead</iisg:collectionName>
                     <iisg:collectionName>iisg.archieven.1</iisg:collectionName>
                     <xsl:call-template name="beeld_en_geluid">
-                        <xsl:with-param name="collection" select="ead:archdesc/ead:did/ead:repository/ead:corpname[text()='Persmuseum']"/>
+                        <xsl:with-param name="collection" select="ead:archdesc/ead:did/ead:repository/ead:corpname[normalize-space(text())='Nederlands Instituut voor Beeld en Geluid']"/>
                     </xsl:call-template>
                     <xsl:call-template name="insertCollection">
                         <xsl:with-param name="collection" select="$collectionName"/>
