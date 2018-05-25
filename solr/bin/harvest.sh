@@ -53,8 +53,9 @@ find $catalog_file -mtime 3 -exec rm {} +
 if [ -f $catalog_file ];
 then
     subject="Warning while indexing: ${catalog_file}"
-	echo "Already processing... ${catalog_file}">$LOG
+	echo "Stale file... ${catalog_file}">$LOG
     /usr/bin/sendmail --body "$LOG" --from "$MAIL_FROM" --to "$MAIL_TO" --subject "$subject" --mail_relay "$MAIL_HOST"
+    rm "$catalog_file"
 	exit 1
 fi
 
