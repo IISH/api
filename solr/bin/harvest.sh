@@ -49,13 +49,12 @@ php LastHarvestFile.php "$now" "-10 day" "$d"/last_harvest.txt
 #-----------------------------------------------------------------------------------------------------------------------
 catalog_file=$d/catalog.xml
 # Any process older than 3 days we assume has a problem. We remove the file.
-find $catalog_file -mtime 3 -exec rm {} +
+find $catalog_file -mtime +3 -exec rm {} +
 if [ -f $catalog_file ];
 then
     subject="Warning while indexing: ${catalog_file}"
 	echo "Stale file... ${catalog_file}">$LOG
     /usr/bin/sendmail --body "$LOG" --from "$MAIL_FROM" --to "$MAIL_TO" --subject "$subject" --mail_relay "$MAIL_HOST"
-    rm "$catalog_file"
 	exit 1
 fi
 
