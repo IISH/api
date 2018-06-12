@@ -43,7 +43,7 @@
                 <iisg:iisg>
                     <xsl:call-template name="insertIISHIdentifiers">
                         <xsl:with-param name="identifier"
-                                        select="concat($collectionName, ':', marc:controlfield[@tag='001']/text())"/>
+                                        select="concat($collectionName, ':', marc:datafield[@tag='901']/marc:subfield[@code='a']/text())"/>
                     </xsl:call-template>
                     <xsl:call-template name="insertCollection">
                         <xsl:with-param name="collection" select="$collectionName"/>

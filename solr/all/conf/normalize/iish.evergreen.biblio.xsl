@@ -235,7 +235,17 @@
                                 or contains(normalize-space(text()),'Turkey')
                                 or contains(normalize-space(text()),'United Kingdom')
                                 or contains(normalize-space(text()),'Russia')
-                                or contains(normalize-space(text()),'Yugoslavia'))]">
+                                or contains(normalize-space(text()),'Yugoslavia')
+                                or contains(normalize-space(text()),'Bosnia-Herzegovina')
+                                or contains(normalize-space(text()),'Czech Republic')
+                                or contains(normalize-space(text()),'Croatia')
+                                or contains(normalize-space(text()),'Denmark')
+                                or contains(normalize-space(text()),'Norway')
+                                or contains(normalize-space(text()),'Slovenia')
+                                or contains(normalize-space(text()),'Serbia')
+                                or contains(normalize-space(text()),'Sweden')
+                                or contains(normalize-space(text()),'Ukraine')
+                                )]">
                                 <iisg:collectionName>VIS-EuropeanSocialMovements</iisg:collectionName>
                             </xsl:when>
                             <xsl:otherwise>
