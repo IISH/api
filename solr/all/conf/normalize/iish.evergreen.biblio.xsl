@@ -55,7 +55,7 @@
                     </xsl:call-template>
 
                     <xsl:call-template name="beeld_en_geluid">
-                        <xsl:with-param name="collection" select="marc:datafield[@tag='852' and marc:subfield[@code='c']/text()='PM']"/>
+                        <xsl:with-param name="collection" select="marc:datafield[@tag='852' and marc:subfield[@code='c']/text()='NIBG (Perscollectie)']"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="insertCollection">
