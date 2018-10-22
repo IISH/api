@@ -470,16 +470,16 @@ class HarvestOAI
         }
 
         # Cannot have a 655$a=Archives format
-        if (!empty($this->_require_852)) {
-            $xpath = new DOMXPath($marc);
-            $xpath->registerNameSpace('marc', 'http://www.loc.gov/MARC21/slim');
-            $list = $xpath->query('//marc:record/marc:datafield[@tag="655"]/marc:subfield[@code="a" and starts-with(text(), "Archives format")]');
-            if ($list->length == 0) {
-                print("655\$a=Archives format. Skipping " . $id . "\n");
-                $this->_saveDeletedRecord($id, $record);
-                return;
-            }
-        }
+        #if (!empty($this->_require_852)) {
+        #    $xpath = new DOMXPath($marc);
+        #    $xpath->registerNameSpace('marc', 'http://www.loc.gov/MARC21/slim');
+        #    $list = $xpath->query('//marc:record/marc:datafield[@tag="655"]/marc:subfield[@code="a" and starts-with(text(), "Archives format")]');
+        #    if ($list->length == 0) {
+        #        print("655\$a=Archives format. Skipping " . $id . "\n");
+        #        $this->_saveDeletedRecord($id, $record);
+        #        return;
+        #    }
+        #}
 
         // If we are supposed to inject any values, do so now inside the first
         // tag of the file:
