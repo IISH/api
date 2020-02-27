@@ -78,6 +78,7 @@ limitations under the License.
                 <name set="solr" search="marc_022_a" search_exact="marc_022_a"/>
                 <name set="solr" search="marc_024_a" search_exact="marc_024_a"/>
                 <name set="solr" search="marc_856_u" search_exact="marc_856_u"/>
+                <name set="solr" search="marc_852_i" search_exact="marc_852_i"/>
                 <name set="solr" search="marc_852_p" search_exact="marc_852_p"/>
                 <name set="solr" search="marc_902_a" search_exact="marc_901_a"/>
                 <name set="solr" search="marc_902_a" search_exact="marc_902_a"/>

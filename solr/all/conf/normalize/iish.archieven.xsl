@@ -679,6 +679,11 @@
                         <marc:subfield code="a">
                             <xsl:value-of select="//node()[starts-with(@encodinganalog,'852$')]/ead:corpname"/>
                         </marc:subfield>
+                        <xsl:for-each select="//ead:unitid">
+                            <marc:subfield code="i">
+                                <xsl:value-of select="concat($identifier, '.', normalize-space(text()))"/>
+                            </marc:subfield>
+                        </xsl:for-each>
                         <marc:subfield code="j">
                             <xsl:value-of select="//node()[@encodinganalog='852$j']"/><xsl:value-of select="text()"/>
                         </marc:subfield>
