@@ -612,6 +612,15 @@ limitations under the License.
                 <name set="solr" search="marc_852_h"/>
             </map>
         </index>
+
+        <index>
+            <title>Item</title>
+            <map>
+                <name set="marc">852$i</name>
+                <name set="solr" search="marc_852_i" search_exact="marc_852_i" />
+            </map>
+        </index>
+
         <index>
             <title>Shelving control number</title>
             <map>
