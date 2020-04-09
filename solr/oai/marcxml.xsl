@@ -16,8 +16,9 @@ limitations under the License.
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 version="2.0"
+                xmlns:m="http://www.loc.gov/MARC21/slim"
                 xmlns:saxon="http://saxon.sf.net/"
-                exclude-result-prefixes="saxon">
+                exclude-result-prefixes="saxon m">
 
     <xsl:import href="oai.xsl"/>
     <xsl:param name="prefix"/>
@@ -26,9 +27,17 @@ limitations under the License.
         <xsl:variable name="record" select="saxon:parse($doc//str[@name='resource']/text())/node()"/>
         <xsl:if test="$record//recordData">
             <metadata>
-                <xsl:copy-of select="$record//recordData/*"/>
+                <xsl:apply-templates select="$record//recordData/*" mode="marcxml"/>
             </metadata>
         </xsl:if>
     </xsl:template>
+
+    <xsl:template match="@*|node()" mode="marcxml">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()" mode="marcxml"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="m:datafield[@tag=852]/m:subfield[@code='i']" mode="marcxml"/>
 
 </xsl:stylesheet>
