@@ -71,20 +71,13 @@
                     </xsl:call-template>
                     <xsl:call-template name="collector"/>
                     <iisg:isShownAt>
-                        <xsl:value-of select="concat('http://hdl.handle.net/', $pid)"/>
+                        <xsl:value-of select="concat('https://hdl.handle.net/', $pid)"/>
                     </iisg:isShownAt>
                     <xsl:for-each
-                            select="marc:subfield[@code='p' and starts-with( text(), '30051')]">
+                            select="marc:subfield[@code='p' and starts-with( text(), 'N30051')]">
                         <iisg:isShownBy>
                             <xsl:value-of
-                                    select="concat('http://hdl.handle.net/10622/', normalize-space(marc:subfield[@code='p']))"/>
-                        </iisg:isShownBy>
-                    </xsl:for-each>
-                    <xsl:for-each
-                            select="marc:subfield[@code='p' and starts-with( text(), '10622/30051')]">
-                        <iisg:isShownBy>
-                            <xsl:value-of
-                                    select="concat('http://hdl.handle.net/', normalize-space(marc:subfield[@code='p']))"/>
+                                    select="concat('https://hdl.handle.net/10622/', normalize-space(marc:subfield[@code='p']))"/>
                         </iisg:isShownBy>
                     </xsl:for-each>
                     <iisg:date_modified>
@@ -117,26 +110,14 @@
 
     <xsl:template match="marc:datafield[@tag='852']">
             <xsl:copy><xsl:apply-templates select="@*|node()"/></xsl:copy>
-            <xsl:if test="marc:subfield[@code='p' and starts-with( text(), '30051')]">
+            <xsl:if test="marc:subfield[@code='p' and starts-with( text(), 'N30051')]">
                 <marc:datafield ind1="4" ind2="0" tag="856">
                     <marc:subfield code="u">
                         <xsl:value-of
-                                select="concat('http://hdl.handle.net/10622/', normalize-space(marc:subfield[@code='p']))"/>
+                                select="concat('https://hdl.handle.net/10622/', normalize-space(marc:subfield[@code='p']))"/>
                     </marc:subfield>
                 </marc:datafield>
             </xsl:if>
-            <xsl:if test="marc:subfield[@code='p' and starts-with( text(), '10622/30051')]">
-                <marc:datafield ind1="4" ind2="0" tag="856">
-                    <marc:subfield code="u">
-                        <xsl:value-of
-                                select="concat('http://hdl.handle.net/', normalize-space(marc:subfield[@code='p']))"/>
-                    </marc:subfield>
-                </marc:datafield>
-            </xsl:if>
-    </xsl:template>
-
-    <xsl:template match="marc:subfield[@code='p' and starts-with( text(), '10622/30051')]/text()">
-        <xsl:value-of select="substring-after(., '/')"/>
     </xsl:template>
 
     <xsl:template name="beeld_en_geluid">
@@ -189,7 +170,7 @@
     <xsl:template name="collectionGeheugenAndNonEuropeanMovement">
         <xsl:param name="material"/>
         <xsl:if test="contains(',rm,gm,pv,km,kc,', $material)">
-            <xsl:if test="//marc:datafield[@tag='852']/marc:subfield[@code='p' and (starts-with( text(), '30051') or starts-with( text(), '10622/30051'))]">
+            <xsl:if test="//marc:datafield[@tag='852']/marc:subfield[@code='p' and (starts-with( text(), 'N30051'))]">
                 <xsl:for-each
                         select="marc:datafield[@tag='985']/marc:subfield[@code='a' and starts-with(text(), 'Geheugen')]">
                     <xsl:variable name="setSpec">
