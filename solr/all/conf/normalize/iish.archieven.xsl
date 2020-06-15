@@ -40,7 +40,7 @@
                     </xsl:call-template>
                     <iisg:isShownAt>
                         <xsl:value-of
-                                select="concat('http://hdl.handle.net/', $identifier)"/>
+                                select="concat('https://hdl.handle.net/', $identifier)"/>
                     </iisg:isShownAt>
                     <iisg:date_modified>
                         <xsl:call-template name="insertDateModified">
@@ -692,19 +692,19 @@
                     <marc:datafield tag="856" ind1="4" ind2=" ">
                         <marc:subfield code="q">text/xml</marc:subfield>
                         <marc:subfield code="u">
-                            <xsl:value-of select="concat('http://hdl.handle.net/', $identifier, '?locatt=view:ead')"/>
+                            <xsl:value-of select="concat('https://hdl.handle.net/', $identifier, '?locatt=view:ead')"/>
                         </marc:subfield>
                     </marc:datafield>
 
                     <!-- A representative image -->
                     <xsl:variable name="digital_items"
-                                  select="//ead:daogrp[ead:daoloc[starts-with(@xlink:href, 'http://hdl.handle.net/10622/')]]"/>
+                                  select="//ead:daogrp[ead:daoloc[contains(@xlink:href, 'hdl.handle.net/10622/')]]"/>
                     <xsl:if test="count($digital_items)>0">
                         <marc:datafield tag="856" ind1="4" ind2="2">
                             <marc:subfield code="q">image/jpeg</marc:subfield>
                             <marc:subfield code="u">
                                 <xsl:value-of
-                                        select="concat('http://hdl.handle.net/', $identifier, '?locatt=view:level3')"/>
+                                        select="concat('https://hdl.handle.net/', $identifier, '?locatt=view:level3')"/>
                             </marc:subfield>
                         </marc:datafield>
                     </xsl:if>
