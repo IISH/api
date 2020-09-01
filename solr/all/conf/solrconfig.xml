@@ -715,6 +715,8 @@ concurrently.  An error is returned if this limit is exceeded. Recommend
             <str name="hmr.afbeeldingen.1"/>
             <str name="iish.archieven"/>
             <str name="iish.archieven.delete"/>
+            <str name="serials"/>
+            <str name="serials.delete"/>
             <str name="iish.evergreen.biblio"/>
             <str name="iish.eci"/>
             <str name="iish.eci.delete"/>
