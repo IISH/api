@@ -20,6 +20,10 @@
             <setName>Archives</setName>
         </set>
         <set>
+            <setSpec>serials</setSpec>
+            <setName>Serials</setName>
+        </set>
+        <set>
             <setSpec>iish.eci</setSpec>
             <setName>Audio and visual material</setName>
         </set>
