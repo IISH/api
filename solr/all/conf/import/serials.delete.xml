@@ -8,7 +8,7 @@
                     dataSource="null"
                     stream="false"
                     processor="FileListEntityProcessor"
-                    baseDir="/home/erhan.tuskan/serials/delete"
+                    baseDir="/data/metadata/serials.delete"
                     filename="^.*\.xml$"
                     recursive="false"
                     rootEntity="true"

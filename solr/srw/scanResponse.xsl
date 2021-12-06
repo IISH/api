@@ -10,7 +10,7 @@
 <xsl:variable name="title">Result of scan for term: <xsl:value-of select="/srw:scanResponse/srw:echoedScanRequest/srw:scanClause"/></xsl:variable>
 <xsl:variable name="maximumTerms"><xsl:value-of select="/srw:scanResponse/srw:echoedScanRequest/srw:maximumTerms"/></xsl:variable>
 <xsl:variable name="indexRelation"> <xsl:value-of select="/srw:scanResponse/srw:echoedScanRequest/srw:xScanClause/xcql:index"/><xsl:text> </xsl:text><xsl:value-of select="/srw:scanResponse/srw:echoedScanRequest/srw:xScanClause/xcql:relation/xcql:value"/><xsl:text> </xsl:text></xsl:variable>
-<xsl:variable name="dbname"><xsl:value-of select="/srw:scanResponse/srw:extraResponseData/databaseTitle"/></xsl:variable>
+<xsl:variable name="dbname">api</xsl:variable>
 
 <xsl:template match="/">
 <xsl:call-template name="stdiface">

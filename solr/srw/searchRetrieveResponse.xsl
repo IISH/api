@@ -12,7 +12,7 @@
 <xsl:import href="MarcXmlToTaggedText.xsl"/>
 
 <xsl:variable name="title">Results for Search: <xsl:value-of select="/srw:searchRetrieveResponse/srw:echoedSearchRetrieveRequest/srw:query"/></xsl:variable>
-<xsl:variable name="dbname"><xsl:value-of select="/srw:searchRetrieveResponse/srw:extraResponseData/databaseTitle"/></xsl:variable>
+<xsl:variable name="dbname">api</xsl:variable>
 <xsl:variable name="count"><xsl:value-of select="/srw:searchRetrieveResponse/srw:numberOfRecords"/></xsl:variable>
 
 <xsl:template match="/">

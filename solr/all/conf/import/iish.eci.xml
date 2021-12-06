@@ -8,7 +8,7 @@
                     dataSource="null"
                     stream="false"
                     processor="FileListEntityProcessor"
-                    baseDir="/home/erhan.tuskan/iish.eci/add_update"
+                    baseDir="/data/metadata/iish.eci"
                     filename="^.*\.xml$"
                     recursive="false"
                     rootEntity="true"
