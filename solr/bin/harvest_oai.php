@@ -92,7 +92,7 @@ class HarvestOAI
     private $_harvestedIdLog = false; // Filename for logging harvested IDs.
     private $_verbose = false; // Should we display debug output?
     private $_catalog = null; // filename of the document that stored all records.
-    private $_saveInCatalog = true; // saves the harvested record into an aggregate file (_catalog) or a file of its own.
+    private $_aggregate = true; // saves the harvested record into an aggregate file (_catalog) or a file of its own.
     private $_validate = true; // validate the xml document or do not.
 
     // As we harvest records, we want to track the most recent date encountered
@@ -122,8 +122,9 @@ class HarvestOAI
         $this->_catalog = $this->_basePath . 'catalog.xml';
         $this->_loadLastHarvestedDate();
 
-        $this->_saveInCatalog = empty($settings['saveInCatalog']) || $settings['saveInCatalog'] === 'true';
+        $this->_aggregate = empty($settings['aggregate']) || $settings['aggregate'] === 'true';
         $this->_validate = empty($settings['validate']) || $settings['validate'] === 'true';
+        $this->_require_852 = !empty($settings['require_852']) && $settings['require_852'] === true;
 
         // Set up base URL:
         if (empty($settings['url'])) {
@@ -205,7 +206,7 @@ class HarvestOAI
     public function launch()
     {
         # Open the XML document
-        if ($this->_saveInCatalog) {
+        if ($this->_aggregate) {
             file_put_contents($this->_catalog, '<?xml version="1.0" encoding="UTF-8"?><marc:catalog xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">');
         }
 
@@ -218,7 +219,7 @@ class HarvestOAI
         }
 
         # Close the XML document
-        if ($this->_saveInCatalog) {
+        if ($this->_aggregate) {
             file_put_contents($this->_catalog, '</marc:catalog>', FILE_APPEND);
         }
     }
@@ -430,7 +431,7 @@ class HarvestOAI
         $id = explode(':', $id); // oai:domain:identifier
         if (sizeof($id) == 3) {
             $xml = '<marc:record xmlns:marc="http://www.loc.gov/MARC21/slim">' . $insert . '<marc:datafield tag="901"><marc:subfield code="a">' . $id[2] . '</marc:subfield></marc:datafield></marc:record>';
-            $filename = ($this->_saveInCatalog) ? $this->_catalog : $this->_basePath . $id . '.xml';
+            $filename = ($this->_aggregate) ? $this->_catalog : $this->_basePath . $id . '.xml';
             file_put_contents($filename, $xml . "\n", FILE_APPEND);
         }
     }
@@ -470,8 +471,8 @@ class HarvestOAI
         # Must have at least one 852 datafield
         if (!empty($this->_require_852)) {
             $xpath = new DOMXPath($doc);
-            $xpath->registerNameSpace('doc', 'http://www.loc.gov/MARC21/slim');
-            $list = $xpath->query('//doc:record/doc:datafield[@tag="852"]');
+            $xpath->registerNameSpace('marc', 'http://www.loc.gov/MARC21/slim');
+            $list = $xpath->query('//marc:record/marc:datafield[@tag="852"]');
             if ($list->length == 0) {
                 print("No 852 datafields present. Skipping " . $id . "\n");
                 $this->_saveDeletedRecord($id, $record);
