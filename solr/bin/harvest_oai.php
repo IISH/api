@@ -90,10 +90,10 @@ class HarvestOAI
     private $_injectHeaderElements; // List of header elements to copy into body
     private $_setNames = array(); // Associative array of setSpec => setName
     private $_harvestedIdLog = false; // Filename for logging harvested IDs.
-    private $_verbose = false; // Should we display debug output?
+    private $_verbose = null; // Should we display debug output?
     private $_catalog = null; // filename of the document that stored all records.
-    private $_aggregate = true; // saves the harvested record into an aggregate file (_catalog) or a file of its own.
-    private $_validate = true; // validate the xml document or do not.
+    private $_aggregate = null; // saves the harvested record into an aggregate file (_catalog) or a file of its own.
+    private $_validate = null; // validate the xml document or do not.
 
     // As we harvest records, we want to track the most recent date encountered
     // so we can set a start point for the next harvest.
@@ -555,7 +555,8 @@ class HarvestOAI
         }
 
         // Save our XML:
-        file_put_contents($this->_catalog, trim($xml) . "\n", FILE_APPEND);
+        $filename = ($this->_aggregate) ? $this->_catalog : $this->_basePath . $id . '.xml';
+        file_put_contents($filename, trim($xml) . "\n", FILE_APPEND);
     }
 
     /**
