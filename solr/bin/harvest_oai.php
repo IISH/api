@@ -92,6 +92,8 @@ class HarvestOAI
     private $_harvestedIdLog = false; // Filename for logging harvested IDs.
     private $_verbose = false; // Should we display debug output?
     private $_catalog = null; // filename of the document that stored all records.
+    private $_saveInCatalog = true; // saves the harvested record into an aggregate file (_catalog) or a file of its own.
+    private $_validate = true; // validate the xml document or do not.
 
     // As we harvest records, we want to track the most recent date encountered
     // so we can set a start point for the next harvest.
@@ -119,6 +121,9 @@ class HarvestOAI
         $this->_lastHarvestFile = $this->_basePath . 'last_harvest.txt';
         $this->_catalog = $this->_basePath . 'catalog.xml';
         $this->_loadLastHarvestedDate();
+
+        $this->_saveInCatalog = empty($settings['saveInCatalog']) || $settings['saveInCatalog'] === 'true';
+        $this->_validate = empty($settings['validate']) || $settings['validate'] === 'true';
 
         // Set up base URL:
         if (empty($settings['url'])) {
@@ -200,7 +205,9 @@ class HarvestOAI
     public function launch()
     {
         # Open the XML document
-        file_put_contents($this->_catalog, '<?xml version="1.0" encoding="UTF-8"?><marc:catalog xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">');
+        if ($this->_saveInCatalog) {
+            file_put_contents($this->_catalog, '<?xml version="1.0" encoding="UTF-8"?><marc:catalog xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">');
+        }
 
         // Start harvesting at the requested date:
         $token = $this->_getRecordsByDate($this->_startDate, $this->_set);
@@ -211,7 +218,9 @@ class HarvestOAI
         }
 
         # Close the XML document
-        file_put_contents($this->_catalog, '</marc:catalog>', FILE_APPEND);
+        if ($this->_saveInCatalog) {
+            file_put_contents($this->_catalog, '</marc:catalog>', FILE_APPEND);
+        }
     }
 
     /**
@@ -421,7 +430,8 @@ class HarvestOAI
         $id = explode(':', $id); // oai:domain:identifier
         if (sizeof($id) == 3) {
             $xml = '<marc:record xmlns:marc="http://www.loc.gov/MARC21/slim">' . $insert . '<marc:datafield tag="901"><marc:subfield code="a">' . $id[2] . '</marc:subfield></marc:datafield></marc:record>';
-            file_put_contents($this->_catalog, $xml . "\n", FILE_APPEND);
+            $filename = ($this->_saveInCatalog) ? $this->_catalog : $this->_basePath . $id . '.xml';
+            file_put_contents($filename, $xml . "\n", FILE_APPEND);
         }
     }
 
@@ -446,9 +456,9 @@ class HarvestOAI
         $xml = trim($record->metadata->asXML());
         $xml = preg_replace('/(^<metadata>)|(<\/metadata>$)/m', '', $xml);
 
-        $marc = new DOMDocument();
-        if ($marc->loadXML($xml)) {
-            if (!$marc->schemaValidate('marc21slim_custom.xsd')) {
+        $doc = new DOMDocument();
+        if (  $doc->loadXML($xml) && $this->_validate) {
+            if (!$doc->schemaValidate('marc21slim_custom.xsd')) {
                 print("XML not valid for " . $id . "\n");
                 return;
             }
@@ -459,9 +469,9 @@ class HarvestOAI
 
         # Must have at least one 852 datafield
         if (!empty($this->_require_852)) {
-            $xpath = new DOMXPath($marc);
-            $xpath->registerNameSpace('marc', 'http://www.loc.gov/MARC21/slim');
-            $list = $xpath->query('//marc:record/marc:datafield[@tag="852"]');
+            $xpath = new DOMXPath($doc);
+            $xpath->registerNameSpace('doc', 'http://www.loc.gov/MARC21/slim');
+            $list = $xpath->query('//doc:record/doc:datafield[@tag="852"]');
             if ($list->length == 0) {
                 print("No 852 datafields present. Skipping " . $id . "\n");
                 $this->_saveDeletedRecord($id, $record);
@@ -471,9 +481,9 @@ class HarvestOAI
 
         # Cannot have a 655$a=Archives format
         #if (!empty($this->_require_852)) {
-        #    $xpath = new DOMXPath($marc);
-        #    $xpath->registerNameSpace('marc', 'http://www.loc.gov/MARC21/slim');
-        #    $list = $xpath->query('//marc:record/marc:datafield[@tag="655"]/marc:subfield[@code="a" and starts-with(text(), "Archives format")]');
+        #    $xpath = new DOMXPath($doc);
+        #    $xpath->registerNameSpace('doc', 'http://www.loc.gov/MARC21/slim');
+        #    $list = $xpath->query('//doc:record/doc:datafield[@tag="655"]/doc:subfield[@code="a" and starts-with(text(), "Archives format")]');
         #    if ($list->length == 0) {
         #        print("655\$a=Archives format. Skipping " . $id . "\n");
         #        $this->_saveDeletedRecord($id, $record);
