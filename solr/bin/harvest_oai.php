@@ -557,7 +557,7 @@ class HarvestOAI
         // Save our XML:
         $id = explode(':', $id); // oai:domain:identifier
         if (sizeof($id) == 3) {
-            $filename = ($this->_aggregate) ? $this->_catalog : $this->_basePath . basename($id[-2]) . '.xml';
+            $filename = ($this->_aggregate) ? $this->_catalog : $this->_basePath . basename($id[2]) . '.xml';
             file_put_contents($filename, trim($xml) . "\n", FILE_APPEND);
         }
     }
