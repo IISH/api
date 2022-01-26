@@ -122,10 +122,10 @@ class HarvestOAI
         $this->_catalog = $this->_basePath . 'catalog.xml';
         $this->_loadLastHarvestedDate();
 
-        $this->_aggregate = empty($settings['aggregate']) || $settings['aggregate'] === 'true';
-        $this->_validate = empty($settings['validate']) || $settings['validate'] === 'true';
-        $this->_require_852 = !empty($settings['require_852']) && $settings['require_852'] === 'true';
-        $this->_verbose = !empty($settings['verbose']) && $settings['verbose'] === 'true';
+        $this->_aggregate = empty($settings['aggregate']) ? true : $settings['aggregate'];
+        $this->_validate = empty($settings['validate']) ? true : $settings['validate'];
+        $this->_require_852 = empty($settings['require_852']) ? false : $settings['require_852'];
+        $this->_verbose = empty($settings['verbose']) ? false : $settings['verbose'];
 
         // Set up base URL:
         if (empty($settings['url'])) {
