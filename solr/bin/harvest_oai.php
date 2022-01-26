@@ -451,7 +451,7 @@ class HarvestOAI
         $id = explode(':', $id); // oai:domain:identifier
         if (sizeof($id) == 3) {
             $xml = '<marc:record xmlns:marc="http://www.loc.gov/MARC21/slim">' . $insert . '<marc:datafield tag="901"><marc:subfield code="a">' . $id[2] . '</marc:subfield></marc:datafield></marc:record>';
-            $filename = ($this->_aggregate) ? $this->_catalog : $this->_basePath . $id . '.xml';
+            $filename = ($this->_aggregate) ? $this->_catalog : $this->_basePath . basename($id[2]);
             file_put_contents($filename, $xml . "\n", FILE_APPEND);
         }
     }
@@ -555,8 +555,11 @@ class HarvestOAI
         }
 
         // Save our XML:
-        $filename = ($this->_aggregate) ? $this->_catalog : $this->_basePath . $id . '.xml';
-        file_put_contents($filename, trim($xml) . "\n", FILE_APPEND);
+        $id = explode(':', $id); // oai:domain:identifier
+        if (sizeof($id) == 3) {
+            $filename = ($this->_aggregate) ? $this->_catalog : $this->_basePath . basename($id[-2]) . '.xml';
+            file_put_contents($filename, trim($xml) . "\n", FILE_APPEND);
+        }
     }
 
     /**
