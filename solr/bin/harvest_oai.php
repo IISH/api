@@ -124,7 +124,8 @@ class HarvestOAI
 
         $this->_aggregate = empty($settings['aggregate']) || $settings['aggregate'] === 'true';
         $this->_validate = empty($settings['validate']) || $settings['validate'] === 'true';
-        $this->_require_852 = !empty($settings['require_852']) && $settings['require_852'] === true;
+        $this->_require_852 = !empty($settings['require_852']) && $settings['require_852'] === 'true';
+        $this->_verbose = !empty($settings['verbose']) && $settings['verbose'] === 'true';
 
         // Set up base URL:
         if (empty($settings['url'])) {
@@ -152,9 +153,6 @@ class HarvestOAI
         if (isset($settings['injectId'])) {
             $this->_injectId = $settings['injectId'];
         }
-        if (isset($settings['require_852'])) {
-            $this->_require_852 = $settings['require_852'];
-        }
         if (isset($settings['injectSetSpec'])) {
             $this->_injectSetSpec = $settings['injectSetSpec'];
         }
@@ -176,11 +174,33 @@ class HarvestOAI
         if (isset($settings['dateGranularity'])) {
             $this->_granularity = $settings['dateGranularity'];
         }
-        if (isset($settings['verbose'])) {
-            $this->_verbose = $settings['verbose'];
-        }
         if ($this->_granularity == 'auto') {
             $this->_loadGranularity();
+        }
+
+        if ($this->_verbose) {
+            print('baseURL: ' . $this->_baseURL);
+            print('set: ' . $this->_set);
+            print('metadata: ' . $this->_metadata);
+            print('idPrefix: ' . $this->_idPrefix);
+            print('idSearch: ' . $this->_idSearch);
+            print('idReplace: ' . $this->_idReplace);
+            print('basePath: ' . $this->_basePath);
+            print('lastHarvestFile: ' . $this->_lastHarvestFile);
+            print('startDate: ' . $this->_startDate);
+            print('granularity: ' . $this->_granularity);
+            print('injectId: ' . $this->_injectId);
+            print('require_852: ' . $this->_require_852);
+            print('injectSetSpec: ' . $this->_injectSetSpec);
+            print('injectSetName: ' . $this->_injectSetName);
+            print('injectDate: ' . $this->_injectDate);
+            print('injectHeaderElements: ' . $this->_injectHeaderElements);
+            print('setNames: ' . $this->_setNames);
+            print('harvestedIdLog: ' . $this->_harvestedIdLog);
+            print('verbose: ' . $this->_verbose);
+            print('catalog: ' . $this->_catalog);
+            print('aggregate: ' . $this->_aggregate);
+            print('validate: ' . $this->_validate);
         }
     }
 
@@ -458,13 +478,13 @@ class HarvestOAI
         $xml = preg_replace('/(^<metadata>)|(<\/metadata>$)/m', '', $xml);
 
         $doc = new DOMDocument();
-        if (  $doc->loadXML($xml) && $this->_validate) {
-            if (!$doc->schemaValidate('marc21slim_custom.xsd')) {
+        if ($doc->loadXML($xml)) {
+            if ($this->_validate && !$doc->schemaValidate('marc21slim_custom.xsd')) {
                 print("XML not valid for " . $id . "\n");
                 return;
             }
         } else {
-            print("XML cannot be parsed for " . $id . "\n");
+            print("XML cannot be parsed for " . $id . "\nThe XML is:\n" . $xml);
             return;
         }
 
