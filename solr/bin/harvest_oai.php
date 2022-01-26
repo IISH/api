@@ -122,8 +122,8 @@ class HarvestOAI
         $this->_catalog = $this->_basePath . 'catalog.xml';
         $this->_loadLastHarvestedDate();
 
-        $this->_aggregate = empty($settings['aggregate']) ? true : $settings['aggregate'];
-        $this->_validate = empty($settings['validate']) ? true : $settings['validate'];
+        $this->_aggregate = empty($settings['aggregate']) ? false : $settings['aggregate'];
+        $this->_validate = empty($settings['validate']) ? false : $settings['validate'];
         $this->_require_852 = empty($settings['require_852']) ? false : $settings['require_852'];
         $this->_verbose = empty($settings['verbose']) ? false : $settings['verbose'];
 
@@ -179,28 +179,28 @@ class HarvestOAI
         }
 
         if ($this->_verbose) {
-            print('baseURL: ' . $this->_baseURL);
-            print('set: ' . $this->_set);
-            print('metadata: ' . $this->_metadata);
-            print('idPrefix: ' . $this->_idPrefix);
-            print('idSearch: ' . $this->_idSearch);
-            print('idReplace: ' . $this->_idReplace);
-            print('basePath: ' . $this->_basePath);
-            print('lastHarvestFile: ' . $this->_lastHarvestFile);
-            print('startDate: ' . $this->_startDate);
-            print('granularity: ' . $this->_granularity);
-            print('injectId: ' . $this->_injectId);
-            print('require_852: ' . $this->_require_852);
-            print('injectSetSpec: ' . $this->_injectSetSpec);
-            print('injectSetName: ' . $this->_injectSetName);
-            print('injectDate: ' . $this->_injectDate);
-            print('injectHeaderElements: ' . $this->_injectHeaderElements);
-            print('setNames: ' . $this->_setNames);
-            print('harvestedIdLog: ' . $this->_harvestedIdLog);
-            print('verbose: ' . $this->_verbose);
-            print('catalog: ' . $this->_catalog);
-            print('aggregate: ' . $this->_aggregate);
-            print('validate: ' . $this->_validate);
+            print('baseURL: ' . $this->_baseURL . "\n");
+            print('set: ' . $this->_set . "\n");
+            print('metadata: ' . $this->_metadata . "\n");
+            print('idPrefix: ' . $this->_idPrefix . "\n");
+            print('idSearch: ' . $this->_idSearch . "\n");
+            print('idReplace: ' . $this->_idReplace . "\n");
+            print('basePath: ' . $this->_basePath . "\n");
+            print('lastHarvestFile: ' . $this->_lastHarvestFile . "\n");
+            print('startDate: ' . $this->_startDate . "\n");
+            print('granularity: ' . $this->_granularity . "\n");
+            print('injectId: ' . $this->_injectId . "\n");
+            print('require_852: ' . $this->_require_852 . "\n");
+            print('injectSetSpec: ' . $this->_injectSetSpec . "\n");
+            print('injectSetName: ' . $this->_injectSetName . "\n");
+            print('injectDate: ' . $this->_injectDate . "\n");
+            print('injectHeaderElements: ' . $this->_injectHeaderElements . "\n");
+            print('setNames: ' . $this->_setNames . "\n");
+            print('harvestedIdLog: ' . $this->_harvestedIdLog . "\n");
+            print('verbose: ' . $this->_verbose . "\n");
+            print('catalog: ' . $this->_catalog . "\n");
+            print('aggregate: ' . $this->_aggregate . "\n");
+            print('validate: ' . $this->_validate . "\n");
         }
     }
 
