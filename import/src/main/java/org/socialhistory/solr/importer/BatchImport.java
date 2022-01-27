@@ -45,7 +45,7 @@ public class BatchImport {
         String[] xslts = _xslts.split("[,;]");
         tChain = new ArrayList<>(xslts.length + 1);
         final TransformerFactory tf = TransformerFactory.newInstance();
-        tChain.add(tf.newTransformer());     // Identity template.
+//        tChain.add(tf.newTransformer());     // Identity template if you want it.
 
         for (String xslt : xslts) {
             File file = new File(xslt);
@@ -122,12 +122,12 @@ public class BatchImport {
                     break;
                 }
             }
-            if ( urlOrigin == null) urlOrigin = new File("dummy");
+            if (urlOrigin == null) urlOrigin = new File("dummy");
         }
 
         if (urlOrigin.exists()) {
             final File candidate = new File(urlOrigin, file.getName());
-            return ( candidate.exists()) ? Files.readAllBytes(candidate.toPath()) : null;
+            return (candidate.exists()) ? Files.readAllBytes(candidate.toPath()) : null;
         }
 
         return null;
@@ -135,10 +135,8 @@ public class BatchImport {
 
     private byte[] process(byte[] record, byte[] origin) throws TransformerException, IOException {
         String resource = null;
-        for (int i = 1; i < tChain.size(); i++) { // from second sheet
-            if (i == tChain.size() - 2) {
-                resource = new String(record, StandardCharsets.UTF_8);
-            } else if (i == tChain.size() - 1) { // last sheet
+        for (int i = 0; i < tChain.size(); i++) { // from second sheet
+            if (i == tChain.size() - 1) { // last sheet, add resources and original
                 tChain.get(i).setParameter("resource", resource);
                 if (origin != null && origin.length != 0) {
                     final String doc = new String(origin, StandardCharsets.UTF_8);
@@ -146,6 +144,9 @@ public class BatchImport {
                 }
             }
             record = convertRecord(tChain.get(i), record);
+            if (i == tChain.size() - 3) { // before the penultimate sheet
+                resource = new String(record, StandardCharsets.UTF_8);
+            }
         }
         return record;
     }
@@ -185,7 +186,7 @@ public class BatchImport {
 
     public static void main(String[] args) throws Exception {
 
-        if ( args.length != 4) {
+        if (args.length != 4) {
             System.err.println("Expect: 'file' to resource or folder with resource docuemnts; 'url' to solr; 'xslt' list; 'parameters'");
             System.exit(1);
         }

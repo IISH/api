@@ -51,7 +51,7 @@
                 <iisg:iisg>
                     <xsl:call-template name="insertIISHIdentifiers">
                         <xsl:with-param name="identifier"
-                                        select="marc:datafield[@tag='901']/marc:subfield[@code='a']/text()"/>
+                                        select="concat('as_', marc:datafield[@tag='902']/marc:subfield[@code='a']/text())"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="beeld_en_geluid">
