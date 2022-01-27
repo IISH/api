@@ -462,7 +462,7 @@ class HarvestOAI
      * @param string $id ID of record to save.
      * @param object $record Record to save (in SimpleXML format).
      *
-     * @return void
+     * @return boolean
      * @access private
      */
     private function _saveRecord($id, $record)
@@ -481,11 +481,11 @@ class HarvestOAI
         if ($doc->loadXML($xml)) {
             if ($this->_validate && !$doc->schemaValidate('marc21slim_custom.xsd')) {
                 print("XML not valid for " . $id . "\n");
-                return;
+                return false;
             }
         } else {
             print("XML cannot be parsed for " . $id . "\nThe XML is:\n" . $xml);
-            return;
+            return false;
         }
 
         # Must have at least one 852 datafield
@@ -496,7 +496,7 @@ class HarvestOAI
             if ($list->length == 0) {
                 print("No 852 datafields present. Skipping " . $id . "\n");
                 $this->_saveDeletedRecord($id, $record);
-                return;
+                return false;
             }
         }
 
@@ -559,7 +559,9 @@ class HarvestOAI
         if (sizeof($id) == 3) {
             $filename = ($this->_aggregate) ? $this->_catalog : $this->_basePath . basename($id[2]) . '.xml';
             file_put_contents($filename, trim($xml) . "\n", FILE_APPEND);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -676,7 +678,8 @@ class HarvestOAI
             if (strtolower($attribs['status']) == 'deleted') {
                 $this->_saveDeletedRecord($id, $record);
             } else {
-                $this->_saveRecord($id, $record);
+                $result = $this->_saveRecord($id, $record);
+                if (!$result) continue;
             }
             $harvestedIds[] = $id;
 

@@ -15,8 +15,11 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -29,17 +32,18 @@ import java.util.List;
  */
 public class BatchImport {
 
-    private String url;
-    private List<Transformer> tChain;
+    private File urlOrigin;
+    private final String urlResource;
+    private final List<Transformer> tChain;
     private int counter = 0;
     final HttpClient httpclient = new HttpClient();
 
-    public BatchImport(String url, String _xslts, String _parameters) throws TransformerConfigurationException, FileNotFoundException, MalformedURLException {
+    public BatchImport(String urlResource, String _xslts, String _parameters) throws TransformerConfigurationException, FileNotFoundException, MalformedURLException {
 
-        this.url = url;
-        String[] parameters = _parameters.split(",|;");
-        String[] xslts = _xslts.split(",|;");
-        tChain = new ArrayList<Transformer>(xslts.length + 1);
+        this.urlResource = urlResource;
+        String[] parameters = _parameters.split("[,;]");
+        String[] xslts = _xslts.split("[,;]");
+        tChain = new ArrayList<>(xslts.length + 1);
         final TransformerFactory tf = TransformerFactory.newInstance();
         tChain.add(tf.newTransformer());     // Identity template.
 
@@ -55,53 +59,103 @@ public class BatchImport {
         }
     }
 
-    public void process(File file) throws FileNotFoundException, XMLStreamException {
+    public void process(File f) throws FileNotFoundException, XMLStreamException {
 
-        final XMLInputFactory xif = XMLInputFactory.newInstance();
-        FileInputStream inputStream = new FileInputStream(file);
-        final XMLStreamReader xsr = xif.createXMLStreamReader(inputStream, "utf-8");
+        if (f.isFile()) { // everything comes from one catalog file
+            final XMLInputFactory xif = XMLInputFactory.newInstance();
+            final FileInputStream inputStream = new FileInputStream(f);
+            final XMLStreamReader xsr = xif.createXMLStreamReader(inputStream, "utf-8");
 
-        while (xsr.hasNext()) {
-
-            if (xsr.getEventType() == XMLStreamReader.START_ELEMENT) {
-                String elementName = xsr.getLocalName();
-                if ("record".equals(elementName)) {
-                    try {
-                        process(xsr);
-                    } catch (Exception e) {
-                        log.warn(e);
+            while (xsr.hasNext()) {
+                if (xsr.getEventType() == XMLStreamReader.START_ELEMENT) {
+                    String elementName = xsr.getLocalName();
+                    if ("record".equals(elementName)) {
+                        try {
+                            final byte[] record = process(getRecordAsBytes(xsr), null);
+                            sendSolrDocument(record);
+                        } catch (IOException | TransformerException e) {
+                            log.warn(e);
+                        }
+                    } else {
+                        xsr.next();
                     }
                 } else {
                     xsr.next();
                 }
-            } else {
-                xsr.next();
+            }
+        } else { // everything comes from files within a directory
+            final File[] files = f.listFiles();
+            if (files == null) throw new FileNotFoundException("Folder has no files: " + f.getAbsolutePath());
+            for (File file : files) {
+                try {
+                    final byte[] record = process(Files.readAllBytes(file.toPath()), findOrigin(file));
+                    sendSolrDocument(record);
+                } catch (IOException | TransformerException e) {
+                    log.warn(e);
+                }
             }
         }
     }
 
-    private void process(XMLStreamReader xsr) throws TransformerException, IOException {
-        byte[] record = getRecordAsBytes(xsr);
+    // Een origin file is simpelweg een file parallel naast de aangeboden file.
+    // Als we die vinden in een ander pad met dezelfde filenaam, dan gebruiken we die.
+    //
+    // Voorbeeld:
+    // file: /a/b/c/d/e/f/12345.xml
+    // parent: /a/b/c/d/e/f
+    // zoek en vind: /a/b/c/d/e/h/12345.xml
+    private byte[] findOrigin(final File file) throws IOException {
+
+        if (urlOrigin == null) { // cache origin root
+            final File parent = file.getParentFile();// in het voorbeeld is dit /a/b/c/d/e/f
+            final File root = parent.getParentFile();// in het voorbeeld is dit /a/b/c/d/e
+            for (File folder : Objects.requireNonNull(root.listFiles(new FileFilter() {
+                @Override
+                public boolean accept(File pathname) {
+                    return pathname.isDirectory()
+                            && !pathname.getAbsolutePath().equalsIgnoreCase(parent.getAbsolutePath()); // we willen de andere folders vinden
+                }
+            }))) {
+                final File candidate = new File(folder, file.getName());
+                if (candidate.exists() && candidate.isFile()) {
+                    urlOrigin = new File(folder.getAbsolutePath());
+                    break;
+                }
+            }
+            if ( urlOrigin == null) urlOrigin = new File("dummy");
+        }
+
+        if (urlOrigin.exists()) {
+            final File candidate = new File(urlOrigin, file.getName());
+            return ( candidate.exists()) ? Files.readAllBytes(candidate.toPath()) : null;
+        }
+
+        return null;
+    }
+
+    private byte[] process(byte[] record, byte[] origin) throws TransformerException, IOException {
         String resource = null;
-        for (int i = 1; i < tChain.size(); i++) {
+        for (int i = 1; i < tChain.size(); i++) { // from second sheet
             if (i == tChain.size() - 2) {
-                resource = new String(record, "utf-8");
-            } else if (i == tChain.size() - 1) {
+                resource = new String(record, StandardCharsets.UTF_8);
+            } else if (i == tChain.size() - 1) { // last sheet
                 tChain.get(i).setParameter("resource", resource);
+                if (origin != null && origin.length != 0) {
+                    final String doc = new String(origin, StandardCharsets.UTF_8);
+                    tChain.get(i).setParameter("original", doc);
+                }
             }
             record = convertRecord(tChain.get(i), record);
         }
-        sendSolrDocument(record);
+        return record;
     }
 
     private void sendSolrDocument(byte[] record) throws IOException {
 
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream(record.length+11)  ;
-        baos.write("<add>".getBytes());
-        baos.write(record)  ;
-        baos.write("</add>".getBytes()) ;
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream(record.length + 11);
+        baos.write(record);
 
-        final PostMethod post = new PostMethod(url);
+        final PostMethod post = new PostMethod(urlResource);
         final RequestEntity entity = new ByteArrayRequestEntity(baos.toByteArray(), "text/xml; charset=utf-8");
         post.setRequestEntity(entity);
         log.info("Sending " + ++counter);
@@ -131,9 +185,14 @@ public class BatchImport {
 
     public static void main(String[] args) throws Exception {
 
+        if ( args.length != 4) {
+            System.err.println("Expect: 'file' to resource or folder with resource docuemnts; 'url' to solr; 'xslt' list; 'parameters'");
+            System.exit(1);
+        }
+
         File file = new File(args[0]);
-        if (!file.exists() || file.isDirectory()) {
-            System.err.println("File not found.");
+        if (!file.exists()) {
+            System.err.println("File or folder not found: " + args[0]);
             System.exit(1);
         }
 
@@ -141,9 +200,9 @@ public class BatchImport {
         final String xslt = args[2];
         final String parameters = args[3];
 
-        BatchImport importer = new BatchImport(url, xslt, parameters);
+        final BatchImport importer = new BatchImport(url, xslt, parameters);
         importer.process(file);
     }
 
-    private Logger log = Logger.getLogger(getClass().getName());
+    private final Logger log = Logger.getLogger(getClass().getName());
 }

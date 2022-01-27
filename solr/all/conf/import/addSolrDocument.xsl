@@ -5,6 +5,7 @@
 
     <xsl:output method="xml" indent="no" omit-xml-declaration="yes"/>
     <xsl:param name="resource"/>
+    <xsl:param name="original"/>
 
     <xsl:template match="doc">
         <add>
@@ -13,6 +14,11 @@
                 <field name="resource">
                     <xsl:value-of select="$resource"/>
                 </field>
+                <xsl:if test="string-length($original)">
+                    <field name="original">
+                        <xsl:value-of select="$original"/>
+                    </field>
+                </xsl:if>
             </doc>
         </add>
     </xsl:template>

@@ -15,6 +15,8 @@ then
     exit 1
 fi
 
+original="$2" # e.g. based on the shared basedir (e in this case): /a/b/c/d/e/f/123.xml and /a/b/c/d/e/g/123.xml theh use value: "../g"
+
 now=$(date +"%Y-%m-%d")
 LOG="/data/log/${dataset}.${now}.harvest.log"
 
@@ -32,8 +34,8 @@ fi
 #-----------------------------------------------------------------------------------------------------------------------
 # Enter the (this) bin folder and create a link to the data folder for this dataset.
 #-----------------------------------------------------------------------------------------------------------------------
-cd $API_HOME/solr/bin
-d=/data/datasets/$dataset
+cd "${API_HOME}/solr/bin"
+d="/data/datasets/${dataset}"
 mkdir -p $d
 ln -s $d
 
@@ -68,8 +70,8 @@ php harvest_oai.php $dataset > $LOG
 #-----------------------------------------------------------------------------------------------------------------------
 # Import all records with the import utility.
 #-----------------------------------------------------------------------------------------------------------------------
-app=$API_HOME/solr/lib/import-1.0.jar
-java -cp $app org.socialhistory.solr.importer.BatchImport $catalog_file "http://localhost:8080/solr/all/update" "${API_HOME}/solr/all/conf/normalize/${dataset}.xsl,${API_HOME}/solr/all/conf/import/add.xsl,${API_HOME}/solr/all/conf/import/addSolrDocument.xsl" "collectionName:$dataset"
+app=$API_HOME/solr/lib/import-1.1.0.jar
+java -cp $app org.socialhistory.solr.importer.BatchImport "$catalog_file" "http://localhost:8080/solr/all/update" "${API_HOME}/solr/all/conf/normalize/${dataset}.xsl,${API_HOME}/solr/all/conf/import/add.xsl,${API_HOME}/solr/all/conf/import/addSolrDocument.xsl" "collectionName:${dataset}"
 if [[ $? != 0 ]] ; then
     subject="Error while indexing: ${catalog_file}"
     echo $subject >> $LOG

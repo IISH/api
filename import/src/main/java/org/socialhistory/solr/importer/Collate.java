@@ -23,7 +23,7 @@ import java.io.*;
  * Collate
  * <p/>
  * If the file parameter is a directory: collates Marc xml documents on fs into one catalog document.
- * If the file parameter is a file: collates all marc references into a catalog documnet.
+ * If the file parameter is a file: collates all marc references into a catalog document.
  * <p/>
  * In both cases xslt an be applied.
  */
