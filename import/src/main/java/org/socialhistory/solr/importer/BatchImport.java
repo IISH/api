@@ -37,8 +37,9 @@ public class BatchImport {
     private final List<Transformer> tChain;
     private int counter = 0;
     final HttpClient httpclient = new HttpClient();
+    private final boolean isVerbose;
 
-    public BatchImport(String urlResource, String _xslts, String _parameters) throws TransformerConfigurationException, FileNotFoundException, MalformedURLException {
+    public BatchImport(String urlResource, String _xslts, String _parameters) throws TransformerConfigurationException {
 
         this.urlResource = urlResource;
         String[] parameters = _parameters.split("[,;]");
@@ -46,6 +47,9 @@ public class BatchImport {
         tChain = new ArrayList<>(xslts.length + 1);
         final TransformerFactory tf = TransformerFactory.newInstance();
 //        tChain.add(tf.newTransformer());     // Identity template if you want it.
+
+        final String verbose = System.getProperty("verbose", null);
+        this.isVerbose = (verbose != null);
 
         for (String xslt : xslts) {
             File file = new File(xslt);
@@ -56,6 +60,7 @@ public class BatchImport {
                 t.setParameter(split[0], split[1]);
             }
             tChain.add(t);
+            if ( isVerbose) log.info("xslt stylesheet: " + file.getAbsolutePath());
         }
     }
 
@@ -175,7 +180,13 @@ public class BatchImport {
         final StreamSource source = new StreamSource(new ByteArrayInputStream(record));
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         transformer.transform(source, new StreamResult(baos));
-        return baos.toByteArray();
+        transformer.reset();
+        final byte[] bytes = baos.toByteArray();
+        if ( isVerbose ) {
+            final String s = new String(bytes, StandardCharsets.UTF_8);
+            log.info("xslt result: " + s);
+        }
+        return bytes;
     }
 
     private byte[] getRecordAsBytes(XMLStreamReader xsr) throws TransformerException {

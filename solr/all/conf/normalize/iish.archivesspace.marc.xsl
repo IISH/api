@@ -102,22 +102,12 @@
 
     </xsl:template>
 
-    <xsl:template match="@*|node()">
-        <xsl:copy>
-            <xsl:apply-templates select="@*|node()"/>
-        </xsl:copy>
-    </xsl:template>
-
-    <xsl:template match="marc:datafield[@tag='852']">
-        <xsl:copy><xsl:apply-templates select="@*|node()"/></xsl:copy>
-        <xsl:if test="marc:subfield[@code='p' and starts-with( text(), 'N30051')]">
-            <marc:datafield ind1="4" ind2="0" tag="856">
-                <marc:subfield code="u">
-                    <xsl:value-of
-                            select="concat('https://hdl.handle.net/10622/', normalize-space(marc:subfield[@code='p']))"/>
-                </marc:subfield>
-            </marc:datafield>
-        </xsl:if>
+    <!-- ensure the marc namespace -->
+    <xsl:template match="marc:*">
+        <xsl:element name="marc:{local-name()}">
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="node()"/>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template name="beeld_en_geluid">

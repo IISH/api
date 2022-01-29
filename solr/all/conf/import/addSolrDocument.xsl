@@ -14,7 +14,7 @@
                 <field name="resource">
                     <xsl:value-of select="$resource"/>
                 </field>
-                <xsl:if test="string-length($original)">
+                <xsl:if test="string-length($original)>0">
                     <field name="original">
                         <xsl:value-of select="$original"/>
                     </field>
