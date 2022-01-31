@@ -20,8 +20,8 @@ if [ -z "$version" ] ; then
 fi
 
 revision=$(git rev-parse HEAD)
-app=$instance-$version
-target=target/$app
+app="${instance}-${version}"
+target="target/${app}"
 expect=$target.tar.gz
 
 echo "Build $expect from revision $revision"
@@ -32,13 +32,14 @@ if [ -d target ] ; then
 	rm -r target
 fi
 
-# Move the jar
-echo "Move the import jar"
-rsync -av --progress "import/target/import-"*.jar "${app}/solr/lib/"
-
 # Move the files to a folder that has the same name as the app
 rsync -av --progress solr $app
 chmod 744 $app/solr/bin/*.sh
+
+# Move the jar
+echo "Move the import jar"
+rsync -av --progress "import/target/import-"*.jar "solr/lib/"
+
 
 mkdir target
 tar -zcvf $expect $app
