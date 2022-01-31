@@ -37,7 +37,7 @@ rsync -av solr $app
 chmod 744 $app/solr/bin/*.sh
 
 # Move the jar
-rsync -av "import/target/import-*.jar" "${app}/solr/lib/"
+rsync -av "import/target/import-"*.jar "${app}/solr/lib/"
 
 
 mkdir target
