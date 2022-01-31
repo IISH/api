@@ -32,13 +32,13 @@ if [ -d target ] ; then
 	rm -r target
 fi
 
-# Move the files to a folder that has the same name as the app
-rsync -av solr $app
-chmod 744 $app/solr/bin/*.sh
-
 # Move the jar
-rsync -av "import/target/import-"*.jar "${app}/solr/lib/"
+echo "Move the import jar"
+rsync -av --progress "import/target/import-"*.jar "${app}/solr/lib/"
 
+# Move the files to a folder that has the same name as the app
+rsync -av --progress solr $app
+chmod 744 $app/solr/bin/*.sh
 
 mkdir target
 tar -zcvf $expect $app
