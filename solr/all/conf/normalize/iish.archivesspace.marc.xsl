@@ -94,7 +94,7 @@
                     <marc:record xmlns:marc="http://www.loc.gov/MARC21/slim"
                                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                                  xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
-                        <xsl:apply-templates select="marc:*"/>
+                    <xsl:apply-templates select="marc:*"/>
                     </marc:record>
                 </recordData>
             </xsl:if>
@@ -102,12 +102,10 @@
 
     </xsl:template>
 
-    <!-- ensure the marc namespace -->
-    <xsl:template match="marc:*">
-        <xsl:element name="marc:{local-name()}">
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="node()"/>
-        </xsl:element>
+    <xsl:template match="@*|node()">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
     </xsl:template>
 
     <xsl:template name="beeld_en_geluid">

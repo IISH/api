@@ -34,13 +34,12 @@ fi
 
 # Move the files to a folder that has the same name as the app
 echo "Copy solr files"
-rsync -av --progress solr $app
+rsync -av --progress solr "$app"
 chmod 744 $app/solr/bin/*.sh
 
 # Move the jar
 echo "Move the import jar"
 rsync -av --progress "import/target/import-"*.jar "${app}/solr/lib/"
-
 
 mkdir target
 tar -zcvf $expect $app

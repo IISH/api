@@ -42,8 +42,8 @@ public class BatchImport {
     public BatchImport(String urlResource, String _xslts, String _parameters) throws TransformerConfigurationException {
 
         this.urlResource = urlResource;
-        String[] parameters = _parameters.split("[,;]");
-        String[] xslts = _xslts.split("[,;]");
+        final String[] parameters = _parameters.split("[,;]");
+        final String[] xslts = _xslts.split("[,;]");
         tChain = new ArrayList<>(xslts.length + 1);
         final TransformerFactory tf = TransformerFactory.newInstance();
 //        tChain.add(tf.newTransformer());     // Identity template if you want it.
@@ -93,7 +93,9 @@ public class BatchImport {
             if (files == null) throw new FileNotFoundException("Folder has no files: " + f.getAbsolutePath());
             for (File file : files) {
                 try {
-                    final byte[] record = process(Files.readAllBytes(file.toPath()), findOrigin(file));
+                    byte[] origin = findOrigin(file);
+                    if ( origin != null ) origin = convertRecord(tChain.get(0), origin); // assumption: the first is normalization of prefix
+                    final byte[] record = process(Files.readAllBytes(file.toPath()), origin);
                     sendSolrDocument(record);
                 } catch (IOException | TransformerException e) {
                     log.warn(e);
