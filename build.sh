@@ -33,6 +33,7 @@ if [ -d target ] ; then
 fi
 
 # Move the files to a folder that has the same name as the app
+echo "Copy solr files"
 rsync -av --progress solr $app
 chmod 744 $app/solr/bin/*.sh
 
