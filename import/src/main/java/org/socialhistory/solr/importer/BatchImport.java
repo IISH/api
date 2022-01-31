@@ -14,7 +14,6 @@ import javax.xml.transform.stax.StAXSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
-import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class BatchImport {
         final String[] xslts = _xslts.split("[,;]");
         tChain = new ArrayList<>(xslts.length + 1);
         final TransformerFactory tf = TransformerFactory.newInstance();
-//        tChain.add(tf.newTransformer());     // Identity template if you want it.
+        tChain.add(tf.newTransformer());
 
         final String verbose = System.getProperty("verbose", null);
         this.isVerbose = (verbose != null);
@@ -55,6 +54,7 @@ public class BatchImport {
             File file = new File(xslt);
             Source source = new StreamSource(file);
             final Transformer t = tf.newTransformer(source);
+            t.setParameter("sheet", file.getName());
             for (String parameter : parameters) {
                 String[] split = parameter.split(":");
                 t.setParameter(split[0], split[1]);
@@ -76,7 +76,7 @@ public class BatchImport {
                     String elementName = xsr.getLocalName();
                     if ("record".equals(elementName)) {
                         try {
-                            final byte[] record = process(getRecordAsBytes(xsr), null);
+                            final byte[] record = process(identity(xsr), null);
                             sendSolrDocument(record);
                         } catch (IOException | TransformerException e) {
                             log.warn(e);
@@ -142,7 +142,7 @@ public class BatchImport {
 
     private byte[] process(byte[] record, byte[] origin) throws TransformerException, IOException {
         String resource = null;
-        for (int i = 0; i < tChain.size(); i++) { // from second sheet
+        for (int i = 1; i < tChain.size(); i++) { // from second sheet. Skip the identity template
             if (i == tChain.size() - 1) { // last sheet, add resources and original
                 tChain.get(i).setParameter("resource", resource);
                 if (origin != null && origin.length != 0) {
@@ -191,7 +191,7 @@ public class BatchImport {
         return bytes;
     }
 
-    private byte[] getRecordAsBytes(XMLStreamReader xsr) throws TransformerException {
+    private byte[] identity(XMLStreamReader xsr) throws TransformerException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         tChain.get(0).transform(new StAXSource(xsr), new StreamResult(baos));
         return baos.toByteArray();
