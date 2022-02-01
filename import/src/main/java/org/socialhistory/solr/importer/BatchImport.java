@@ -103,6 +103,7 @@ public class BatchImport {
                         sendSolrDocument(record);
                     }
                 } catch (IOException | TransformerException e) {
+                    log.warn(file.getAbsolutePath());
                     log.warn(e);
                 }
             }
