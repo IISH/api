@@ -95,9 +95,13 @@ public class BatchImport {
             for (File file : files) {
                 try {
                     byte[] origin = findOrigin(file);
-                    if ( origin.length != 0 ) origin = convertRecord(tChain.get(1), origin); // assumption: the first is normalization of prefix
-                    final byte[] record = process(Files.readAllBytes(file.toPath()), origin);
-                    sendSolrDocument(record);
+                    if ( urlOrigin != null && origin.length == 0) {
+                        log.warn("Negeer: geen origineel document gevonden bij " + file.getAbsolutePath());
+                    } else {
+                        origin = convertRecord(tChain.get(1), origin); // assumption: the first is normalization of prefix
+                        final byte[] record = process(Files.readAllBytes(file.toPath()), origin);
+                        sendSolrDocument(record);
+                    }
                 } catch (IOException | TransformerException e) {
                     log.warn(e);
                 }
@@ -117,12 +121,9 @@ public class BatchImport {
         if (urlOrigin == null) { // cache origin root
             final File parent = file.getParentFile();// in het voorbeeld is dit /a/b/c/d/e/f
             final File root = parent.getParentFile();// in het voorbeeld is dit /a/b/c/d/e
-            for (File folder : Objects.requireNonNull(root.listFiles(new FileFilter() {
-                @Override
-                public boolean accept(File pathname) {
-                    return pathname.isDirectory()
-                            && !pathname.getAbsolutePath().equalsIgnoreCase(parent.getAbsolutePath()); // we willen de andere folders vinden
-                }
+            for (File folder : Objects.requireNonNull(root.listFiles(pathname -> {
+                return pathname.isDirectory()
+                        && !pathname.getAbsolutePath().equalsIgnoreCase(parent.getAbsolutePath()); // we willen de andere folders vinden
             }))) {
                 final File candidate = new File(folder, file.getName());
                 if (candidate.exists() && candidate.isFile()) {
@@ -141,7 +142,7 @@ public class BatchImport {
         return new byte[] {};
     }
 
-    private byte[] process(byte[] record, byte[] origin) throws TransformerException, IOException {
+    private byte[] process(byte[] record, byte[] origin) throws IOException, TransformerException {
         String resource = null;
         for (int i = 1; i < tChain.size(); i++) { // from second sheet. Skip the inbuilt identity template
             if (i == tChain.size() - 1) { // last sheet, add resources and original
