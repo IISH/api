@@ -25,9 +25,10 @@ import java.util.Objects;
  * Mass import of files into the index
  * <p/>
  * args:
- * 0=folder containing files;
+ * 0=folder containing files with a record; or catalog with records;
  * 1=SOLR update url with core, like http://localhost:8080/solr/all/update
- * 2=comma separated xslt stylesheets; 3=xslt parameters
+ * 2=comma separated xslt stylesheets: first must be an identity template
+ * 3=xslt parameters
  */
 public class BatchImport {
 
@@ -94,7 +95,7 @@ public class BatchImport {
             for (File file : files) {
                 try {
                     byte[] origin = findOrigin(file);
-                    if ( origin != null ) origin = convertRecord(tChain.get(0), origin); // assumption: the first is normalization of prefix
+                    if ( origin.length != 0 ) origin = convertRecord(tChain.get(1), origin); // assumption: the first is normalization of prefix
                     final byte[] record = process(Files.readAllBytes(file.toPath()), origin);
                     sendSolrDocument(record);
                 } catch (IOException | TransformerException e) {
@@ -134,15 +135,15 @@ public class BatchImport {
 
         if (urlOrigin.exists()) {
             final File candidate = new File(urlOrigin, file.getName());
-            return (candidate.exists()) ? Files.readAllBytes(candidate.toPath()) : null;
+            return (candidate.exists()) ? Files.readAllBytes(candidate.toPath()) : new byte[] {};
         }
 
-        return null;
+        return new byte[] {};
     }
 
     private byte[] process(byte[] record, byte[] origin) throws TransformerException, IOException {
         String resource = null;
-        for (int i = 1; i < tChain.size(); i++) { // from second sheet. Skip the identity template
+        for (int i = 1; i < tChain.size(); i++) { // from second sheet. Skip the inbuilt identity template
             if (i == tChain.size() - 1) { // last sheet, add resources and original
                 tChain.get(i).setParameter("resource", resource);
                 if (origin != null && origin.length != 0) {
@@ -211,7 +212,7 @@ public class BatchImport {
         }
 
         final String url = args[1];
-        final String xslt = args[2];
+        final String xslt = args[2]; // het eerste sheet is een identity sheet.
         final String parameters = args[3];
 
         final BatchImport importer = new BatchImport(url, xslt, parameters);
