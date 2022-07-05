@@ -166,6 +166,9 @@ public class BatchImport {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream(record.length + 11);
         baos.write(record);
 
+        final String doc = new String(baos.toByteArray(), StandardCharsets.UTF_8);
+
+
         final PostMethod post = new PostMethod(urlResource);
         final RequestEntity entity = new ByteArrayRequestEntity(baos.toByteArray(), "text/xml; charset=utf-8");
         post.setRequestEntity(entity);
