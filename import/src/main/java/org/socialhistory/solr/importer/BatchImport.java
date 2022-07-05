@@ -38,9 +38,11 @@ public class BatchImport {
     private int counter = 0;
     final HttpClient httpclient = new HttpClient();
     private final boolean isVerbose;
+    private final boolean debug;
 
     public BatchImport(String urlResource, String _xslts, String _parameters) throws TransformerConfigurationException {
 
+        this.debug = Boolean.parseBoolean(System.getProperty("debug", "false"));
         this.urlResource = urlResource;
         final String[] parameters = _parameters.split("[,;]");
         final String[] xslts = _xslts.split("[,;]");
@@ -61,7 +63,7 @@ public class BatchImport {
                 t.setParameter(split[0], split[1]);
             }
             tChain.add(t);
-            if ( isVerbose) log.info("xslt stylesheet: " + file.getAbsolutePath());
+            if (isVerbose) log.info("xslt stylesheet: " + file.getAbsolutePath());
         }
     }
 
@@ -95,7 +97,7 @@ public class BatchImport {
             for (File file : files) {
                 try {
                     byte[] origin = findOrigin(file);
-                    if ( urlOrigin != null && origin.length == 0) {
+                    if (urlOrigin != null && origin.length == 0) {
                         log.warn("Negeer: geen origineel document gevonden bij " + file.getAbsolutePath());
                     } else {
                         origin = convertRecord(tChain.get(1), origin); // assumption: the first is normalization of prefix
@@ -137,10 +139,10 @@ public class BatchImport {
 
         if (urlOrigin.exists()) {
             final File candidate = new File(urlOrigin, file.getName());
-            return (candidate.exists()) ? Files.readAllBytes(candidate.toPath()) : new byte[] {};
+            return (candidate.exists()) ? Files.readAllBytes(candidate.toPath()) : new byte[]{};
         }
 
-        return new byte[] {};
+        return new byte[]{};
     }
 
     private byte[] process(byte[] record, byte[] origin) throws IOException, TransformerException {
@@ -166,8 +168,10 @@ public class BatchImport {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream(record.length + 11);
         baos.write(record);
 
-        final String doc = new String(baos.toByteArray(), StandardCharsets.UTF_8);
-
+        if (debug) {
+            final String doc = new String(baos.toByteArray(), StandardCharsets.UTF_8);
+            System.out.println(doc);
+        }
 
         final PostMethod post = new PostMethod(urlResource);
         final RequestEntity entity = new ByteArrayRequestEntity(baos.toByteArray(), "text/xml; charset=utf-8");
@@ -190,7 +194,7 @@ public class BatchImport {
         transformer.transform(source, new StreamResult(baos));
         transformer.reset();
         final byte[] bytes = baos.toByteArray();
-        if ( isVerbose ) {
+        if (isVerbose) {
             final String s = new String(bytes, StandardCharsets.UTF_8);
             log.info("xslt result: " + s);
         }
