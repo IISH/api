@@ -2,13 +2,15 @@
 
 API_ENDPOINT='http://localhost:8080/solr/all/update'
 SQL='select id, repo_id  from resource;'
-HOST='n-195-169-89-74.diginfra.net'
-PASSWORD='13ace1fa-fb83-11ec-b00e-17642db5fe2a'
+HOST="$H"
+PASSWORD="$P"
+USER="$U"
+
 ID_FILE='/tmp/id.txt'
-DOMEIN='https://as-oai.collections.iisg.org'
+DOMEIN="$D"
 DATASET='/data/datasets/archivesspace'
 
-/usr/bin/mysql -h "$HOST" -u archivesspace -p"$PASSWORD" -BN -e "$SQL" archivesspace > "$ID_FILE"
+/usr/bin/mysql -h "$HOST" -u "$USER" -p"$PASSWORD" -BN -e "$SQL" "$D" > "$ID_FILE"
 
 for metadata_prefix in oai_ead oai_marc
 do
