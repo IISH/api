@@ -13,6 +13,7 @@
     <xsl:param name="marc_controlfield_005"/>
     <xsl:param name="marc_controlfield_008"/>
     <xsl:param name="date_modified"/>
+    <xsl:param name="datestamp"/>
     <xsl:param name="collectionName"/>
 
     <xsl:template match="marc:record">
@@ -28,6 +29,9 @@
             <xsl:choose>
                 <xsl:when test="datestamp">
                     <xsl:value-of select="datestamp"/>
+                </xsl:when>
+                <xsl:when test="$datestamp">
+                    <xsl:value-of select="$datestamp"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:call-template name="insertDateModified">

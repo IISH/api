@@ -16,7 +16,9 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,8 +39,9 @@ public class BatchImport {
     private final List<Transformer> tChain;
     private int counter = 0;
     final HttpClient httpclient = new HttpClient();
-    private final boolean isVerbose;
     private final boolean debug;
+
+    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
     public BatchImport(String urlResource, String _xslts, String _parameters) throws TransformerConfigurationException {
 
@@ -50,9 +53,6 @@ public class BatchImport {
         final TransformerFactory tf = TransformerFactory.newInstance();
         tChain.add(tf.newTransformer());
 
-        final String verbose = System.getProperty("verbose", null);
-        this.isVerbose = (verbose != null);
-
         for (String xslt : xslts) {
             File file = new File(xslt);
             Source source = new StreamSource(file);
@@ -63,7 +63,7 @@ public class BatchImport {
                 t.setParameter(split[0], split[1]);
             }
             tChain.add(t);
-            if (isVerbose) log.info("xslt stylesheet: " + file.getAbsolutePath());
+            if (debug) log.info("xslt stylesheet: " + file.getAbsolutePath());
         }
     }
 
@@ -100,8 +100,8 @@ public class BatchImport {
                     if (urlOrigin != null && origin.length == 0) {
                         log.warn("Negeer: geen origineel document gevonden bij " + file.getAbsolutePath());
                     } else {
-                        origin = convertRecord(tChain.get(1), origin); // assumption: the first is normalization of prefix
-                        final byte[] record = process(Files.readAllBytes(file.toPath()), origin);
+                        origin = convertRecord(tChain.get(1), origin); // assumption: the first is normalization of prefix\
+                        final byte[] record = process(Files.readAllBytes(file.toPath()), origin, datestamp(file.lastModified()));
                         sendSolrDocument(record);
                     }
                 } catch (IOException | TransformerException e) {
@@ -146,8 +146,13 @@ public class BatchImport {
     }
 
     private byte[] process(byte[] record, byte[] origin) throws IOException, TransformerException {
+        return process(record, origin, datestamp( new Date().getTime()));
+    }
+
+    private byte[] process(byte[] record, byte[] origin, String datestamp) throws IOException, TransformerException {
         String resource = null;
         for (int i = 1; i < tChain.size(); i++) { // from second sheet. Skip the inbuilt identity template
+            tChain.get(i).setParameter("datestamp", datestamp);
             if (i == tChain.size() - 1) { // last sheet, add resources and original
                 tChain.get(i).setParameter("resource", resource);
                 if (origin != null && origin.length != 0) {
@@ -194,7 +199,7 @@ public class BatchImport {
         transformer.transform(source, new StreamResult(baos));
         transformer.reset();
         final byte[] bytes = baos.toByteArray();
-        if (isVerbose) {
+        if (debug) {
             final String s = new String(bytes, StandardCharsets.UTF_8);
             log.info("xslt result: " + s);
         }
@@ -205,6 +210,11 @@ public class BatchImport {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         tChain.get(0).transform(new StAXSource(xsr), new StreamResult(baos));
         return baos.toByteArray();
+    }
+
+    private String datestamp(long time) {
+        final Date date = new Date(time);
+        return simpleDateFormat.format(date);
     }
 
     public static void main(String[] args) throws Exception {

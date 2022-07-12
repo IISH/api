@@ -1,22 +1,20 @@
 #!/bin/bash
 
 API_ENDPOINT='http://localhost:8080/solr/all/update'
-SQL='select id, repo_id  from resource;'
+SQL='select id, repo_id, user_mtime from resource;'
 HOST="$H"
 PASSWORD="$P"
 USER="$U"
-
 ID_FILE='/tmp/id.txt'
-DOMEIN="$D"
 DATASET='/data/datasets/archivesspace'
 
 /usr/bin/mysql -h "$HOST" -u "$USER" -p"$PASSWORD" -BN -e "$SQL" "$D" > "$ID_FILE"
 
 for metadata_prefix in oai_ead oai_marc
 do
-  folder="${DATABASE}/${metadata_prefix}"
+  folder="${DATASET}/${metadata_prefix}"
   ([ -d "$folder" ] && rm "${folder}/"*) || mkdir "$folder"
-  while read -r resource_id repo_id
+  while read -r resource_id repo_id user_mtime
   do
     identifier="oai:archivesspace//repositories/${repo_id}/resources/${resource_id}"
     url="${DOMEIN}?verb=GetRecord&identifier=${identifier}&metadataPrefix=${metadata_prefix}"
@@ -24,6 +22,9 @@ do
     CMD="curl -X GET -o '${f}' -k '$url'"
     echo "$CMD" && eval "$CMD"
     (grep -q "idDoesNotExist" "$f" && echo "BAD ${f} - idDoesNotExist ${identifier} in ${f}" && rm "$f") || echo "OK ${f}"
+    sed -i 's/.*<metadata>//g' "$f"
+    sed -i 's/<\/metadata>.*//g' "$f"
+    datestamp="${user_mtime:0:10}" && touch -c --date="$datestamp" "$f"
   done < "$ID_FILE"
 done
 
