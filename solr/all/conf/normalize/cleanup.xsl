@@ -16,9 +16,9 @@
     </xsl:template>
 
     <!-- de archivesspace identifier hoeft niet mee -->
-    <xsl:template match="@id"/>
-    <xsl:template match="ead:language[@langcode='dut']/text()">Dutch</xsl:template>
-    <xsl:template match="ead:language[@langcode='spa']/text()">Spanish</xsl:template>
+    <xsl:template match="@id" mode="ead"/>
+    <xsl:template match="ead:language[@langcode='dut']/text()" mode="ead">Dutch</xsl:template>
+    <xsl:template match="ead:language[@langcode='spa']/text()" mode="ead">Spanish</xsl:template>
 
 
     <xsl:template match="ead:ead">
