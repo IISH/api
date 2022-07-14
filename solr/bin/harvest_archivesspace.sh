@@ -24,7 +24,7 @@ do
     (grep -q "idDoesNotExist" "$f" && echo "BAD ${f} - idDoesNotExist ${identifier} in ${f}" && rm "$f") || echo "OK ${f}"
     sed -i 's/.*<metadata>//g' "$f"
     sed -i 's/<\/metadata>.*//g' "$f"
-    sed -i 's/ id=\"aspace_.*\"//g' "$f"
+    sed -i 's/ id="aspace_[a-z0-9]*"//g' "$f"
     datestamp="${user_mtime:0:10}" && touch -c --date="$datestamp" "$f"
   done < "$ID_FILE"
 done
