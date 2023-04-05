@@ -38,7 +38,7 @@
         <xsl:choose>
             <xsl:when test="string-length(local-name())=0">
                 <xsl:copy>
-                    <xsl:apply-templates select="node()|@*" />
+                    <xsl:apply-templates select="node()|@*" mode="marc" />
                 </xsl:copy>
             </xsl:when>
             <xsl:otherwise>
