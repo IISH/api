@@ -71,7 +71,9 @@ php harvest_oai.php $dataset > $LOG
 # Import all records with the import utility.
 #-----------------------------------------------------------------------------------------------------------------------
 app=$API_HOME/solr/lib/import-1.0.jar
-java -cp $app org.socialhistory.solr.importer.BatchImport "$catalog_file" "http://localhost:8080/solr/all/update" "${API_HOME}/solr/all/conf/normalize/${dataset}.xsl,${API_HOME}/solr/all/conf/normalize/prepend_namespace.xsl,${API_HOME}/solr/all/conf/import/add.xsl,${API_HOME}/solr/all/conf/import/addSolrDocument.xsl" "collectionName:${dataset}"
+java -cp $app org.socialhistory.solr.importer.BatchImport "$catalog_file" "http://localhost:8080/solr/all/update" "${API_HOME}/solr/all/conf/normalize/${dataset}.xsl,${API_HOME}/solr/all/conf/import/add.xsl,${API_HOME}/solr/all/conf/import/addSolrDocument.xsl" "collectionName:${dataset}"
+
+ #"collectionName:iish.evergreen.biblio"
 if [[ $? != 0 ]] ; then
     subject="Error while indexing: ${catalog_file}"
     echo $subject >> $LOG

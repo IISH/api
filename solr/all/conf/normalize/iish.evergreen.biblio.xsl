@@ -94,7 +94,7 @@
                     <marc:record xmlns:marc="http://www.loc.gov/MARC21/slim"
                                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                                  xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
-                        <xsl:apply-templates select="marc:*"/>
+                        <xsl:apply-templates select="marc:*" mode="marc"/>
                     </marc:record>
                 </recordData>
             </xsl:if>
@@ -106,6 +106,22 @@
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="node() | @*" mode="marc">
+        <xsl:choose>
+            <xsl:when test="string-length(local-name())=0">
+                <xsl:copy>
+                    <xsl:apply-templates select="node()|@*" mode="marc" />
+                </xsl:copy>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:element name="marc:{local-name()}">
+                    <xsl:copy-of select="@*"/>
+                    <xsl:apply-templates mode="marc" />
+                </xsl:element>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="marc:datafield[@tag='852']">
