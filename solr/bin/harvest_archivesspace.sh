@@ -7,8 +7,9 @@ PASSWORD="$P"
 USER="$U"
 ID_FILE='/tmp/id.txt'
 DATASET='/data/datasets/archivesspace'
+DATABASE="$D"
 
-/usr/bin/mysql -h "$HOST" -u "$USER" -p"$PASSWORD" -BN -e "$SQL" "$D" > "$ID_FILE"
+/usr/bin/mysql -h "$HOST" -u "$USER" -p"$PASSWORD" -BN -e "$SQL" "$DATABASE" > "$ID_FILE"
 
 for metadata_prefix in oai_ead oai_marc
 do
